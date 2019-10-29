@@ -24,7 +24,7 @@ LIBS = -lm
 _HEADERS = CamadaEnlace.hpp CamadaFisica.hpp
 HEADERS = $(patsubst %,$(DIR_HEADERS)/%,$(_HEADERS))
 
-_OBJECTS = CamadaEnlace.o CamadaFisica.o
+_OBJECTS = Simulador.o CamadaEnlace.o CamadaFisica.o
 OBJECTS = $(patsubst %,$(DIR_OBJECTS)/%,$(_OBJECTS))
 
 
