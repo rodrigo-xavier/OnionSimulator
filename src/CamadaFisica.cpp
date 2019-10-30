@@ -45,17 +45,17 @@ void CamadaFisica::Receptora(int quadro[])
     switch (tipoDeDecodificacao)
     {
     case 0: //codificao binaria
-        fluxoBrutoDeBits = ReceptoraDecodificacaoBinaria(quadro);
+        fluxoBrutoDeBits = ReceptoraCodificacaoBinaria(quadro);
         break;
     case 1: //codificacao manchester
-        fluxoBrutoDeBits = ReceptoraDecodificacaoManchester(quadro);
+        fluxoBrutoDeBits = ReceptoraCodificacaoManchester(quadro);
         break;
     case 2: //codificacao manchester diferencial
-        fluxoBrutoDeBits = ReceptoraDecodificacaoManchesterDiferencial(quadro);
+        fluxoBrutoDeBits = ReceptoraCodificacaoManchesterDiferencial(quadro);
         break;
     } //fim do switch/case
     //chama proxima camada
-    CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
+    // CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
 } //fim do metodo CamadaFisicaTransmissora
 
 int *CamadaFisica::ReceptoraCodificacaoBinaria(int quadro[])
@@ -70,3 +70,23 @@ int *CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(int quadro[])
 {
     //implementacao do algoritmo para DECODIFICAR
 } //fim do CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
+
+/*##########################################################################################################*/
+// MEIO DE COMUNICAÇÃO
+
+/* Este metodo simula a transmissao da informacao no meio de
+* comunicacao, passando de um pontoA (transmissor) para um
+* ponto B (receptor)
+*/
+void CamadaFisica::MeioDeComunicacao(int fluxoBrutoDeBits[])
+{
+    //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
+    int *fluxoBrutoDeBitsPontoA, *fluxoBrutoDeBitsPontoB;
+    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
+    // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
+    // {
+    //     fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS! Sendo transferidos
+    // }                                                 //fim do while
+    //chama proxima camada
+    Receptora(fluxoBrutoDeBitsPontoB);
+} //fim do metodo MeioDeTransmissao

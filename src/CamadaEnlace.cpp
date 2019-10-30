@@ -9,7 +9,7 @@ void CamadaEnlace::DadosTransmissora(int quadro[])
     DadosTransmissoraControleDeErro(quadro);
     DadosTransmissoraControleDeFluxo(quadro);
     //chama proxima camada
-    CamadaFisicaTransmissora(quadro);
+    // CamadaFisicaTransmissora(quadro);
 } //fim do metodo CamadaEnlaceDadosTransmissora
 
 /*##########################################################################################################*/
@@ -112,7 +112,7 @@ void CamadaEnlace::DadosReceptora(int quadro[])
     DadosTransmissoraControleDeErro(quadro);
     DadosTransmissoraControleDeFluxo(quadro);
     //chama proxima camada
-    CamadaDeAplicacaoReceptora(quadro);
+    // CamadaDeAplicacaoReceptora(quadro);
 } //fim do metodo DadosReceptora
 
 /*##########################################################################################################*/
@@ -205,3 +205,22 @@ void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(int quadro[])
 {
     //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
 } //fim do metodo DadosReceptoraControleDeErroCodigoDeHamming
+
+/*##########################################################################################################*/
+// MEIO DE COMUNICAÇÃO
+
+void CamadaEnlace::MeioDeComunicacao(int fluxoBrutoDeBits[])
+{
+    //OBS: trabalhar com BITS e nao com BYTES!!!
+    int erro, porcentagemDeErros;
+    int *fluxoBrutoDeBitsPontoA, *fluxoBrutoDeBitsPontoB;
+    porcentagemDeErros = 0; //10%, 20%, 30%, 40%, ..., 100%
+    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
+    // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
+    // {
+    //     if ((rand() % 100) == ...)                        //fazer a probabilidade do erro
+    //         fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS!!!
+    //     else                                              //ERRO! INVERTER (usa condicao ternaria)
+    //         (fluxoBrutoBitsPontoB == 0) ? fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB++ : fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB--;
+    // } //fim do while
+} //fim do metodo MeioDeTransmissao

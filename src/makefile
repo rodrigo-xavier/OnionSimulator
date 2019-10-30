@@ -34,11 +34,11 @@ OBJECTS = $(patsubst %,$(DIR_OBJECTS)/%,$(_OBJECTS))
 
 # Gera arquivos objeto para todos os .cpp que estão localizados no mesmo diretório do makefile e em seguida compila
 $(DIR_OBJECTS)/%.o: %.cpp $(HEADERS)
-	$(CC) -c -o3 $@ $< $(CFLAGS) $(LIBS)
+	$(CC) -c -o $@ $< $(CFLAGS) $(LIBS)
 
 # Chama todos os arquivos objeto, gerando binários e criando o executável
 $(PROJECT_EXE): $(OBJECTS)
-	$(CC) -o3 $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 
 # MiniTutorial

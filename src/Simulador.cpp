@@ -1,25 +1,25 @@
-#include "../lib/CamadaEnlace.hpp"
 #include "../lib/CamadaFisica.hpp"
+#include "../lib/CamadaEnlace.hpp"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class CamadaDeAplicacao
+class CamadaAplicacao : public CamadaEnlace
 {
 private:
     void Transmissora(string mensagem)
     {
         //int quadro [] = mensagem //trabalhar com bits!!!
         //chama a proxima camada
-        CamadaFisicaTransmissora(quadro);
+        // CamadaFisicaTransmissora(quadro);
     } //fim do metodo CamadaDeAplicacaoTransmissora
 
     void Receptora(int quadro[])
     {
         //string mensagem = quadro []; //estava trabalhando com bits
         //chama proxima camada
-        AplicacaoReceptora(mensagem);
+        // AplicacaoReceptora(mensagem);
     } //fim do metodo CamadaDeAplicacaoReceptora
 
     void AplicacaoTransmissora(void)
@@ -28,8 +28,8 @@ private:
         cout << "Digite uma mensagem:" << endl;
         cin >> mensagem;
         //chama a proxima camada
-        CamadaDeAplicacaoTransmissora(mensagem); //em um exemplo mais realistico, aqui seria dado um SEND do SOCKET
-    }                                            //fim do metodo AplicacaoTransmissora
+        // CamadaDeAplicacaoTransmissora(mensagem); //em um exemplo mais realistico, aqui seria dado um SEND do SOCKET
+    } //fim do metodo AplicacaoTransmissora
 
     void AplicacaoReceptora(string mensagem)
     {
@@ -39,42 +39,11 @@ private:
 public:
 };
 
-void MeioDeComunicacaoEnlace(int fluxoBrutoDeBits[])
+int main(int argc, char *args[])
 {
-    //OBS: trabalhar com BITS e nao com BYTES!!!
-    int erro, porcentagemDeErros;
-    int fluxoBrutoDeBitsPontoA[], fluxoBrutoDeBitsPontoB[];
-    porcentagemDeErros = 0; //10%, 20%, 30%, 40%, ..., 100%
-    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
-    {
-        if ((rand() % 100) == ...)                        //fazer a probabilidade do erro
-            fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS!!!
-        else                                              //ERRO! INVERTER (usa condicao ternaria)
-            (fluxoBrutoBitsPontoB == 0) ? fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB++ : fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB--;
-    } //fim do while
-} //fim do metodo MeioDeTransmissao
+    CamadaAplicacao Simulador;
 
-/* Este metodo simula a transmissao da informacao no meio de
-* comunicacao, passando de um pontoA (transmissor) para um
-* ponto B (receptor)
-*/
-void MeioDeComunicacaoFisica(int fluxoBrutoDeBits[])
-{
-    //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
-    int fluxoBrutoDeBitsPontoA[], fluxoBrutoDeBitsPontoB[];
-    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
-    {
-        fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS! Sendo transferidos
-    }                                                 //fim do while
-    //chama proxima camada
-    CamadaFisicaReceptora(fluxoBrutoDeBitsPontoB);
-} //fim do metodo MeioDeTransmissao
-
-void main(int argc, char *args[])
-{
-    AplicacaoTransmissora();
+    cout << "Funciona CARALHO" << endl;
 
     return 0;
 }
