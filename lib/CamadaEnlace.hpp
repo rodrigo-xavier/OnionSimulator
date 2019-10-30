@@ -1,4 +1,5 @@
 #ifndef CAMADA_ENLACE
+#define CAMADA_ENLACE
 #include "CamadaFisica.hpp"
 #include <iostream>
 
@@ -36,6 +37,8 @@ private:
     void DadosReceptoraControleDeErroBitDeParidadeImpar(int quadro[]);
     void DadosReceptoraControleDeErroCRC(int quadro[]);
     void DadosReceptoraControleDeErroCodigoDeHamming(int quadro[]);
+
+    void MeioDeComunicacao(int fluxoBrutoDeBits[]);
 
 public:
 };

@@ -1,4 +1,5 @@
 #ifndef CAMADA_FISICA
+#define CAMADA_FISICA
 #include <iostream>
 
 using namespace std;
@@ -15,6 +16,8 @@ private:
     int *ReceptoraCodificacaoBinaria(int quadro[]);
     int *ReceptoraCodificacaoManchester(int quadro[]);
     int *ReceptoraCodificacaoManchesterDiferencial(int quadro[]);
+
+    void MeioDeComunicacao(int fluxoBrutoDeBits[]);
 
 public:
 };
