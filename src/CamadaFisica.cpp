@@ -26,10 +26,11 @@ int *CamadaFisica::TransmissoraCodificacaoBinaria(int quadro[])
 {
     //implementacao do algoritmo
 } //fim do metodo CamadaFisicaTransmissoraCodificacaoBinaria
+
+// CamadaFisicaTransmissoraCodificacaoManchester
 int *CamadaFisica::TransmissoraCodificacaoManchester(int quadro[])
 {
-    //implementacao do algoritmo
-} //fim do metodo CamadaFisicaTransmissoraCodificacaoManchester
+}
 int *CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(int quadro[])
 {
     //implementacao do algoritmo
