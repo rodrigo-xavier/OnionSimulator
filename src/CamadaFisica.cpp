@@ -3,7 +3,7 @@
 /*##########################################################################################################*/
 // TRANSMISSORA
 
-void CamadaFisica::Transmissora(int quadro[])
+void CamadaFisica::Transmissora(int quadro)
 {
     int tipoDeCodificacao = 0; //alterar de acordo o teste
     int *fluxoBrutoDeBits;     //ATENÇÃO: trabalhar com BITS!!!
@@ -22,16 +22,31 @@ void CamadaFisica::Transmissora(int quadro[])
     MeioDeComunicacao(fluxoBrutoDeBits);
 } //fim do metodo CamadaFisicaTransmissora
 
-int *CamadaFisica::TransmissoraCodificacaoBinaria(int quadro[])
+// CamadaFisicaTransmissoraCodificacaoBinaria
+int *CamadaFisica::TransmissoraCodificacaoBinaria(int quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo CamadaFisicaTransmissoraCodificacaoBinaria
 
 // CamadaFisicaTransmissoraCodificacaoManchester
-int *CamadaFisica::TransmissoraCodificacaoManchester(int quadro[])
+//demetrio passou por aqui
+int *CamadaFisica::TransmissoraCodificacaoManchester(int quadro)
 {
+    bitset<int * 2> codificacao_manchester;
+
+    for (int i = 0; i < quadro.size(); i++)
+    {
+        bitset<int> word = quadro[i];
+
+        for (int j = 0; j < sizeof(int); j++)
+        {
+            codificacao_manchester = (word == true) ? manchester_bit_1 : manchester_bit_0;
+        }
+    }
+
+    return codificacao_manchester;
 }
-int *CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(int quadro[])
+int *CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(int quadro)
 {
     //implementacao do algoritmo
 } //fim do CamadaFisicaTransmissoraCodificacaoManchesterDiferencial
@@ -39,7 +54,7 @@ int *CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(int quadro[])
 /*##########################################################################################################*/
 // RECEPTORA
 
-void CamadaFisica::Receptora(int quadro[])
+void CamadaFisica::Receptora(int quadro)
 {
     int tipoDeDecodificacao = 0; //alterar de acordo o teste
     int *fluxoBrutoDeBits;       //ATENÇÃO: trabalhar com BITS!!!
@@ -58,16 +73,18 @@ void CamadaFisica::Receptora(int quadro[])
     //chama proxima camada
     // CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
 } //fim do metodo CamadaFisicaTransmissora
-
-int *CamadaFisica::ReceptoraCodificacaoBinaria(int quadro[])
+// CamadaFisicaReceptoraDecodificacaoBinaria
+int *CamadaFisica::ReceptoraCodificacaoBinaria(int quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoBinaria
-int *CamadaFisica::ReceptoraCodificacaoManchester(int quadro[])
+// CamadaFisicaReceptoraDecodificacaoManchester
+int *CamadaFisica::ReceptoraCodificacaoManchester(int quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoManchester
-int *CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(int quadro[])
+// CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
+int *CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(int quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
 } //fim do CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
@@ -79,7 +96,7 @@ int *CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(int quadro[])
 * comunicacao, passando de um pontoA (transmissor) para um
 * ponto B (receptor)
 */
-void CamadaFisica::MeioDeComunicacao(int fluxoBrutoDeBits[])
+void CamadaFisica::MeioDeComunicacao(int fluxoBrutoDeBits)
 {
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
     int *fluxoBrutoDeBitsPontoA, *fluxoBrutoDeBitsPontoB;
