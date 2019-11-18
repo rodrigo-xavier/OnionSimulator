@@ -29,10 +29,9 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> quadro)
 } //fim do metodo CamadaFisicaTransmissoraCodificacaoBinaria
 
 // CamadaFisicaTransmissoraCodificacaoManchester
-//demetrio passou por aqui
 vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> quadro)
 {
-    cout << "Realizando a codificação manchester" << endl;
+    cout << "Realizando a Codificação Manchester" << endl;
 
     vector<int> codificacao_manchester;
 
@@ -44,10 +43,33 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> quadro)
 
     return codificacao_manchester;
 }
+
+// CamadaFisicaTransmissoraCodificacaoManchesterDiferencial
 vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<int> quadro)
 {
-    //implementacao do algoritmo
-} //fim do CamadaFisicaTransmissoraCodificacaoManchesterDiferencial
+    cout << "Realizando a Codificação Manchester Diferencial" << endl;
+
+    vector<int> codificacao_manchester;
+    int alternador_bit_0 = 0;
+    int alternador_bit_1 = 1;
+
+    codificacao_manchester.push_back(quadro[0] ^ alternador_bit_0);
+    codificacao_manchester.push_back(quadro[0] ^ alternador_bit_1);
+
+    for (int i = 1; i < quadro.size(); i++)
+    {
+        if (quadro[i] == 1)
+        {
+            alternador_bit_0 = alternador_bit_0 ^ 0;
+            alternador_bit_1 = alternador_bit_1 ^ 0;
+        }
+
+        codificacao_manchester.push_back(quadro[i] ^ alternador_bit_0);
+        codificacao_manchester.push_back(quadro[i] ^ alternador_bit_1);
+    }
+
+    return codificacao_manchester;
+}
 
 /*##########################################################################################################*/
 // RECEPTORA
