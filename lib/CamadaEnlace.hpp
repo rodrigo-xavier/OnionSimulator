@@ -8,37 +8,37 @@ using namespace std;
 class CamadaEnlace
 {
 public:
-    void DadosTransmissora(int quadro[]);
+    void DadosTransmissora(vector<int> quadro);
 
-    void DadosTransmissoraEnquadramento(int quadro[]);
-    void DadosTransmissoraEnquadramentoContagemDeCaracteres(int quadro[]);
-    void DadosTransmissoraEnquadramentoInsercaoDeBytes(int quadro[]);
-    void DadosTransmissoraEnquadramentoInsercaoDeBits(int quadro[]);
-    void DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(int quadro[]);
+    void DadosTransmissoraEnquadramento(vector<int> quadro);
+    void DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro);
+    void DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro);
+    void DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro);
+    void DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro);
 
-    void DadosTransmissoraControleDeErro(int quadro[]);
-    void DadosTransmissoraControleDeFluxo(int quadro[]);
-    void DadosTransmissoraControleDeErroBitParidadePar(int quadro[]);
-    void DadosTransmissoraControleDeErroBitParidadeImpar(int quadro[]);
-    void DadosTransmissoraControleDeErroCRC(int quadro[]);
-    void DadosTransmissoraControleDeErroCodigoDeHamming(int quadro[]);
+    void DadosTransmissoraControleDeErro(vector<int> quadro);
+    void DadosTransmissoraControleDeFluxo(vector<int> quadro);
+    void DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro);
+    void DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> quadro);
+    void DadosTransmissoraControleDeErroCRC(vector<int> quadro);
+    void DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro);
 
-    void DadosReceptora(int quadro[]);
+    void DadosReceptora(vector<int> quadro);
 
-    void DadosReceptoraEnquadramento(int quadro[]);
-    void DadosReceptoraEnquadramentoContagemDeCaracteres(int quadro[]);
-    void DadosReceptoraEnquadramentoInsercaoDeBytes(int quadro[]);
-    void DadosReceptoraEnquadramentoInsercaoDeBits(int quadro[]);
-    void DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(int quadro[]);
+    void DadosReceptoraEnquadramento(vector<int> quadro);
+    void DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro);
+    void DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro);
+    void DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro);
+    void DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro);
 
-    void DadosReceptoraControleDeErro(int quadro[]);
-    void DadosReceptoraControleDeFluxo(int quadro[]);
-    void DadosReceptoraControleDeErroBitDeParidadePar(int quadro[]);
-    void DadosReceptoraControleDeErroBitDeParidadeImpar(int quadro[]);
-    void DadosReceptoraControleDeErroCRC(int quadro[]);
-    void DadosReceptoraControleDeErroCodigoDeHamming(int quadro[]);
+    void DadosReceptoraControleDeErro(vector<int> quadro);
+    void DadosReceptoraControleDeFluxo(vector<int> quadro);
+    void DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro);
+    void DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro);
+    void DadosReceptoraControleDeErroCRC(vector<int> quadro);
+    void DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro);
 
-    void MeioDeComunicacao(int fluxoBrutoDeBits[]);
+    void MeioDeComunicacao(vector<int> fluxoBrutoDeBits);
 
 public:
 };
