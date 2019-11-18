@@ -3,10 +3,18 @@
 /*##########################################################################################################*/
 // TRANSMISSORA
 
+/********************************************************************************************  
+  Descrição Breve: Método transmissor de dados da Camada Física
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 void CamadaFisica::Transmissora(vector<int> quadro)
 {
-    int tipoDeCodificacao = 0;    //alterar de acordo o teste
-    vector<int> fluxoBrutoDeBits; //ATENÇÃO: trabalhar com BITS!!!
+    int tipoDeCodificacao = 0;
+    vector<int> fluxoBrutoDeBits;
     switch (tipoDeCodificacao)
     {
     case 0: //codificao binaria
@@ -22,10 +30,17 @@ void CamadaFisica::Transmissora(vector<int> quadro)
     MeioDeComunicacao(fluxoBrutoDeBits);
 }
 
-// CamadaFisicaTransmissoraCodificacaoBinaria
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
+
 vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> quadro)
 {
-    //implementacao do algoritmo
     cout << "Realizando a codificação binária" << endl;
 
     vector<int> codificacao_binaria;
@@ -36,7 +51,14 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> quadro)
     return codificacao_binaria;
 }
 
-// CamadaFisicaTransmissoraCodificacaoManchester
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> quadro)
 {
     cout << "Realizando a codificação manchester" << endl;
@@ -52,7 +74,14 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> quadro)
     return codificacao_manchester;
 }
 
-// CamadaFisicaTransmissoraCodificacaoManchesterDiferencial
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<int> quadro)
 {
     cout << "Realizando a Codificação Manchester Diferencial" << endl;
@@ -75,6 +104,14 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 /*##########################################################################################################*/
 // RECEPTORA
 
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 void CamadaFisica::Receptora(vector<int> quadro)
 {
     int tipoDeDecodificacao = 0;  //alterar de acordo o teste
@@ -95,7 +132,14 @@ void CamadaFisica::Receptora(vector<int> quadro)
     // CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
 }
 
-// CamadaFisicaReceptoraDecodificacaoBinaria
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> quadro)
 {
     cout << "Realizando a decodificação binária" << endl;
@@ -108,7 +152,14 @@ vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> quadro)
     return decodificacao_binaria;
 }
 
-// CamadaFisicaReceptoraDecodificacaoManchester
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
 {
     cout << "Realizando a decodificação manchester" << endl;
@@ -128,7 +179,14 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
     return decodificacao_manchester;
 }
 
-// CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> quadro)
 {
     cout << "Realizando a Decodificação Manchester Diferencial" << endl;
@@ -155,10 +213,14 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> 
 /*##########################################################################################################*/
 // MEIO DE COMUNICAÇÃO
 
-/* Este metodo simula a transmissao da informacao no meio de
-* comunicacao, passando de um pontoA (transmissor) para um
-* ponto B (receptor)
-*/
+/********************************************************************************************  
+  Descrição Breve: Método da Camada Física de codificação Binária
+  
+  Descrição da Entrada:
+  (quadro) - Quadro de 
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
