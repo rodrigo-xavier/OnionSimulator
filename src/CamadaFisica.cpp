@@ -19,7 +19,7 @@ void CamadaFisica::Transmissora(vector<int> quadro)
         fluxoBrutoDeBits = TransmissoraCodificacaoManchesterDiferencial(quadro);
         break;
     } //fim do switch/case
-    // MeioDeComunicacao(fluxoBrutoDeBits);
+    MeioDeComunicacao(fluxoBrutoDeBits);
 } //fim do metodo CamadaFisicaTransmissora
 
 // CamadaFisicaTransmissoraCodificacaoBinaria
@@ -109,10 +109,11 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
-    // {
-    //     fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS! Sendo transferidos
-    // }                                                 //fim do while
+    for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++) {
+         //BITS! Sendo transferidos
+        fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i));
+    } //fim do while
+
     //chama proxima camada
-    Receptora(fluxoBrutoDeBitsPontoB);
+    //Receptora(fluxoBrutoDeBitsPontoB);
 } //fim do metodo MeioDeTransmissao

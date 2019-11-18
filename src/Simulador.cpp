@@ -11,6 +11,7 @@
 #define DEBUG_MANCHESTER_RECEPTORA
 #define DEBUG_BINARIA_TRANSMISSORA
 #define DEBUG_BINARIA_RECEPTORA
+#define DEBUG_MEIO_DE_COMUNICACAO
 
 #define assertm(exp, msg) assert(((void)msg, exp))
 
@@ -75,7 +76,7 @@ int main(int argc, char *args[])
     assertm(int(quadro_receptor[1]) == 0, "Falha na Codificacao binária");
     assertm(int(quadro_receptor[2]) == 1, "Falha na Codificacao binária");
 
-    cout << "Codificacao manchester funcionando" << endl;
+    cout << "Codificacao binária funcionando" << endl;
 
 #endif 
 
@@ -92,6 +93,10 @@ int main(int argc, char *args[])
     cout << "Codificacao manchester funcionando" << endl;
 
 #endif
+
+#ifdef DEBUG_MEIO_DE_COMUNICACAO
+    camadafisica.MeioDeComunicacao(quadro_transmissor);
+#endif 
 
 #endif
 
