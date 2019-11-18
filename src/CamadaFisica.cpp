@@ -3,10 +3,10 @@
 /*##########################################################################################################*/
 // TRANSMISSORA
 
-void CamadaFisica::Transmissora(int quadro[])
+void CamadaFisica::Transmissora(vector<int> quadro)
 {
-    int tipoDeCodificacao = 0; //alterar de acordo o teste
-    int *fluxoBrutoDeBits;     //ATENÇÃO: trabalhar com BITS!!!
+    int tipoDeCodificacao = 0;    //alterar de acordo o teste
+    vector<int> fluxoBrutoDeBits; //ATENÇÃO: trabalhar com BITS!!!
     switch (tipoDeCodificacao)
     {
     case 0: //codificao binaria
@@ -19,18 +19,32 @@ void CamadaFisica::Transmissora(int quadro[])
         fluxoBrutoDeBits = TransmissoraCodificacaoManchesterDiferencial(quadro);
         break;
     } //fim do switch/case
-    MeioDeComunicacao(fluxoBrutoDeBits);
+    // MeioDeComunicacao(fluxoBrutoDeBits);
 } //fim do metodo CamadaFisicaTransmissora
 
-int *CamadaFisica::TransmissoraCodificacaoBinaria(int quadro[])
+// CamadaFisicaTransmissoraCodificacaoBinaria
+vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo CamadaFisicaTransmissoraCodificacaoBinaria
-int *CamadaFisica::TransmissoraCodificacaoManchester(int quadro[])
+
+// CamadaFisicaTransmissoraCodificacaoManchester
+//demetrio passou por aqui
+vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> quadro)
 {
-    //implementacao do algoritmo
-} //fim do metodo CamadaFisicaTransmissoraCodificacaoManchester
-int *CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(int quadro[])
+    cout << "Realizando a codificação manchester" << endl;
+
+    vector<int> codificacao_manchester;
+
+    for (int i = 0; i < quadro.size(); i++)
+    {
+        codificacao_manchester.push_back(quadro[i] ^ 0);
+        codificacao_manchester.push_back(quadro[i] ^ 1);
+    }
+
+    return codificacao_manchester;
+}
+vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do CamadaFisicaTransmissoraCodificacaoManchesterDiferencial
@@ -38,10 +52,10 @@ int *CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(int quadro[])
 /*##########################################################################################################*/
 // RECEPTORA
 
-void CamadaFisica::Receptora(int quadro[])
+void CamadaFisica::Receptora(vector<int> quadro)
 {
-    int tipoDeDecodificacao = 0; //alterar de acordo o teste
-    int *fluxoBrutoDeBits;       //ATENÇÃO: trabalhar com BITS!!!
+    int tipoDeDecodificacao = 0;  //alterar de acordo o teste
+    vector<int> fluxoBrutoDeBits; //ATENÇÃO: trabalhar com BITS!!!
     switch (tipoDeDecodificacao)
     {
     case 0: //codificao binaria
@@ -57,16 +71,18 @@ void CamadaFisica::Receptora(int quadro[])
     //chama proxima camada
     // CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
 } //fim do metodo CamadaFisicaTransmissora
-
-int *CamadaFisica::ReceptoraCodificacaoBinaria(int quadro[])
+// CamadaFisicaReceptoraDecodificacaoBinaria
+vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoBinaria
-int *CamadaFisica::ReceptoraCodificacaoManchester(int quadro[])
+// CamadaFisicaReceptoraDecodificacaoManchester
+vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoManchester
-int *CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(int quadro[])
+// CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
+vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
 } //fim do CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
@@ -78,10 +94,10 @@ int *CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(int quadro[])
 * comunicacao, passando de um pontoA (transmissor) para um
 * ponto B (receptor)
 */
-void CamadaFisica::MeioDeComunicacao(int fluxoBrutoDeBits[])
+void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
-    int *fluxoBrutoDeBitsPontoA, *fluxoBrutoDeBitsPontoB;
+    vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
     // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
     // {

@@ -7,7 +7,7 @@ using namespace std;
 
 class CamadaEnlace
 {
-private:
+public:
     void DadosTransmissora(int quadro[]);
 
     void DadosTransmissoraEnquadramento(int quadro[]);

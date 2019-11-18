@@ -1,23 +1,27 @@
 #ifndef CAMADA_FISICA
 #define CAMADA_FISICA
 #include <iostream>
+#include <vector>
+#include <bitset>
 
 using namespace std;
 
 class CamadaFisica
 {
-private:
-    void Transmissora(int quadro[]);
-    int *TransmissoraCodificacaoBinaria(int quadro[]);
-    int *TransmissoraCodificacaoManchester(int quadro[]);
-    int *TransmissoraCodificacaoManchesterDiferencial(int quadro[]);
+public:
+    vector<int> quadro;
 
-    void Receptora(int quadro[]);
-    int *ReceptoraCodificacaoBinaria(int quadro[]);
-    int *ReceptoraCodificacaoManchester(int quadro[]);
-    int *ReceptoraCodificacaoManchesterDiferencial(int quadro[]);
+    void Transmissora(vector<int> quadro);
+    vector<int> TransmissoraCodificacaoBinaria(vector<int> quadro);
+    vector<int> TransmissoraCodificacaoManchester(vector<int> quadro);
+    vector<int> TransmissoraCodificacaoManchesterDiferencial(vector<int> quadro);
 
-    void MeioDeComunicacao(int fluxoBrutoDeBits[]);
+    void Receptora(vector<int> quadro);
+    vector<int> ReceptoraCodificacaoBinaria(vector<int> quadro);
+    vector<int> ReceptoraCodificacaoManchester(vector<int> quadro);
+    vector<int> ReceptoraCodificacaoManchesterDiferencial(vector<int> quadro);
+
+    void MeioDeComunicacao(vector<int> fluxoBrutoDeBits);
 
 public:
 };
