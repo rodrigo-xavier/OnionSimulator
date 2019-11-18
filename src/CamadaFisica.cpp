@@ -260,5 +260,5 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     } //fim do while
 
     //chama proxima camada
-    //Receptora(fluxoBrutoDeBitsPontoB);
+    Receptora(fluxoBrutoDeBitsPontoB);
 }

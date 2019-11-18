@@ -3,7 +3,7 @@
 /*##########################################################################################################*/
 // TRANSMISSORA
 
-void CamadaEnlace::DadosTransmissora(int quadro[])
+void CamadaEnlace::DadosTransmissora(vector<int> quadro)
 {
     DadosTransmissoraEnquadramento(quadro);
     DadosTransmissoraControleDeErro(quadro);
@@ -15,10 +15,10 @@ void CamadaEnlace::DadosTransmissora(int quadro[])
 /*##########################################################################################################*/
 // TRANSMISSORA: ENQUADRAMENTO
 
-void CamadaEnlace::DadosTransmissoraEnquadramento(int quadro[])
+void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro)
 {
     int tipoDeEnquadramento = 0; //alterar de acordo com o teste
-    int *quadroEnquadrado;
+    vector<int> quadroEnquadrado;
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
@@ -35,22 +35,22 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(int quadro[])
     } //fim do switch/case
 } //fim do metodo CamadaEnlaceTransmissoraEnquadramento
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(int quadro[])
+void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraContagemDeCaracteres
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(int quadro[])
+void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraInsercaoDeBytes
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(int quadro[])
+void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraInsercaoDeBits
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(int quadro[])
+void CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraViolacaoDaCamadaFisica
@@ -58,7 +58,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(int quad
 /*##########################################################################################################*/
 // TRANSMISSORA: CONTROLE
 
-void CamadaEnlace::DadosTransmissoraControleDeErro(int quadro[])
+void CamadaEnlace::DadosTransmissoraControleDeErro(vector<int> quadro)
 {
     int tipoDeControleDeErro = 0; //alterar de acordo com o teste
     switch (tipoDeControleDeErro)
@@ -77,28 +77,28 @@ void CamadaEnlace::DadosTransmissoraControleDeErro(int quadro[])
     } //fim do switch/case
 } //fim do metodo DadosTransmissoraControleDeErro
 
-void CamadaEnlace::DadosTransmissoraControleDeFluxo(int quadro[])
+void CamadaEnlace::DadosTransmissoraControleDeFluxo(vector<int> quadro)
 {
     //algum codigo aqui
 } //fim do metodo DadosTransmissoraControleDeFluxo
 
-void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(int quadro[])
+void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraControledeErroBitParidadePar
 
-void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadeImpar(int quadro[])
+void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraControledeErroBitParidadeImpar
 
-void CamadaEnlace::DadosTransmissoraControleDeErroCRC(int quadro[])
+void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro)
 {
     //implementacao do algoritmo
     //usar polinomio CRC-32(IEEE 802)
 } //fim do metodo DadosTransmissoraControledeErroCRC
 
-void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(int quadro[])
+void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraControleDeErroCodigoDehamming
@@ -106,7 +106,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(int quadro[])
 /*##########################################################################################################*/
 // RECEPTORA
 
-void CamadaEnlace::DadosReceptora(int quadro[])
+void CamadaEnlace::DadosReceptora(vector<int> quadro)
 {
     DadosTransmissoraEnquadramento(quadro);
     DadosTransmissoraControleDeErro(quadro);
@@ -118,10 +118,10 @@ void CamadaEnlace::DadosReceptora(int quadro[])
 /*##########################################################################################################*/
 // RECEPTORA: ENQUADRAMENTO
 
-void CamadaEnlace::DadosReceptoraEnquadramento(int quadro[])
+void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro)
 {
     int tipoDeEnquadramento = 0; //alterar de acordo com o teste
-    int *quadroDesenquadrado;
+    vector<int> quadroDesenquadrado;
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
@@ -138,22 +138,22 @@ void CamadaEnlace::DadosReceptoraEnquadramento(int quadro[])
     } //fim do switch/case
 } //fim do metodo DadosReceptoraEnquadramento
 
-void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(int quadro[])
+void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
 } //fim do metodo DadosReceptoraContagemDeCaracteres
 
-void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(int quadro[])
+void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
 } //fim do metodo DadosReceptoraInsercaoDeBytes
 
-void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(int quadro[])
+void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
 } //fim do metodo DadosReceptoraInsercaoDeBits
 
-void CamadaEnlace::DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(int quadro[])
+void CamadaEnlace::DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
 } //fim do metodo DadosReceptoraViolacaoDaCamadaFisica
@@ -161,7 +161,7 @@ void CamadaEnlace::DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(int quadro[
 /*##########################################################################################################*/
 // RECEPTORA: CONTROLE
 
-void CamadaEnlace::DadosReceptoraControleDeErro(int quadro[])
+void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro)
 {
     int tipoDeControleDeErro = 0; //alterar de acordo com o teste
     switch (tipoDeControleDeErro)
@@ -180,28 +180,28 @@ void CamadaEnlace::DadosReceptoraControleDeErro(int quadro[])
     } //fim do switch/case
 } //fim do metodo DadosReceptoraControleDeErro
 
-void CamadaEnlace::DadosReceptoraControleDeFluxo(int quadro[])
+void CamadaEnlace::DadosReceptoraControleDeFluxo(vector<int> quadro)
 {
     //algum codigo aqui
 } //fim do metodo DadosReceptoraControleDeFluxo
 
-void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(int quadro[])
+void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro)
 {
     //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
 } //fim do metodo DadosReceptoraControleDeErroBitDeParidadePar
 
-void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(int quadro[])
+void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro)
 {
     //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
 } //fim do metodo DadosReceptoraControleDeErroBitDeParidadeImpar
 
-void CamadaEnlace::DadosReceptoraControleDeErroCRC(int quadro[])
+void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro)
 {
     //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
     //usar polinomio CRC-32(IEEE 802)
 } //fim do metodo DadosReceptoraControleDeErroCRC
 
-void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(int quadro[])
+void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro)
 {
     //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
 } //fim do metodo DadosReceptoraControleDeErroCodigoDeHamming
@@ -209,11 +209,11 @@ void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(int quadro[])
 /*##########################################################################################################*/
 // MEIO DE COMUNICAÇÃO
 
-void CamadaEnlace::MeioDeComunicacao(int fluxoBrutoDeBits[])
+void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
     //OBS: trabalhar com BITS e nao com BYTES!!!
     int erro, porcentagemDeErros;
-    int *fluxoBrutoDeBitsPontoA, *fluxoBrutoDeBitsPontoB;
+    vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     porcentagemDeErros = 0; //10%, 20%, 30%, 40%, ..., 100%
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
     // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
