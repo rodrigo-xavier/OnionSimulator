@@ -26,6 +26,16 @@ void CamadaFisica::Transmissora(vector<int> quadro)
 vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> quadro)
 {
     //implementacao do algoritmo
+    cout << "Realizando a codificação binária" << endl;
+
+    vector<int> codificacao_binaria;
+
+    for (int i = 0; i < quadro.size(); i++){
+        codificacao_binaria.push_back(quadro[i]);
+    }
+    
+    return codificacao_binaria;
+
 } //fim do metodo CamadaFisicaTransmissoraCodificacaoBinaria
 
 // CamadaFisicaTransmissoraCodificacaoManchester
