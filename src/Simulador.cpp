@@ -60,6 +60,7 @@ int main(int argc, char *args[])
     CamadaEnlace camadaenlace;
     vector<int> quadro_transmissor;
     vector<int> quadro_receptor;
+    vector<int> quadro_meio_comunicacao;
 
 #ifdef DEBUG_CAMADA_FISICA
     // Define o número 5
@@ -97,6 +98,30 @@ int main(int argc, char *args[])
 #ifdef DEBUG_MEIO_DE_COMUNICACAO
     camadafisica.MeioDeComunicacao(quadro_transmissor);
 #endif 
+
+#ifdef DEBUG_BINARIA_RECEPTORA
+    quadro_receptor = camadafisica.ReceptoraCodificacaoBinaria(quadro_transmissor);
+
+    assertm(int(quadro_receptor[0]) == 1, "Falha na Decodificacao binária");
+    assertm(int(quadro_receptor[1]) == 0, "Falha na Decodificacao binária");
+    assertm(int(quadro_receptor[2]) == 1, "Falha na Decodificacao binária");
+
+    cout << "Decodificacao binária funcionando" << endl;
+
+#endif
+
+#ifdef DEBUG_MANCHESTER_RECEPTORA
+
+    quadro_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchester(quadro_transmissor);
+    quadro_receptor = camadafisica.ReceptoraCodificacaoManchester(quadro_meio_comunicacao);
+
+    assertm(int(quadro_receptor[0]) == 1, "Falha na Decodificacao manchester");
+    assertm(int(quadro_receptor[1]) == 0, "Falha na Decodificacao manchester");
+    assertm(int(quadro_receptor[2]) == 1, "Falha na Decodificacao manchester");
+
+    cout << "Decodificacao manchester funcionando" << endl;
+
+#endif
 
 #endif
 
