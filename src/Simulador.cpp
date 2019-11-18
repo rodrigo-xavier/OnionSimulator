@@ -10,6 +10,7 @@
 #define DEBUG_MANCHESTER_TRANSMISSORA
 #define DEBUG_MANCHESTER_TRANSMISSORA_DIFERENCIAL
 #define DEBUG_MANCHESTER_RECEPTORA
+#define DEBUG_MANCHESTER_RECEPTORA_DIFERENCIAL
 #define DEBUG_BINARIA_TRANSMISSORA
 #define DEBUG_BINARIA_RECEPTORA
 #define DEBUG_MEIO_DE_COMUNICACAO
@@ -119,7 +120,7 @@ int main(int argc, char *args[])
     assertm(int(quadro_receptor[1]) == 0, "Falha na Decodificacao binária");
     assertm(int(quadro_receptor[2]) == 1, "Falha na Decodificacao binária");
 
-    cout << "Decodificacao binária funcionando" << endl;
+    cout << "Decodificacao Binária Funcionando" << endl;
 
 #endif
 
@@ -132,7 +133,20 @@ int main(int argc, char *args[])
     assertm(int(quadro_receptor[1]) == 0, "Falha na Decodificacao manchester");
     assertm(int(quadro_receptor[2]) == 1, "Falha na Decodificacao manchester");
 
-    cout << "Decodificacao manchester funcionando" << endl;
+    cout << "Decodificacao Manchester Funcionando" << endl;
+
+#endif
+
+#ifdef DEBUG_MANCHESTER_RECEPTORA_DIFERENCIAL
+
+    quadro_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchesterDiferencial(quadro_transmissor);
+    quadro_receptor = camadafisica.ReceptoraCodificacaoManchesterDiferencial(quadro_meio_comunicacao);
+
+    assertm(int(quadro_receptor[0]) == 1, "Falha na Decodificacao manchester");
+    assertm(int(quadro_receptor[1]) == 0, "Falha na Decodificacao manchester");
+    assertm(int(quadro_receptor[2]) == 1, "Falha na Decodificacao manchester");
+
+    cout << "Decodificacao Manchester Diferencial Funcionando" << endl;
 
 #endif
 

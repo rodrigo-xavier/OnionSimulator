@@ -115,7 +115,7 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
 
     vector<int> decodificacao_manchester;
 
-    for (int i = 0; i < quadro.size(); i = i + 2)
+    for (int i = 0; i < quadro.size(); i += 2)
     {
         if ((quadro[i] == 0) && (quadro[i + 1] == 1))
             decodificacao_manchester.push_back(0);
@@ -131,7 +131,25 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
 // CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
 vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> quadro)
 {
-    //implementacao do algoritmo para DECODIFICAR
+    cout << "Realizando a Decodificação Manchester Diferencial" << endl;
+
+    vector<int> decodificacao_manchester;
+    int alternador = 0;
+
+    for (int i = 0; i < quadro.size(); i += 2)
+    {
+        if ((quadro[i] == 0 ^ alternador) && (quadro[i + 1] == 1 ^ alternador))
+            decodificacao_manchester.push_back(0);
+        else if ((quadro[i] == (1 ^ alternador)) && (quadro[i + 1] == (0 ^ alternador)))
+        {
+            decodificacao_manchester.push_back(1);
+            alternador = alternador ^ 1;
+        }
+        else
+            cout << "Erro na Decodificação" << endl;
+    }
+
+    return decodificacao_manchester;
 }
 
 /*##########################################################################################################*/
