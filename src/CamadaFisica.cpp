@@ -64,9 +64,9 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
   (pacote) - Unidade de dados da camada física
 
   Descrição da saída:
-  (codificacao_manchester) - 
+  (codificacao_manchester) - Pacote codificado com a codificação Manchester
 
-  Descrição Detalhada: 
+  Descrição Detalhada: A codificação manchester separa os bits em clocks, 
 *********************************************************************************************/
 vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> pacote)
 {
