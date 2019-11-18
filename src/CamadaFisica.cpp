@@ -19,19 +19,29 @@ void CamadaFisica::Transmissora(vector<int> quadro)
         fluxoBrutoDeBits = TransmissoraCodificacaoManchesterDiferencial(quadro);
         break;
     } //fim do switch/case
-    // MeioDeComunicacao(fluxoBrutoDeBits);
+    MeioDeComunicacao(fluxoBrutoDeBits);
 } //fim do metodo CamadaFisicaTransmissora
 
 // CamadaFisicaTransmissoraCodificacaoBinaria
 vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> quadro)
 {
     //implementacao do algoritmo
+    cout << "Realizando a codificação binária" << endl;
+
+    vector<int> codificacao_binaria;
+
+    for (int i = 0; i < quadro.size(); i++)
+        codificacao_binaria.push_back(quadro[i]);
+
+    return codificacao_binaria;
+
 } //fim do metodo CamadaFisicaTransmissoraCodificacaoBinaria
 
 // CamadaFisicaTransmissoraCodificacaoManchester
+//demetrio passou por aqui
 vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> quadro)
 {
-    cout << "Realizando a Codificação Manchester" << endl;
+    cout << "Realizando a codificação manchester" << endl;
 
     vector<int> codificacao_manchester;
 
@@ -49,26 +59,19 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 {
     cout << "Realizando a Codificação Manchester Diferencial" << endl;
 
-    vector<int> codificacao_manchester;
-    int alternador_bit_0 = 0;
-    int alternador_bit_1 = 1;
+    vector<int> codificacao_manchester_diferencial;
+    int alternador = 0;
 
-    codificacao_manchester.push_back(quadro[0] ^ alternador_bit_0);
-    codificacao_manchester.push_back(quadro[0] ^ alternador_bit_1);
-
-    for (int i = 1; i < quadro.size(); i++)
+    for (int i = 0; i < quadro.size(); i++)
     {
         if (quadro[i] == 1)
-        {
-            alternador_bit_0 = alternador_bit_0 ^ 0;
-            alternador_bit_1 = alternador_bit_1 ^ 0;
-        }
+            alternador = alternador ^ 1;
 
-        codificacao_manchester.push_back(quadro[i] ^ alternador_bit_0);
-        codificacao_manchester.push_back(quadro[i] ^ alternador_bit_1);
+        codificacao_manchester_diferencial.push_back(alternador);
+        codificacao_manchester_diferencial.push_back(alternador ^ 1);
     }
 
-    return codificacao_manchester;
+    return codificacao_manchester_diferencial;
 }
 
 /*##########################################################################################################*/
@@ -97,11 +100,44 @@ void CamadaFisica::Receptora(vector<int> quadro)
 vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
+    cout << "Realizando a decodificação binária" << endl;
+
+    vector<int> decodificacao_binaria;
+
+    for (int i = 0; i < quadro.size(); i++)
+    {
+        decodificacao_binaria.push_back(quadro[i]);
+    }
+
+    return decodificacao_binaria;
+
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoBinaria
 // CamadaFisicaReceptoraDecodificacaoManchester
 vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
+    cout << "Realizando a decodificação manchester" << endl;
+
+    vector<int> decodificacao_manchester;
+
+    for (int i = 0; i < quadro.size(); i = i + 2)
+    {
+        if (int(quadro[i]) == 0 && int(quadro[i + 1] == 1))
+        {
+            decodificacao_manchester.push_back(0);
+        }
+        else if (int(quadro[i]) == 1 && int(quadro[i + 1] == 0))
+        {
+            decodificacao_manchester.push_back(1);
+        }
+        else
+        {
+            cout << "Erro na Decodificação" << endl;
+        }
+    }
+
+    return decodificacao_manchester;
+
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoManchester
 // CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
 vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> quadro)
@@ -121,10 +157,12 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
-    // {
-    //     fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS! Sendo transferidos
-    // }                                                 //fim do while
+    for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
+    {
+        //BITS! Sendo transferidos
+        fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i));
+    } //fim do while
+
     //chama proxima camada
-    Receptora(fluxoBrutoDeBitsPontoB);
+    //Receptora(fluxoBrutoDeBitsPontoB);
 } //fim do metodo MeioDeTransmissao
