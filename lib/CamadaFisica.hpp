@@ -9,8 +9,6 @@ using namespace std;
 class CamadaFisica
 {
 public:
-    vector<int> quadro;
-
     void Transmissora(vector<int> quadro);
     vector<int> TransmissoraCodificacaoBinaria(vector<int> quadro);
     vector<int> TransmissoraCodificacaoManchester(vector<int> quadro);
