@@ -85,11 +85,39 @@ void CamadaFisica::Receptora(vector<int> quadro)
 vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
+    cout << "Realizando a decodificação binária" << endl;
+
+    vector<int> decodificacao_binaria;
+
+    for (int i = 0; i < quadro.size(); i++){
+        decodificacao_binaria.push_back(quadro[i]);
+    }
+    
+    return decodificacao_binaria;    
+
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoBinaria
 // CamadaFisicaReceptoraDecodificacaoManchester
 vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
 {
     //implementacao do algoritmo para DECODIFICAR
+    cout << "Realizando a decodificação manchester" << endl;
+
+    vector<int> decodificacao_manchester;
+
+    for (int i = 0; i < quadro.size(); i=i+2)
+    {
+        if (int(quadro[i]) == 0 && int(quadro[i+1] == 1)){
+            decodificacao_manchester.push_back(0);
+        } else if (int(quadro[i]) == 1 && int(quadro[i+1] == 0)){
+            decodificacao_manchester.push_back(1);
+        } else { 
+            cout << "Erro na Decodificação" << endl;
+        }
+
+    }
+
+    return decodificacao_manchester;
+
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoManchester
 // CamadaFisicaReceptoraDecodificacaoManchesterDiferencial
 vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> quadro)
