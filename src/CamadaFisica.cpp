@@ -30,10 +30,9 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> quadro)
 
     vector<int> codificacao_binaria;
 
-    for (int i = 0; i < quadro.size(); i++){
+    for (int i = 0; i < quadro.size(); i++)
         codificacao_binaria.push_back(quadro[i]);
-    }
-    
+
     return codificacao_binaria;
 
 } //fim do metodo CamadaFisicaTransmissoraCodificacaoBinaria
@@ -54,10 +53,26 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> quadro)
 
     return codificacao_manchester;
 }
+
+// CamadaFisicaTransmissoraCodificacaoManchesterDiferencial
 vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<int> quadro)
 {
-    //implementacao do algoritmo
-} //fim do CamadaFisicaTransmissoraCodificacaoManchesterDiferencial
+    cout << "Realizando a Codificação Manchester Diferencial" << endl;
+
+    vector<int> codificacao_manchester_diferencial;
+    int alternador = 0;
+
+    for (int i = 0; i < quadro.size(); i++)
+    {
+        if (quadro[i] == 1)
+            alternador = alternador ^ 1;
+
+        codificacao_manchester_diferencial.push_back(alternador);
+        codificacao_manchester_diferencial.push_back(alternador ^ 1);
+    }
+
+    return codificacao_manchester_diferencial;
+}
 
 /*##########################################################################################################*/
 // RECEPTORA
@@ -89,11 +104,12 @@ vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> quadro)
 
     vector<int> decodificacao_binaria;
 
-    for (int i = 0; i < quadro.size(); i++){
+    for (int i = 0; i < quadro.size(); i++)
+    {
         decodificacao_binaria.push_back(quadro[i]);
     }
-    
-    return decodificacao_binaria;    
+
+    return decodificacao_binaria;
 
 } //fim do metodo CamadaFisicaReceptoraDecodificacaoBinaria
 // CamadaFisicaReceptoraDecodificacaoManchester
@@ -104,16 +120,20 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> quadro)
 
     vector<int> decodificacao_manchester;
 
-    for (int i = 0; i < quadro.size(); i=i+2)
+    for (int i = 0; i < quadro.size(); i = i + 2)
     {
-        if (int(quadro[i]) == 0 && int(quadro[i+1] == 1)){
+        if (int(quadro[i]) == 0 && int(quadro[i + 1] == 1))
+        {
             decodificacao_manchester.push_back(0);
-        } else if (int(quadro[i]) == 1 && int(quadro[i+1] == 0)){
+        }
+        else if (int(quadro[i]) == 1 && int(quadro[i + 1] == 0))
+        {
             decodificacao_manchester.push_back(1);
-        } else { 
+        }
+        else
+        {
             cout << "Erro na Decodificação" << endl;
         }
-
     }
 
     return decodificacao_manchester;
@@ -137,8 +157,9 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++) {
-         //BITS! Sendo transferidos
+    for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
+    {
+        //BITS! Sendo transferidos
         fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i));
     } //fim do while
 
