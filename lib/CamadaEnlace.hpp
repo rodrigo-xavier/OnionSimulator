@@ -20,7 +20,6 @@ public:
     void DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro);
 
     void DadosTransmissoraControleDeErro(vector<int> quadro);
-    void DadosTransmissoraControleDeFluxo(vector<int> quadro);
     void DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro);
     void DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> quadro);
     void DadosTransmissoraControleDeErroCRC(vector<int> quadro);
@@ -35,7 +34,6 @@ public:
     void DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro);
 
     void DadosReceptoraControleDeErro(vector<int> quadro);
-    void DadosReceptoraControleDeFluxo(vector<int> quadro);
     void DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro);
     void DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro);
     void DadosReceptoraControleDeErroCRC(vector<int> quadro);
