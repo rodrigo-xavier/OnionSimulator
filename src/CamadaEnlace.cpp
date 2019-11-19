@@ -7,7 +7,6 @@ void CamadaEnlace::DadosTransmissora(vector<int> quadro)
 {
     DadosTransmissoraEnquadramento(quadro);
     DadosTransmissoraControleDeErro(quadro);
-    DadosTransmissoraControleDeFluxo(quadro);
     //chama proxima camada
     // CamadaFisicaTransmissora(quadro);
 } //fim do metodo CamadaEnlaceDadosTransmissora
@@ -22,35 +21,51 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro)
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
-        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro);
+        quadroEnquadrado = DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro);
         break;
     case 1: //insercao de bytes
-        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro);
+        quadroEnquadrado = DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro);
         break;
     case 2: //insercao de bits
-        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro);
+        quadroEnquadrado = DadosTransmissoraEnquadramentoInsercaoDeBits(quadro);
     case 3: //violacao da camada fisica
         // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro);
         break;
     } //fim do switch/case
+    DadosTransmissoraControleDeErro(quadroEnquadrado);
 } //fim do metodo CamadaEnlaceTransmissoraEnquadramento
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+vector<int> CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
     //implementacao do algoritmo
+    int qtd_bytes = ceil(quadro.size() / 8);
+    vector<int> enquadramento_contagem_caracteres;
+
+    enquadramento_contagem_caracteres.push_back(qtd_bytes);
+
+    for (int i = 0; i < quadro.size(); i++)
+        enquadramento_contagem_caracteres.push_back(quadro[i]);
+
+    for (int i = 0; i < enquadramento_contagem_caracteres.size(); i++)
+        cout << enquadramento_contagem_caracteres[i];
+
+    cout << endl;
+
+    return enquadramento_contagem_caracteres;
+
 } //fim do metodo DadosTransmissoraContagemDeCaracteres
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
+vector<int> CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraInsercaoDeBytes
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro)
+vector<int> CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraInsercaoDeBits
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
+vector<int> CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
 {
     //implementacao do algoritmo
 } //fim do metodo DadosTransmissoraViolacaoDaCamadaFisica
@@ -138,22 +153,35 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro)
     } //fim do switch/case
 } //fim do metodo DadosReceptoraEnquadramento
 
-void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+vector<int> CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
+    int qtd_bytes = quadro.front();
+    vector<int> desenquadramento_contagem_caracteres;
+
+    for (int i = 1; i < quadro.size(); i++)
+        desenquadramento_contagem_caracteres.push_back(quadro[i]);
+
+    for (int i = 0; i < desenquadramento_contagem_caracteres.size(); i++)
+        cout << desenquadramento_contagem_caracteres[i];
+
+    cout << endl;
+
+    return desenquadramento_contagem_caracteres;
 } //fim do metodo DadosReceptoraContagemDeCaracteres
 
-void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
+vector<int> CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
+
 } //fim do metodo DadosReceptoraInsercaoDeBytes
 
-void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro)
+vector<int> CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
 } //fim do metodo DadosReceptoraInsercaoDeBits
 
-void CamadaEnlace::DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
+vector<int> CamadaEnlace::DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
 } //fim do metodo DadosReceptoraViolacaoDaCamadaFisica
