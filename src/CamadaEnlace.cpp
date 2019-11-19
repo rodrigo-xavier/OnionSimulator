@@ -34,8 +34,9 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro)
     } //fim do switch/case
 }
 
-void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+vector<int> CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
+    cout << "Realizando enquadramento com contagem de caracteres" << endl;
     //implementacao do algoritmo
     int qtd_bytes = ceil(quadro.size() / 8);
     vector<int> enquadramento_contagem_caracteres;
@@ -49,6 +50,8 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
         cout << enquadramento_contagem_caracteres[i];
 
     cout << endl;
+
+    return enquadramento_contagem_caracteres;
 
 } //fim do metodo DadosTransmissoraContagemDeCaracteres
 
@@ -145,7 +148,7 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro)
     } //fim do switch/case
 }
 
-void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+vector<int> CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
     int qtd_bytes = quadro.front();
@@ -158,6 +161,8 @@ void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> q
         cout << desenquadramento_contagem_caracteres[i];
 
     cout << endl;
+
+    return desenquadramento_contagem_caracteres;
 
 } //fim do metodo DadosReceptoraContagemDeCaracteres
 

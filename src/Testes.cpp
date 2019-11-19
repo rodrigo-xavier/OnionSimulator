@@ -12,13 +12,13 @@ void Testes::init_pacote(void)
 
 void Testes::init_quadro(void)
 {
-    string value_255 = "11111111", value_3 = "00000011", value_esc = "11110000";
-    string value_flag = "00001111", value_5 = "00000101", value_0 = "00000000";
+    vector<int> value_255 = {1, 1, 1, 1, 1, 1, 1, 1}, value_3 = {0, 0, 0, 0, 0, 0, 1, 1}, value_esc = {1, 1, 1, 1, 0, 0, 0, 0};
+    vector<int> value_flag = {0, 0, 0, 0, 1, 1, 1, 1}, value_5 = {0, 0, 0, 0, 0, 1, 0, 1}, value_0 = {0, 0, 0, 0, 0, 0, 0, 0};
     int introdutor;
 
-    string concat = value_255 + value_3 + value_esc + value_flag + value_5 + value_0;
+    vector<int> concat = {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    for (int i = concat.length(); i >= 0; i--)
+    for (int i = concat.size(); i >= 0; i--)
     {
         introdutor = int(concat[i]);
         this->quadro_transmissor.push_back(introdutor);
@@ -39,6 +39,7 @@ void Testes::run(void)
     test_manchester_receptora_diferencial();
 #endif
 #ifdef DEBUG_CAMADA_ENLACE
+    test_transmissora_enquadramento_contagem_de_caracteres();
 #endif
 #ifdef DEBUG_CAMADA_APLICACAO
 #endif
@@ -128,6 +129,18 @@ void Testes::test_manchester_receptora_diferencial(void)
 
 /*##########################################################################################################*/
 // CAMADA ENLACE
+
+void Testes::test_transmissora_enquadramento_contagem_de_caracteres(void)
+{
+    this->pacote_receptor = camadaenlace.DadosTransmissoraEnquadramentoContagemDeCaracteres(this->quadro_transmissor);
+
+    cout << int(this->pacote_receptor[0]) << endl;
+    assertm(int(this->pacote_receptor[0]) == 6, "Falha no Enquadramento usando contagem de caracteres");
+    assertm(int(this->pacote_receptor[1]) == 0, "Falha no Enquadramento usando contagem de caracteres");
+    assertm(int(this->pacote_receptor[47]) == 1, "Falha no Enquadramento usando contagem de caracteres");
+
+    cout << "Enquadramento usando contagem de caracteres funcionando" << endl;
+}
 
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
