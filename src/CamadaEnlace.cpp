@@ -40,13 +40,20 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
 
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
 {
+    // cout << "Realizando enquadramento com inserção de bytes" << endl;
+
+    // string compare;
+
+    // for (int i = 0; i < quadro.size(); i++)
+    // {
+    //     for (int j = 0; j < BYTE; j++)
+    //     {
+    //         compare = quadro
+    //     }
+    // }
 }
 
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro)
-{
-}
-
-void CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
 {
 }
 
@@ -133,10 +140,6 @@ void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro
 }
 
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro)
-{
-}
-
-void CamadaEnlace::DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
 {
 }
 

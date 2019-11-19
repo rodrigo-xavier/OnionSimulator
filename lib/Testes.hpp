@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <assert.h>
+#include <bitset>
 
 /*##########################################################################################################*/
 // DEFINE
@@ -24,11 +25,11 @@ class Testes
 public:
     CamadaFisica camadafisica;
     CamadaEnlace camadaenlace;
+    vector<int> pacote_transmissor, pacote_receptor, pacote_meio_comunicacao;
     vector<int> quadro_transmissor;
-    vector<int> quadro_receptor;
-    vector<int> quadro_meio_comunicacao;
 
-    void init(void);
+    void init_pacote(void);
+    void init_quadro(void);
     void run(void);
 
     /* Camada Física */
@@ -41,4 +42,5 @@ public:
     void test_manchester_receptora_diferencial(void);
 
     /* Camada Enlace */
+    void test_transmissora_enquadramento_insercao_de_bytes(void);
 };

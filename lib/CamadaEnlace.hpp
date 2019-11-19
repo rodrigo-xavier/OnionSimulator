@@ -3,6 +3,8 @@
 #include "CamadaFisica.hpp"
 #include <iostream>
 
+#define BYTE 8
+
 using namespace std;
 
 class CamadaEnlace
@@ -10,6 +12,8 @@ class CamadaEnlace
 public:
     CamadaFisica camadafisica;
     vector<int> quadro;
+    string flag = "00001111";
+    string esc = "11110000";
 
     void DadosTransmissora(vector<int> quadro);
 
@@ -31,7 +35,6 @@ public:
     void DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro);
     void DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro);
     void DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro);
-    void DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro);
 
     void DadosReceptoraControleDeErro(vector<int> quadro);
     void DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro);
