@@ -1,5 +1,4 @@
 #include "../lib/Testes.hpp"
-#define assertm(exp, msg) assert(((void)msg, exp))
 
 void Testes::init_pacote(void)
 {
@@ -12,15 +11,15 @@ void Testes::init_pacote(void)
 
 void Testes::init_quadro(void)
 {
-    string value_255 = "11111111", value_3 = "00000011", value_esc = "11110000";
-    string value_flag = "00001111", value_5 = "00000101", value_0 = "00000000";
+    string value_255 = "11111111", value_3 = "00000011", value_esc_240 = "11110000";
+    string value_flag_15 = "00001111", value_5 = "00000101", value_0 = "00000000";
     int introdutor;
 
-    string concat = value_255 + value_3 + value_esc + value_flag + value_5 + value_0;
+    string concat = value_255 + value_3 + value_esc_240 + value_flag_15 + value_5 + value_0;
 
-    for (int i = concat.length(); i >= 0; i--)
+    for (int i = 0; i < concat.length(); i++)
     {
-        introdutor = int(concat[i]);
+        introdutor = concat[i] - '0';
         this->quadro_transmissor.push_back(introdutor);
     }
 }
@@ -39,6 +38,7 @@ void Testes::run(void)
     test_manchester_receptora_diferencial();
 #endif
 #ifdef DEBUG_CAMADA_ENLACE
+    test_transmissora_enquadramento_insercao_de_bytes();
 #endif
 #ifdef DEBUG_CAMADA_APLICACAO
 #endif
@@ -131,23 +131,21 @@ void Testes::test_manchester_receptora_diferencial(void)
 
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
-    int introdutor;
+    string _255 = "11111111", _3 = "00000011", _esc_240 = "11110000";
+    string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
+
+    string quadro_real = _flag_15 + _255 + _3 + _esc_240 + _esc_240 + _esc_240 + _flag_15 + _5 + _0 + _flag_15;
+    int counter = 1;
     string quadro = "";
-    bitset<8> bin_to_dec;
 
     this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
 
-    for (int i = 0; i < this->camadaenlace.quadro.size(); i += 8)
+    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
     {
-        for (int j = 0; j < BYTE; j++)
-        {
-            bin_to_dec[j] = this->camadaenlace.quadro.back();
-            this->camadaenlace.quadro.pop_back();
-        }
-        quadro += bin_to_dec.to_ulong();
+        quadro += to_string(this->camadaenlace.quadro[i]);
     }
 
-    assertm(quadro == "25532401550", "Falha na Decodificacao manchester");
+    assertm(quadro == quadro_real, "Falha na insercao de bytes");
 
     cout << "Enquadramento com inserção de bytes funcionando" << endl;
 }
