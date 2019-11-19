@@ -3,139 +3,85 @@
 /*##########################################################################################################*/
 // TRANSMISSORA
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissora(vector<int> quadro)
+void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro);
-    DadosTransmissoraControleDeErro(quadro);
-    DadosTransmissoraControleDeFluxo(quadro);
+    DadosTransmissoraEnquadramento(quadro_bruto);
+    DadosTransmissoraControleDeErro(quadro_bruto);
     //chama proxima camada
-    // CamadaFisicaTransmissora(quadro);
-} //fim do metodo CamadaEnlaceDadosTransmissora
+    // CamadaFisicaTransmissora(quadro_bruto);
+}
 
 /*##########################################################################################################*/
 // TRANSMISSORA: ENQUADRAMENTO
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro)
+void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro_bruto)
 {
     int tipoDeEnquadramento = 0; //alterar de acordo com o teste
     vector<int> quadroEnquadrado;
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
-        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro);
+        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro_bruto);
         break;
     case 1: //insercao de bytes
-        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro);
+        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro_bruto);
         break;
     case 2: //insercao de bits
-        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro);
+        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
     case 3: //violacao da camada fisica
-        // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro);
+        // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
     } //fim do switch/case
-} //fim do metodo CamadaEnlaceTransmissoraEnquadramento
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo
-} //fim do metodo DadosTransmissoraContagemDeCaracteres
-
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
+}
+void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo
-} //fim do metodo DadosTransmissoraInsercaoDeBytes
+    cout << "Realizando enquadramento com inserção de bytes" << endl;
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
+    string byte_str = "", quadro_str = this->flag;
+    vector<int> novo_quadro;
+    int counter = 1;
 
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
+    for (int i = 0; i < quadro_bruto.size(); i++)
+    {
+        byte_str += to_string(quadro_bruto[i]);
 
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro)
+        if (counter == BYTE)
+        {
+            if (byte_str == this->flag)
+                quadro_str += this->esc;
+            if (byte_str == this->esc)
+                quadro_str += this->esc;
+
+            quadro_str += byte_str;
+
+            counter = 0;
+            byte_str = "";
+        }
+        counter++;
+    }
+
+    quadro_str += this->flag;
+
+    for (auto &i : quadro_str)
+        novo_quadro.push_back(i - '0');
+
+    this->quadro = novo_quadro;
+
+    // this->quadro = TransmissoraCodificacaoBinaria(novo_quadro);
+}
+
+void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo
-} //fim do metodo DadosTransmissoraInsercaoDeBits
-
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
-{
-    //implementacao do algoritmo
-} //fim do metodo DadosTransmissoraViolacaoDaCamadaFisica
+}
 
 /*##########################################################################################################*/
 // TRANSMISSORA: CONTROLE
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraControleDeErro(vector<int> quadro)
+void CamadaEnlace::DadosTransmissoraControleDeErro(vector<int> quadro_bruto)
 {
     int tipoDeControleDeErro = 0; //alterar de acordo com o teste
     switch (tipoDeControleDeErro)
@@ -152,225 +98,68 @@ void CamadaEnlace::DadosTransmissoraControleDeErro(vector<int> quadro)
         //codigo
         break;
     } //fim do switch/case
-} //fim do metodo DadosTransmissoraControleDeErro
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraControleDeFluxo(vector<int> quadro)
+void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro_bruto)
 {
-    //algum codigo aqui
-} //fim do metodo DadosTransmissoraControleDeFluxo
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro)
+void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo
-} //fim do metodo DadosTransmissoraControledeErroBitParidadePar
-
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> quadro)
+}
+void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo
-} //fim do metodo DadosTransmissoraControledeErroBitParidadeImpar
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro)
-{
-    //implementacao do algoritmo
     //usar polinomio CRC-32(IEEE 802)
-} //fim do metodo DadosTransmissoraControledeErroCRC
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro)
+void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo
-} //fim do metodo DadosTransmissoraControleDeErroCodigoDehamming
+}
 
 /*##########################################################################################################*/
 // RECEPTORA
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptora(vector<int> quadro)
+void CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro);
-    DadosTransmissoraControleDeErro(quadro);
-    DadosTransmissoraControleDeFluxo(quadro);
-    //chama proxima camada
-    // CamadaDeAplicacaoReceptora(quadro);
-} //fim do metodo DadosReceptora
+}
 
-/*##########################################################################################################*/
-// RECEPTORA: ENQUADRAMENTO
-
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 {
     int tipoDeEnquadramento = 0; //alterar de acordo com o teste
     vector<int> quadroDesenquadrado;
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
-        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro);
+        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro_bruto);
         break;
     case 1: //insercao de bytes
-        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro);
+        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro_bruto);
         break;
     case 2: //insercao de bits
-        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro);
+        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
     case 3: //violacao da camada fisica
-        // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro);
+        // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
     } //fim do switch/case
-} //fim do metodo DadosReceptoraEnquadramento
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo para DESENQUADRAR
-} //fim do metodo DadosReceptoraContagemDeCaracteres
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo para DESENQUADRAR
-} //fim do metodo DadosReceptoraInsercaoDeBytes
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo para DESENQUADRAR
-} //fim do metodo DadosReceptoraInsercaoDeBits
-
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
-{
-    //implementacao do algoritmo para DESENQUADRAR
-} //fim do metodo DadosReceptoraViolacaoDaCamadaFisica
+}
 
 /*##########################################################################################################*/
 // RECEPTORA: CONTROLE
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro_bruto)
 {
     int tipoDeControleDeErro = 0; //alterar de acordo com o teste
     switch (tipoDeControleDeErro)
@@ -387,88 +176,25 @@ void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro)
         //codigo
         break;
     } //fim do switch/case
-} //fim do metodo DadosReceptoraControleDeErro
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraControleDeFluxo(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro_bruto)
 {
-    //algum codigo aqui
-} //fim do metodo DadosReceptoraControleDeFluxo
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
-} //fim do metodo DadosReceptoraControleDeErroBitDeParidadePar
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
-} //fim do metodo DadosReceptoraControleDeErroBitDeParidadeImpar
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro)
-{
-    //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
     //usar polinomio CRC-32(IEEE 802)
-} //fim do metodo DadosReceptoraControleDeErroCRC
+}
 
-/********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
-  
-  Descrição da Entrada:
-  (pacote) - Unidade de dados da camada física
-
-  Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
-
-  Descrição Detalhada: 
-*********************************************************************************************/
-void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo para VERIFICAR SE HOUVE ERRO
-} //fim do metodo DadosReceptoraControleDeErroCodigoDeHamming
+}
 
 /*##########################################################################################################*/
 // MEIO DE COMUNICAÇÃO
@@ -498,4 +224,4 @@ void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     //     else                                              //ERRO! INVERTER (usa condicao ternaria)
     //         (fluxoBrutoBitsPontoB == 0) ? fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB++ : fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB--;
     // } //fim do while
-} //fim do metodo MeioDeTransmissao
+}
