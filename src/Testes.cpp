@@ -1,5 +1,4 @@
 #include "../lib/Testes.hpp"
-#define assertm(exp, msg) assert(((void)msg, exp))
 
 void Testes::init_pacote(void)
 {
@@ -12,11 +11,11 @@ void Testes::init_pacote(void)
 
 void Testes::init_quadro(void)
 {
-    string value_255 = "11111111", value_3 = "00000011", value_esc = "11110000";
-    string value_flag = "00001111", value_5 = "00000101", value_0 = "00000000";
+    string value_255 = "11111111", value_3 = "00000011", value_esc_240 = "11110000";
+    string value_flag_15 = "00001111", value_5 = "00000101", value_0 = "00000000";
     int introdutor;
 
-    string concat = value_255 + value_3 + value_esc + value_flag + value_5 + value_0;
+    string concat = value_255 + value_3 + value_esc_240 + value_flag_15 + value_5 + value_0;
 
     for (int i = concat.length(); i >= 0; i--)
     {
@@ -39,6 +38,7 @@ void Testes::run(void)
     test_manchester_receptora_diferencial();
 #endif
 #ifdef DEBUG_CAMADA_ENLACE
+    test_transmissora_enquadramento_insercao_de_bytes();
 #endif
 #ifdef DEBUG_CAMADA_APLICACAO
 #endif
@@ -133,7 +133,7 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
     int introdutor;
     string quadro = "";
-    bitset<8> bin_to_dec;
+    bitset<BYTE> bin_to_dec;
 
     this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
 
@@ -147,7 +147,7 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
         quadro += bin_to_dec.to_ulong();
     }
 
-    assertm(quadro == "25532401550", "Falha na Decodificacao manchester");
+    assertm(quadro == "152553240240240155015", "Falha na Decodificacao manchester");
 
     cout << "Enquadramento com inserção de bytes funcionando" << endl;
 }
