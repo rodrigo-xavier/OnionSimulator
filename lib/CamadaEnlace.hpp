@@ -8,6 +8,9 @@ using namespace std;
 class CamadaEnlace
 {
 public:
+    CamadaFisica camadafisica;
+    vector<int> quadro;
+
     void DadosTransmissora(vector<int> quadro);
 
     void DadosTransmissoraEnquadramento(vector<int> quadro);
