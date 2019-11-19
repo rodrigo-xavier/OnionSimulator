@@ -40,13 +40,17 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
 
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro)
 {
+
+    for (int i = 0; i < quadro.size(); i++)
+    {
+        for (int j = 0; j < BYTE; j++)
+        {
+            /* code */
+        }
+        }
 }
 
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro)
-{
-}
-
-void CamadaEnlace::DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro)
 {
 }
 
