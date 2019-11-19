@@ -43,17 +43,24 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
     cout << "Realizando enquadramento com inserção de bytes" << endl;
 
     string byte_str = "", quadro_str = this->flag;
-    bitset<BYTE> bin_to_str;
+    bitset<BYTE-1> bin_to_str;
     vector<int> novo_quadro;
-    int counter = 0;
+    int counter = BYTE - 2;
+
+    string showme="";
+    for (int i = 0; i < quadro_bruto.size(); i++)
+        showme+=quadro_bruto[i];
+    cout << showme << endl;
+    
 
     for (int i = 0; i < quadro_bruto.size(); i++)
     {
         bin_to_str[counter] = quadro_bruto[i];
 
-        if (counter == BYTE)
+        if (counter == 0)
         {
             byte_str = bin_to_str.to_string();
+            cout << byte_str << endl;
 
             if (byte_str == this->flag)
                 quadro_str += this->esc;
@@ -62,11 +69,10 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
 
             quadro_str += byte_str;
 
-            counter = 0;
-
-            cout << byte_str << endl;
+            counter = BYTE - 2;
+            // bin_to_str.reset();
         }
-        counter++;
+        counter--;
     }
 
     quadro_str += this->flag;
