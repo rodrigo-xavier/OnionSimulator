@@ -17,9 +17,9 @@ void Testes::init_quadro(void)
 
     string concat = value_255 + value_3 + value_esc_240 + value_flag_15 + value_5 + value_0;
 
-    for (int i = concat.length(); i >= 0; i--)
+    for (int i = 0; i < concat.length(); i++)
     {
-        introdutor = int(concat[i]);
+        introdutor = concat[i] - '0';
         this->quadro_transmissor.push_back(introdutor);
     }
 }
@@ -139,16 +139,17 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 
     for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
     {
-        bin_to_dec[counter] = this->camadaenlace.quadro.back();
-        this->camadaenlace.quadro.pop_back();
+        bin_to_dec[counter] = this->camadaenlace.quadro[i];
 
-        if ((i % (BYTE - 1)) == 0)
+        if (counter == BYTE)
         {
             quadro += bin_to_dec.to_ulong();
             counter = 0;
         }
         counter++;
     }
+
+    cout << quadro << endl;
 
     assertm(quadro == "152553240240240155015", "Falha na Decodificacao manchester");
 
