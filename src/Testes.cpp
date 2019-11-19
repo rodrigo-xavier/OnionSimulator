@@ -18,7 +18,7 @@ void Testes::init_quadro(void)
 
     string concat = value_255 + value_3 + value_esc + value_flag + value_5 + value_0;
 
-    for (int i = 0; i < concat.length(); i++)
+    for (int i = concat.length(); i >= 0; i--)
     {
         introdutor = int(concat[i]);
         this->quadro_transmissor.push_back(introdutor);
@@ -46,6 +46,7 @@ void Testes::run(void)
 
 /*##########################################################################################################*/
 // CAMADA FÍSICA
+
 void Testes::test_transmissora_binaria(void)
 {
     this->pacote_receptor = camadafisica.TransmissoraCodificacaoBinaria(this->pacote_transmissor);
@@ -130,5 +131,23 @@ void Testes::test_manchester_receptora_diferencial(void)
 
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
-    this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes()
+    int introdutor;
+    string quadro = "";
+    bitset<8> bin_to_dec;
+
+    this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
+
+    for (int i = 0; i < this->camadaenlace.quadro.size(); i += 8)
+    {
+        for (int j = 0; j < BYTE; j++)
+        {
+            bin_to_dec[j] = this->camadaenlace.quadro.back();
+            this->camadaenlace.quadro.pop_back();
+        }
+        quadro += bin_to_dec.to_ulong();
+    }
+
+    assertm(quadro == "25532401550", "Falha na Decodificacao manchester");
+
+    cout << "Enquadramento com inserção de bytes funcionando" << endl;
 }

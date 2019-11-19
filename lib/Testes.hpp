@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <assert.h>
+#include <bitset>
 
 /*##########################################################################################################*/
 // DEFINE
@@ -25,7 +26,7 @@ public:
     CamadaFisica camadafisica;
     CamadaEnlace camadaenlace;
     vector<int> pacote_transmissor, pacote_receptor, pacote_meio_comunicacao;
-    vector<int> quadro_transmissor, quadro_receptor;
+    vector<int> quadro_transmissor;
 
     void init_pacote(void);
     void init_quadro(void);
