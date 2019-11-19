@@ -131,20 +131,23 @@ void Testes::test_manchester_receptora_diferencial(void)
 
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
-    int introdutor;
+    int counter = 0;
     string quadro = "";
     bitset<BYTE> bin_to_dec;
 
     this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
 
-    for (int i = 0; i < this->camadaenlace.quadro.size(); i += 8)
+    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
     {
-        for (int j = 0; j < BYTE; j++)
+        bin_to_dec[counter] = this->camadaenlace.quadro.back();
+        this->camadaenlace.quadro.pop_back();
+
+        if ((i % (BYTE - 1)) == 0)
         {
-            bin_to_dec[j] = this->camadaenlace.quadro.back();
-            this->camadaenlace.quadro.pop_back();
+            quadro += bin_to_dec.to_ulong();
+            counter = 0;
         }
-        quadro += bin_to_dec.to_ulong();
+        counter++;
     }
 
     assertm(quadro == "152553240240240155015", "Falha na Decodificacao manchester");
