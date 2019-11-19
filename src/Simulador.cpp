@@ -53,7 +53,7 @@ int main(int argc, char *args[])
 {
     Testes teste;
 
-    teste.run();
+    teste.init();
 
     return 0;
 }

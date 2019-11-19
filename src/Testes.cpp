@@ -8,6 +8,7 @@ void Testes::init(void)
     this->quadro_transmissor.push_back(0);
     this->quadro_transmissor.push_back(1);
     // Define o número 5
+    run();
 }
 
 void Testes::run(void)
@@ -34,7 +35,6 @@ void Testes::test_transmissora_binaria(void)
     this->quadro_receptor = camadafisica.TransmissoraCodificacaoBinaria(quadro_transmissor);
 
     assertm(int(this->quadro_receptor[0]) == 1, "Falha na Codificacao binária");
-    cout << "problemas" << endl;
     assertm(int(this->quadro_receptor[1]) == 0, "Falha na Codificacao binária");
     assertm(int(this->quadro_receptor[2]) == 1, "Falha na Codificacao binária");
 
@@ -87,7 +87,6 @@ void Testes::test_binaria_receptora(void)
 
 void Testes::test_manchester_receptora(void)
 {
-
     this->quadro_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchester(quadro_transmissor);
     this->quadro_receptor = camadafisica.ReceptoraCodificacaoManchester(quadro_meio_comunicacao);
 
@@ -100,7 +99,6 @@ void Testes::test_manchester_receptora(void)
 
 void Testes::test_manchester_receptora_diferencial(void)
 {
-
     this->quadro_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchesterDiferencial(quadro_transmissor);
     this->quadro_receptor = camadafisica.ReceptoraCodificacaoManchesterDiferencial(quadro_meio_comunicacao);
 
