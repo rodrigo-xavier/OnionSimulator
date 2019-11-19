@@ -2,12 +2,10 @@
 #define CAMADA_ENLACE
 #include "CamadaFisica.hpp"
 #include <iostream>
-#include <bitset>
-#include <algorithm>
 
 #define BYTE 8
 
-using namespace std;
+// using namespace std;
 
 class CamadaEnlace : CamadaFisica
 {
