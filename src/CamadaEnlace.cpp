@@ -220,7 +220,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
 {
     cout << "Realizando a transmissão com controle de erro CRC" << endl;
 
-    vector<int> crc, novo_quadro;
+    vector<int> novo_quadro;
 
     if (quadro_bruto.size() <= this->polinomio_crc_32.length())
     {
@@ -228,23 +228,26 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
         return;
     }
 
-    crc = quadro_bruto;
+    novo_quadro = quadro_bruto;
 
-    for (int i = 0; i < this->polinomio_crc_32.length(); i++)
-        crc.push_back(0);
-    
+    for (int i = 0; i < 32 - 1; i++)
+        novo_quadro.push_back(0);
+
     cout << "polinomio " << this->polinomio_crc_32 << endl;
 
     for (int i = 0; i < quadro_bruto.size(); i++)
     {
-        if (crc[i] == 1)
+        if (novo_quadro[i] == 1)
         {
             for (int j = 0; j < this->polinomio_crc_32.length(); j++)
-                crc[i + j] ^= (this->polinomio_crc_32[j] - '0');
+                novo_quadro[i + j] ^= (this->polinomio_crc_32[j] - '0');
         }
     }
 
-    this->quadro = crc;
+    for (int i = 0; i < quadro_bruto.size(); i++)
+        novo_quadro[i] = quadro_bruto[i];
+
+    this->quadro = novo_quadro;
 }
 
 void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
@@ -452,8 +455,37 @@ void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> qu
 
 void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
 {
+    cout << "Realizando o controle de erro CRC receptor" << endl;
 
-    //usar polinomio CRC-32(IEEE 802)
+    vector<int> mensagem, novo_quadro;
+    bool valido = true;
+
+    if (quadro_bruto.size() <= this->polinomio_crc_32.length())
+    {
+        cout << "Erro, o quadro possui menos bits que o polinômio";
+        return;
+    }
+
+    mensagem = quadro_bruto;
+    mensagem.erase(mensagem.end() - 31, mensagem.end());
+
+    for (int i = 0; i < mensagem.size(); i++)
+    {
+        if (quadro_bruto[i] == 1)
+        {
+            for (int j = 0; j < this->polinomio_crc_32.length(); j++)
+                novo_quadro[j + i] = novo_quadro[j + i] == polinomio_crc_32[j] ? 0 : 1;
+        }
+    }
+
+    for (int i = 0; i < mensagem.size(); i++)
+    {
+        if (novo_quadro[i] != 0)
+            valido = false;
+    }
+
+    if (valido)
+        this->quadro = novo_quadro;
 }
 
 void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
