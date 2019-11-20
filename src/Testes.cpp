@@ -18,11 +18,13 @@ void Testes::run(void)
 #ifdef DEBUG_CAMADA_ENLACE
 
     // test_transmissora_enquadramento_contagem_de_caracteres();
-    // test_transmissora_enquadramento_insercao_de_bits();
-    test_transmissora_enquadramento_insercao_de_bytes();
+    test_transmissora_enquadramento_insercao_de_bits();
+    // test_transmissora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_bit_paridade_impar();
-    //    test_receptora_controle_de_erro_bit_paridade_par();
-    test_receptora_enquadramento_insercao_de_bytes();
+    // test_receptora_controle_de_erro_bit_paridade_par();
+    // test_receptora_enquadramento_insercao_de_bytes();
+    // test_transmissora_controle_de_erro_crc();
+    // test_receptora_controle_de_erro_crc();
 
 #endif
 
@@ -59,6 +61,7 @@ void Testes::init_quadro(void)
 
 void Testes::test_transmissora_binaria(void)
 {
+    CamadaFisica camadafisica;
     string enviado = "", recebido = "";
 
     this->pacote_receptor = camadafisica.TransmissoraCodificacaoBinaria(this->pacote_transmissor);
@@ -83,6 +86,7 @@ void Testes::test_transmissora_binaria(void)
 
 void Testes::test_transmissora_manchester(void)
 {
+    CamadaFisica camadafisica;
     string enviado = "", recebido = "";
 
     this->pacote_receptor = camadafisica.TransmissoraCodificacaoManchester(this->pacote_transmissor);
@@ -110,6 +114,7 @@ void Testes::test_transmissora_manchester(void)
 
 void Testes::test_transmissora_manchester_diferencial(void)
 {
+    CamadaFisica camadafisica;
     string enviado = "", recebido = "";
 
     this->pacote_receptor = camadafisica.TransmissoraCodificacaoManchesterDiferencial(this->pacote_transmissor);
@@ -137,15 +142,16 @@ void Testes::test_transmissora_manchester_diferencial(void)
 
 void Testes::test_meio_de_comunicacao(void)
 {
+    CamadaFisica camadafisica;
     camadafisica.MeioDeComunicacao(this->pacote_transmissor);
     cout << endl;
 }
 
 void Testes::test_binaria_receptora(void)
 {
-    string enviado = "", recebido = "";
+    CamadaFisica camadafisica;
 
-    this->pacote_receptor = camadafisica.ReceptoraCodificacaoBinaria(this->pacote_transmissor);
+    string enviado = "", recebido = "";
 
     for (int i = 0; i < this->pacote_receptor.size(); i++)
     {
@@ -167,6 +173,7 @@ void Testes::test_binaria_receptora(void)
 
 void Testes::test_manchester_receptora(void)
 {
+    CamadaFisica camadafisica;
     string enviado = "", recebido = "";
 
     this->pacote_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchester(this->pacote_transmissor);
@@ -191,6 +198,7 @@ void Testes::test_manchester_receptora(void)
 
 void Testes::test_manchester_receptora_diferencial(void)
 {
+    CamadaFisica camadafisica;
     string enviado = "", recebido = "";
 
     this->pacote_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchesterDiferencial(this->pacote_transmissor);
@@ -218,6 +226,7 @@ void Testes::test_manchester_receptora_diferencial(void)
 
 void Testes::test_transmissora_enquadramento_contagem_de_caracteres(void)
 {
+    CamadaEnlace camadaenlace;
     camadaenlace.DadosTransmissoraEnquadramentoContagemDeCaracteres(this->quadro_transmissor);
 
     cout << int(this->quadro_transmissor[0]) << endl;
@@ -230,18 +239,20 @@ void Testes::test_transmissora_enquadramento_contagem_de_caracteres(void)
 
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
+    CamadaEnlace camadaenlace;
+
     string _255 = "11111111", _3 = "00000011", _esc_240 = "11110000";
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
     string esperado = _flag_15 + _255 + _3 + _esc_240 + _esc_240 + _esc_240 + _flag_15 + _5 + _0 + _flag_15;
     string enviado = "", recebido = "";
 
-    this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
+    camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
 
     for (int i = 0; i < this->quadro_transmissor.size(); i++)
         enviado += to_string(this->quadro_transmissor[i]);
 
-    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
-        recebido += to_string(this->camadaenlace.quadro[i]);
+    for (int i = 0; i < camadaenlace.quadro.size(); i++)
+        recebido += to_string(camadaenlace.quadro[i]);
 
     cout << "Valor enviado : " << enviado << endl;
     cout << "Valor recebido: " << recebido << endl;
@@ -255,6 +266,8 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 
 void Testes::test_transmissora_enquadramento_insercao_de_bits(void)
 {
+
+    CamadaEnlace camadaenlace;
     camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBits(this->quadro_transmissor);
 
     cout << "Enquadramento com inserção de bits funcionando" << endl;
@@ -262,6 +275,7 @@ void Testes::test_transmissora_enquadramento_insercao_de_bits(void)
 
 void Testes::test_transmissora_controle_de_erro_bit_paridade_par(void)
 {
+    CamadaEnlace camadaenlace;
     camadaenlace.DadosTransmissoraControleDeErroBitParidadePar(this->quadro_transmissor);
 
     cout << "Controle de erro de paridade par funcionando" << endl;
@@ -269,6 +283,7 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_par(void)
 
 void Testes::test_receptora_controle_de_erro_bit_paridade_par(void)
 {
+    CamadaEnlace camadaenlace;
     camadaenlace.DadosReceptoraControleDeErroBitDeParidadePar(this->quadro_transmissor);
 
     cout << "Recebimento do controle de erro de paridade par funcionando" << endl;
@@ -276,6 +291,7 @@ void Testes::test_receptora_controle_de_erro_bit_paridade_par(void)
 
 void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
 {
+    CamadaEnlace camadaenlace;
     camadaenlace.DadosTransmissoraControleDeErroBitParidadeImpar(this->quadro_transmissor);
 
     cout << "Recebimento do controle de erro de paridade impar funcionando" << endl;
@@ -283,18 +299,19 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
 
 void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
 {
+    CamadaEnlace camadaenlace;
     string enviado = "", recebido = "", esperado = "";
 
-    this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
+    camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
 
-    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
-        enviado += to_string(this->camadaenlace.quadro[i]);
+    for (int i = 0; i < camadaenlace.quadro.size(); i++)
+        enviado += to_string(camadaenlace.quadro[i]);
 
-    this->camadaenlace.DadosReceptoraEnquadramentoInsercaoDeBytes(this->camadaenlace.quadro);
+    camadaenlace.DadosReceptoraEnquadramentoInsercaoDeBytes(camadaenlace.quadro);
 
-    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
+    for (int i = 0; i < camadaenlace.quadro.size(); i++)
     {
-        recebido += to_string(this->camadaenlace.quadro[i]);
+        recebido += to_string(camadaenlace.quadro[i]);
         esperado += to_string(this->quadro_transmissor[i]);
     }
 
@@ -305,5 +322,55 @@ void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
     assertm(recebido == esperado, "Falha na insercao de bytes");
 
     cout << "Decodificação do enquadramento com inserção de bytes funcionando" << endl;
+    cout << endl;
+}
+
+void Testes::test_transmissora_controle_de_erro_crc(void)
+{
+
+    CamadaEnlace camadaenlace;
+    string enviado = "", recebido = "", esperado = "1111111100000011111100000000111100000101000000001010100110001111111110010";
+
+    camadaenlace.DadosTransmissoraControleDeErroCRC(this->quadro_transmissor);
+
+    for (int i = 0; i < this->quadro_transmissor.size(); i++)
+        enviado += to_string(this->quadro_transmissor[i]);
+
+    for (int i = 0; i < camadaenlace.quadro.size(); i++)
+        recebido += to_string(camadaenlace.quadro[i]);
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: " << esperado << endl;
+    cout << "CRC:            1010100110001111111110010" << endl;
+
+    assertm(recebido == esperado, "Falha na insercao de bytes");
+
+    cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
+    cout << endl;
+}
+
+void Testes::test_receptora_controle_de_erro_crc(void)
+{
+    CamadaEnlace camadaenlace;
+    string enviado = "", recebido = "", esperado = "111111110000001111110000000011110000010100000000";
+
+    camadaenlace.DadosTransmissoraControleDeErroCRC(this->quadro_transmissor);
+    camadaenlace.DadosReceptoraControleDeErroCRC(this->quadro_transmissor);
+
+    for (int i = 0; i < this->quadro_transmissor.size(); i++)
+        enviado += to_string(this->quadro_transmissor[i]);
+
+    for (int i = 0; i < camadaenlace.quadro.size(); i++)
+        recebido += to_string(camadaenlace.quadro[i]);
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: " << esperado << endl;
+    cout << "CRC:            1010100110001111111110010" << endl;
+
+    assertm(recebido == esperado, "Falha na insercao de bytes");
+
+    cout << "Recepção com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
 }
