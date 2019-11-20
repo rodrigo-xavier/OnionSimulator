@@ -47,29 +47,29 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
 
     for (int i = 0; i < quadro_bruto.size(); i++)
     {
-        byte_str += to_string(quadro_bruto[i]);
+        byte_str += to_string(quadro_bruto[i]); // Concatena a string anterior com o valor atual do quadro
 
         if (counter == BYTE)
         {
             if (byte_str == this->flag)
-                quadro_str += this->esc;
+                quadro_str += this->esc; // Se o byte é igual ao valor da flag, adiciona o valor de esc ao quadro
             if (byte_str == this->esc)
-                quadro_str += this->esc;
+                quadro_str += this->esc; // Se o byte é igual ao valor de esc, adiciona mais uma vez o valor de esc ao quadro
 
-            quadro_str += byte_str;
+            quadro_str += byte_str; // Adiciona o próprio byte ao quadro
 
-            counter = 0;
-            byte_str = "";
+            counter = 0; // Zera a contagem
+            byte_str = ""; // Apaga o byte
         }
         counter++;
     }
 
-    quadro_str += this->flag;
+    quadro_str += this->flag; // Adiciona o valor da flag ao quadro
 
     for (auto &i : quadro_str)
-        novo_quadro.push_back(i - '0');
+        novo_quadro.push_back(i - '0'); // Adiciona de i até o final do quadro ao novo quadro
 
-    this->quadro = novo_quadro;
+    this->quadro = novo_quadro; // Atualiza o quadro
 
     // this->quadro = TransmissoraCodificacaoBinaria(novo_quadro);
 }

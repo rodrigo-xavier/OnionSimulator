@@ -49,10 +49,10 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
 {
     cout << "Realizando a codificação binária" << endl;
 
-    vector<int> codificacao_binaria;
+    vector<int> codificacao_binaria; // Inicializa o vetor de inteiros
 
     for (int i = 0; i < pacote.size(); i++)
-        codificacao_binaria.push_back(pacote[i]);
+        codificacao_binaria.push_back(pacote[i]); // Insere cada elemento do pacote no vetor 'codificacao_binaria'
 
     return codificacao_binaria;
 }
@@ -72,12 +72,12 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> pacote)
 {
     cout << "Realizando a codificação manchester" << endl;
 
-    vector<int> codificacao_manchester;
+    vector<int> codificacao_manchester; // Inicializa o vetor de inteiros
 
     for (int i = 0; i < pacote.size(); i++)
     {
-        codificacao_manchester.push_back(pacote[i] ^ 0);
-        codificacao_manchester.push_back(pacote[i] ^ 1);
+        codificacao_manchester.push_back(pacote[i] ^ 0); // Coloca 1 no vetor se 'pacote[i]' for 1, e 0 caso contrário
+        codificacao_manchester.push_back(pacote[i] ^ 1); // Coloca 1, se 'pacote[i]' for 0. Caso contrário, insere 1.
     }
 
     return codificacao_manchester;
@@ -98,16 +98,16 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 {
     cout << "Realizando a Codificação Manchester Diferencial" << endl;
 
-    vector<int> codificacao_manchester_diferencial;
-    int alternador = 0;
+    vector<int> codificacao_manchester_diferencial; // Inicializa o vetor de inteiros
+    int alternador = 0; // flag que indica o estado do alternador
 
     for (int i = 0; i < pacote.size(); i++)
     {
         if (pacote[i] == 1)
-            alternador = alternador ^ 1;
+            alternador = alternador ^ 1; // Ativa 'alternador' se ele estava desativado
 
-        codificacao_manchester_diferencial.push_back(alternador);
-        codificacao_manchester_diferencial.push_back(alternador ^ 1);
+        codificacao_manchester_diferencial.push_back(alternador); // Insere o valor do alternador no final do vetor 'codificacao_manchester_diferencial'
+        codificacao_manchester_diferencial.push_back(alternador ^ 1); // Se o alternador estiver desativado, insere um 1 no final do vetor 'codificacao_manchester_diferencial'
     }
 
     return codificacao_manchester_diferencial;
@@ -129,9 +129,9 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 *********************************************************************************************/
 void CamadaFisica::Receptora(vector<int> pacote)
 {
-    int tipoDeDecodificacao = 0;  //alterar de acordo o teste
-    vector<int> fluxoBrutoDeBits; //ATENÇÃO: trabalhar com BITS!!!
-    switch (tipoDeDecodificacao)
+    int tipoDeDecodificacao = 0;  // Alterar de acordo o teste
+    vector<int> fluxoBrutoDeBits; // ATENÇÃO: trabalhar com BITS!!!
+    switch (tipoDeDecodificacao) // Testa de acordo com o escolhido em 'tipoDeDecodificacao'
     {
     case 0: //codificao binaria
         fluxoBrutoDeBits = ReceptoraCodificacaoBinaria(pacote);
@@ -143,7 +143,7 @@ void CamadaFisica::Receptora(vector<int> pacote)
         fluxoBrutoDeBits = ReceptoraCodificacaoManchesterDiferencial(pacote);
         break;
     }
-    //chama proxima camada
+    // Chama proxima camada
     // CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
 }
 
@@ -252,12 +252,12 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
-    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
+    fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits; // Define o ponto A como o bruto
     for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
     {
-        //BITS! Sendo transferidos
+        //BITS! do Ponto A Sendo transferidos para o vetor Ponto B
         fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i));
-    } //fim do while
+    }
 
     //chama proxima camada
     Receptora(fluxoBrutoDeBitsPontoB);
