@@ -362,12 +362,12 @@ void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro_bruto)
         DadosReceptoraControleDeErroBitDeParidadePar(quadro_bruto);
         break;
     case 1: //bit de paridade impar
-        //codigo
+        DadosReceptoraControleDeErroBitDeParidadeImpar(quadro_bruto);
         break;
     case 2: //CRC
-    //codigo
+        DadosReceptoraControleDeErroCRC(quadro_bruto);
     case 3: //codigo de hamming
-        //codigo
+        DadosReceptoraControleDeErroCodigoDeHamming(quadro_bruto);
         break;
     } //fim do switch/case
 }

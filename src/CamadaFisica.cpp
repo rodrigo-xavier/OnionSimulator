@@ -52,7 +52,13 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
     vector<int> codificacao_binaria;
 
     for (int i = 0; i < pacote.size(); i++)
+    {
         codificacao_binaria.push_back(pacote[i]);
+        cout << pacote[i];
+    }
+
+    cout << endl;
+    cout << "Codificação binária realizada " << endl;
 
     return codificacao_binaria;
 }
@@ -131,6 +137,8 @@ void CamadaFisica::Receptora(vector<int> pacote)
 {
     int tipoDeDecodificacao = 0;  //alterar de acordo o teste
     vector<int> fluxoBrutoDeBits; //ATENÇÃO: trabalhar com BITS!!!
+    //CamadaAplicacao camadaaplicacao;
+
     switch (tipoDeDecodificacao)
     {
     case 0: //codificao binaria
@@ -144,7 +152,7 @@ void CamadaFisica::Receptora(vector<int> pacote)
         break;
     }
     //chama proxima camada
-    // CamadaDeAplicacaoReceptora(fluxoBrutoDeBits);
+    //camadaaplicacao.Receptora(fluxoBrutoDeBits);
 }
 
 /********************************************************************************************  
@@ -259,6 +267,7 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
         fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i));
     } //fim do while
 
+    cout << "Passando pelo Meio de Comunicação" << endl;
     //chama proxima camada
     Receptora(fluxoBrutoDeBitsPontoB);
 }
