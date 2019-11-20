@@ -34,7 +34,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro)
     } //fim do switch/case
 }
 
-vector<int> CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
     cout << "Realizando enquadramento com contagem de caracteres" << endl;
     //implementacao do algoritmo
@@ -51,7 +51,7 @@ vector<int> CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vec
 
     cout << endl;
 
-    return enquadramento_contagem_caracteres;
+    this->quadro = enquadramento_contagem_caracteres;
 
 } //fim do metodo DadosTransmissoraContagemDeCaracteres
 
@@ -72,6 +72,65 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
 
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro)
 {
+    cout << "Realizando enquadramento com inserção de bits" << endl;
+    //implementacao do algoritmo
+    int seq_cinco_bits_um = 0;
+    vector<int> enquadramento_insercao_bits;
+
+    cout << "Bits original: ";
+    for (int i = 0; i < quadro.size(); i++)
+        cout << quadro[i];
+    cout << endl;
+
+    enquadramento_insercao_bits.push_back(0);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(0);
+
+    for (int i = 0; i < quadro.size(); i++)
+    {
+        if (seq_cinco_bits_um < 5)
+        {
+            if (quadro[i] == 0)
+            {
+                seq_cinco_bits_um = 0;
+            }
+            else
+            {
+                seq_cinco_bits_um = seq_cinco_bits_um + 1;
+            }
+            enquadramento_insercao_bits.push_back(quadro[i]);
+        }
+        else
+        {
+            enquadramento_insercao_bits.push_back(0);
+            enquadramento_insercao_bits.push_back(quadro[i]);
+            seq_cinco_bits_um = 0;
+        }
+    }
+
+    enquadramento_insercao_bits.push_back(0);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(1);
+    enquadramento_insercao_bits.push_back(0);
+
+    cout << "Enquadramento insercao de bits: ";
+    for (int i = 0; i < enquadramento_insercao_bits.size(); i++)
+        cout << enquadramento_insercao_bits[i];
+
+    cout << endl;
+
+    this->quadro = enquadramento_insercao_bits;
+
+    DadosReceptoraEnquadramentoInsercaoDeBits(enquadramento_insercao_bits);
 }
 
 /*##########################################################################################################*/
@@ -148,7 +207,7 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro)
     } //fim do switch/case
 }
 
-vector<int> CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
+void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro)
 {
     //implementacao do algoritmo para DESENQUADRAR
     int qtd_bytes = quadro.front();
@@ -162,7 +221,7 @@ vector<int> CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector
 
     cout << endl;
 
-    return desenquadramento_contagem_caracteres;
+    this->quadro = desenquadramento_contagem_caracteres;
 
 } //fim do metodo DadosReceptoraContagemDeCaracteres
 
@@ -172,6 +231,48 @@ void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro
 
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro)
 {
+    cout << "Realizando desenquadramento com inserção de bits" << endl;
+    //implementacao do algoritmo
+    int seq_cinco_bits_um = 0;
+    vector<int> desenquadramento_insercao_bits;
+
+    for (int i = 8; i < quadro.size() - 1; i++)
+    {
+        if (seq_cinco_bits_um < 5)
+        {
+            if (quadro[i] == 0)
+            {
+                seq_cinco_bits_um = 0;
+            }
+            else
+            {
+                seq_cinco_bits_um = seq_cinco_bits_um + 1;
+            }
+            desenquadramento_insercao_bits.push_back(quadro[i]);
+        }
+        else
+        {
+            if (quadro[i] == 0)
+            {
+                seq_cinco_bits_um = 0;
+            }
+            else
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    desenquadramento_insercao_bits.pop_back();
+                }
+            }
+        }
+    }
+
+    cout << "Desenquadramento insercao de bits: ";
+    for (int i = 0; i < desenquadramento_insercao_bits.size(); i++)
+        cout << desenquadramento_insercao_bits[i];
+
+    cout << endl;
+
+    this->quadro = desenquadramento_insercao_bits;
 }
 
 /*##########################################################################################################*/
