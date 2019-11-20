@@ -28,7 +28,7 @@ void Testes::run(void)
 {
     init_pacote();
     init_quadro();
-#ifdef DEBUG_CAMADA_FISICA
+/*#ifdef DEBUG_CAMADA_FISICA
     test_transmissora_binaria();
     test_transmissora_manchester();
     test_transmissora_manchester_diferencial();
@@ -36,12 +36,16 @@ void Testes::run(void)
     test_binaria_receptora();
     test_manchester_receptora();
     test_manchester_receptora_diferencial();
-#endif
+#endif*/
 #ifdef DEBUG_CAMADA_ENLACE
 
+    /*    
     test_transmissora_enquadramento_contagem_de_caracteres();
     test_transmissora_enquadramento_insercao_de_bits();
     test_transmissora_enquadramento_insercao_de_bytes();
+    */
+    test_transmissora_controle_de_erro_bit_paridade_impar();
+    //    test_receptora_controle_de_erro_bit_paridade_par();
 
 #endif
 #ifdef DEBUG_CAMADA_APLICACAO
@@ -171,4 +175,25 @@ void Testes::test_transmissora_enquadramento_insercao_de_bits(void)
     camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBits(this->quadro_transmissor);
 
     cout << "Enquadramento com inserção de bits funcionando" << endl;
+}
+
+void Testes::test_transmissora_controle_de_erro_bit_paridade_par(void)
+{
+    camadaenlace.DadosTransmissoraControleDeErroBitParidadePar(this->quadro_transmissor);
+
+    cout << "Controle de erro de paridade par funcionando" << endl;
+}
+
+void Testes::test_receptora_controle_de_erro_bit_paridade_par(void)
+{
+    camadaenlace.DadosReceptoraControleDeErroBitDeParidadePar(this->quadro_transmissor);
+
+    cout << "Recebimento do controle de erro de paridade par funcionando" << endl;
+}
+
+void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
+{
+    camadaenlace.DadosTransmissoraControleDeErroBitParidadeImpar(this->quadro_transmissor);
+
+    cout << "Recebimento do controle de erro de paridade impar funcionando" << endl;
 }

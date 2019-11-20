@@ -164,25 +164,78 @@ void CamadaEnlace::DadosTransmissoraControleDeErro(vector<int> quadro_bruto)
     switch (tipoDeControleDeErro)
     {
     case 0: //bit de paridade par
-        //codigo
+        DadosTransmissoraControleDeErroBitParidadePar(quadro_bruto);
         break;
     case 1: //bit de paridade impar
-        //codigo
+        DadosTransmissoraControleDeErroBitParidadePar(quadro_bruto);
         break;
     case 2: //CRC
-    //codigo
+        DadosTransmissoraControleDeErroCRC(quadro_bruto);
+        break;
     case 3: //codigo de Hamming
-        //codigo
+        DadosTransmissoraControleDeErroCodigoDeHamming(quadro_bruto);
         break;
     } //fim do switch/case
 }
 
 void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro_bruto)
 {
+    cout << "Controle de Paridade Par" << endl;
+    vector<int> controle_paridade_par;
+    bool paridade = true;
+
+    for (int i = 0; i < quadro_bruto.size(); i++)
+    {
+        controle_paridade_par.push_back(quadro_bruto.at(i));
+    }
+
+    for (int i = 0; i < quadro_bruto.size(); i++)
+    {
+        if (quadro_bruto.at(i) == 1)
+        {
+            paridade = !paridade;
+        }
+    }
+
+    controle_paridade_par.push_back(paridade);
+
+    for (int i = 0; i < controle_paridade_par.size(); i++)
+    {
+        cout << controle_paridade_par.at(i);
+    }
+    cout << endl;
+
+    this->quadro = controle_paridade_par;
 }
 
 void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> quadro_bruto)
 {
+    cout << "Controle de Paridade Ímpar" << endl;
+    vector<int> controle_paridade_impar;
+    bool paridade = false;
+
+    for (int i = 0; i < quadro_bruto.size(); i++)
+    {
+        controle_paridade_impar.push_back(quadro_bruto.at(i));
+    }
+
+    for (int i = 0; i < quadro_bruto.size(); i++)
+    {
+        if (quadro_bruto.at(i) == 1)
+        {
+            paridade = !paridade;
+        }
+    }
+
+    controle_paridade_impar.push_back(paridade);
+
+    for (int i = 0; i < controle_paridade_impar.size(); i++)
+    {
+        cout << controle_paridade_impar.at(i);
+    }
+    cout << endl;
+
+    this->quadro = controle_paridade_impar;
 }
 
 void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
@@ -306,7 +359,7 @@ void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro_bruto)
     switch (tipoDeControleDeErro)
     {
     case 0: //bit de paridade par
-        //codigo
+        DadosReceptoraControleDeErroBitDeParidadePar(quadro_bruto);
         break;
     case 1: //bit de paridade impar
         //codigo
@@ -321,10 +374,68 @@ void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro_bruto)
 {
+    cout << "Recebimento do controle de Paridade Par" << endl;
+    vector<int> recebimento_paridade_par;
+    bool paridade = true;
+
+    for (int i = 0; i < quadro_bruto.size() - 1; i++)
+    {
+        recebimento_paridade_par.push_back(quadro_bruto.at(i));
+    }
+
+    for (int i = 0; i < recebimento_paridade_par.size(); i++)
+    {
+        if (recebimento_paridade_par.at(i) == 1)
+        {
+            paridade = !paridade;
+        }
+    }
+
+    if (quadro_bruto.back() == paridade)
+    {
+        cout << "Recebeu com sucesso" << endl;
+    }
+
+    for (int i = 0; i < recebimento_paridade_par.size(); i++)
+    {
+        cout << recebimento_paridade_par.at(i);
+    }
+    cout << endl;
+
+    this->quadro = recebimento_paridade_par;
 }
 
 void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro_bruto)
 {
+    /*cout << "Recebimento do controle de Paridade Ímpar" << endl;
+    vector<int> recebimento_paridade_impar;
+    bool paridade = false;
+
+        for (int i = 0; i < quadro_bruto.size() - 1; i++)
+    {
+        recebimento_paridade_impar.push_back(quadro_bruto.at(i));
+    }
+
+    for (int i = 0; i < recebimento_paridade_impar.size(); i++)
+    {
+        if (recebimento_paridade_impar.at(i) == 1)
+        {
+            paridade = !paridade;
+        }
+    }
+
+    if (quadro_bruto.back() == paridade)
+    {
+        cout << "Recebeu com sucesso" << endl;
+    }
+
+    for (int i = 0; i < recebimento_paridade_impar.size(); i++)
+    {
+        cout << recebimento_paridade_impar.at(i);
+    }
+    cout << endl;
+
+    this->quadro = recebimento_paridade_impar;*/
 }
 
 void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
