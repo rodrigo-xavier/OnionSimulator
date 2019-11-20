@@ -25,6 +25,7 @@ void Testes::run(void)
     // test_receptora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_crc();
     // test_receptora_controle_de_erro_crc();
+    test_receptora_camada_aplicacao();
 
 #endif
 
@@ -325,6 +326,12 @@ void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
     cout << endl;
 }
 
+void Testes::test_receptora_camada_aplicacao(void)
+{
+    CamadaAplicacao camadaaplicacao;
+
+    camadaaplicacao.AplicacaoTransmissora();
+}
 void Testes::test_transmissora_controle_de_erro_crc(void)
 {
 

@@ -1,8 +1,9 @@
 /*##########################################################################################################*/
 // INCLUDE
 
-#include "../lib/CamadaFisica.hpp"
-#include "../lib/CamadaEnlace.hpp"
+#include "CamadaFisica.hpp"
+#include "CamadaEnlace.hpp"
+#include "CamadaAplicacao.hpp"
 #include <iostream>
 #include <string>
 #include <assert.h>
@@ -48,6 +49,7 @@ public:
     void test_transmissora_controle_de_erro_bit_paridade_par(void);
     void test_receptora_controle_de_erro_bit_paridade_par(void);
     void test_receptora_enquadramento_insercao_de_bytes(void);
+    void test_receptora_camada_aplicacao(void);
     void test_transmissora_controle_de_erro_crc(void);
     void test_receptora_controle_de_erro_crc(void);
 };
