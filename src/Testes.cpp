@@ -150,9 +150,8 @@ void Testes::test_meio_de_comunicacao(void)
 void Testes::test_binaria_receptora(void)
 {
     CamadaFisica camadafisica;
-    string enviado = "", recebido = "";
 
-    this->pacote_receptor = camadafisica.ReceptoraCodificacaoBinaria(this->pacote_transmissor);
+    string enviado = "", recebido = "";
 
     for (int i = 0; i < this->pacote_receptor.size(); i++)
     {
@@ -300,7 +299,6 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
 
 void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
 {
-
     CamadaEnlace camadaenlace;
     string enviado = "", recebido = "", esperado = "";
 
