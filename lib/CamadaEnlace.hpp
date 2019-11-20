@@ -2,6 +2,7 @@
 #define CAMADA_ENLACE
 #include "CamadaFisica.hpp"
 #include <iostream>
+#include <math.h>
 
 #define BYTE 8
 

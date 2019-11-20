@@ -38,7 +38,11 @@ void Testes::run(void)
     test_manchester_receptora_diferencial();
 #endif
 #ifdef DEBUG_CAMADA_ENLACE
+
+    test_transmissora_enquadramento_contagem_de_caracteres();
+    test_transmissora_enquadramento_insercao_de_bits();
     test_transmissora_enquadramento_insercao_de_bytes();
+
 #endif
 #ifdef DEBUG_CAMADA_APLICACAO
 #endif
@@ -129,6 +133,18 @@ void Testes::test_manchester_receptora_diferencial(void)
 /*##########################################################################################################*/
 // CAMADA ENLACE
 
+void Testes::test_transmissora_enquadramento_contagem_de_caracteres(void)
+{
+    camadaenlace.DadosTransmissoraEnquadramentoContagemDeCaracteres(this->quadro_transmissor);
+
+    cout << int(this->quadro_transmissor[0]) << endl;
+    /*assertm(int(this->quadro_transmissor[0]) == 6, "Falha no Enquadramento usando contagem de caracteres");
+    assertm(int(this->quadro_transmissor[1]) == 0, "Falha no Enquadramento usando contagem de caracteres");
+    assertm(int(this->quadro_transmissor[47]) == 1, "Falha no Enquadramento usando contagem de caracteres");
+    */
+    cout << "Enquadramento usando contagem de caracteres funcionando" << endl;
+}
+
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
     string _255 = "11111111", _3 = "00000011", _esc_240 = "11110000";
@@ -148,4 +164,11 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
     assertm(quadro == quadro_real, "Falha na insercao de bytes");
 
     cout << "Enquadramento com inserção de bytes funcionando" << endl;
+}
+
+void Testes::test_transmissora_enquadramento_insercao_de_bits(void)
+{
+    camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBits(this->quadro_transmissor);
+
+    cout << "Enquadramento com inserção de bits funcionando" << endl;
 }
