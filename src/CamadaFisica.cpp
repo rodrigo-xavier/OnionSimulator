@@ -47,7 +47,7 @@ void CamadaFisica::Transmissora(vector<int> pacote)
 
 vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
 {
-    cout << "Realizando a codificação binária" << endl;
+    cout << "Realizando a codificação binária: ";
 
     vector<int> codificacao_binaria;
 
@@ -56,9 +56,7 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
         codificacao_binaria.push_back(pacote[i]);
         cout << pacote[i];
     }
-
     cout << endl;
-    cout << "Codificação binária realizada " << endl;
 
     return codificacao_binaria;
 }
@@ -168,12 +166,16 @@ void CamadaFisica::Receptora(vector<int> pacote)
 *********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> pacote)
 {
-    cout << "Realizando a decodificação binária" << endl;
+    cout << "Realizando a decodificação binária: ";
 
     vector<int> decodificacao_binaria;
 
     for (int i = 0; i < pacote.size(); i++)
+    {
         decodificacao_binaria.push_back(pacote[i]);
+        cout << pacote[i];
+    }
+    cout << endl;
 
     return decodificacao_binaria;
 }
