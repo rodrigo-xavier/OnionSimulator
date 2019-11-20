@@ -59,18 +59,43 @@ void Testes::init_quadro(void)
 
 void Testes::test_transmissora_binaria(void)
 {
+    string enviado = "", recebido = "";
+
     this->pacote_receptor = camadafisica.TransmissoraCodificacaoBinaria(this->pacote_transmissor);
+
+    for (int i = 0; i < this->pacote_receptor.size(); i++)
+    {
+        enviado += to_string(this->pacote_transmissor[i]);
+        recebido += to_string(this->pacote_receptor[i]);
+    }
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: 101" << endl;
 
     assertm(int(this->pacote_receptor[0]) == 1, "Falha na Codificacao binária");
     assertm(int(this->pacote_receptor[1]) == 0, "Falha na Codificacao binária");
     assertm(int(this->pacote_receptor[2]) == 1, "Falha na Codificacao binária");
 
     cout << "Codificacao binária funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_manchester(void)
 {
+    string enviado = "", recebido = "";
+
     this->pacote_receptor = camadafisica.TransmissoraCodificacaoManchester(this->pacote_transmissor);
+
+    for (int i = 0; i < this->pacote_receptor.size(); i++)
+    {
+        enviado += to_string(this->pacote_transmissor[i]);
+        recebido += to_string(this->pacote_receptor[i]);
+    }
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: 100110" << endl;
 
     assertm(int(this->pacote_receptor[0]) == 1, "Falha na Codificacao manchester");
     assertm(int(this->pacote_receptor[1]) == 0, "Falha na Codificacao manchester");
@@ -80,11 +105,24 @@ void Testes::test_transmissora_manchester(void)
     assertm(int(this->pacote_receptor[5]) == 0, "Falha na Codificacao manchester");
 
     cout << "Codificacao manchester funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_manchester_diferencial(void)
 {
+    string enviado = "", recebido = "";
+
     this->pacote_receptor = camadafisica.TransmissoraCodificacaoManchesterDiferencial(this->pacote_transmissor);
+
+    for (int i = 0; i < this->pacote_receptor.size(); i++)
+    {
+        enviado += to_string(this->pacote_transmissor[i]);
+        recebido += to_string(this->pacote_receptor[i]);
+    }
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: 101001" << endl;
 
     assertm(int(this->pacote_receptor[0]) == 1, "Falha na Codificacao Manchester Diferencial");
     assertm(int(this->pacote_receptor[1]) == 0, "Falha na Codificacao Manchester Diferencial");
@@ -94,46 +132,85 @@ void Testes::test_transmissora_manchester_diferencial(void)
     assertm(int(this->pacote_receptor[5]) == 1, "Falha na Codificacao Manchester Diferencial");
 
     cout << "Codificacao manchester Diferencial funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_meio_de_comunicacao(void)
 {
     camadafisica.MeioDeComunicacao(this->pacote_transmissor);
+    cout << endl;
 }
 
 void Testes::test_binaria_receptora(void)
 {
+    string enviado = "", recebido = "";
+
     this->pacote_receptor = camadafisica.ReceptoraCodificacaoBinaria(this->pacote_transmissor);
+
+    for (int i = 0; i < this->pacote_receptor.size(); i++)
+    {
+        enviado += to_string(this->pacote_transmissor[i]);
+        recebido += to_string(this->pacote_receptor[i]);
+    }
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: 101" << endl;
 
     assertm(int(this->pacote_receptor[0]) == 1, "Falha na Decodificacao binária");
     assertm(int(this->pacote_receptor[1]) == 0, "Falha na Decodificacao binária");
     assertm(int(this->pacote_receptor[2]) == 1, "Falha na Decodificacao binária");
 
     cout << "Decodificacao Binária Funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_manchester_receptora(void)
 {
+    string enviado = "", recebido = "";
+
     this->pacote_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchester(this->pacote_transmissor);
     this->pacote_receptor = camadafisica.ReceptoraCodificacaoManchester(this->pacote_meio_comunicacao);
+
+    for (int i = 0; i < this->pacote_meio_comunicacao.size(); i++)
+        enviado += to_string(this->pacote_meio_comunicacao[i]);
+    for (int i = 0; i < this->pacote_receptor.size(); i++)
+        recebido += to_string(this->pacote_receptor[i]);
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: 101" << endl;
 
     assertm(int(this->pacote_receptor[0]) == 1, "Falha na Decodificacao manchester");
     assertm(int(this->pacote_receptor[1]) == 0, "Falha na Decodificacao manchester");
     assertm(int(this->pacote_receptor[2]) == 1, "Falha na Decodificacao manchester");
 
     cout << "Decodificacao Manchester Funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_manchester_receptora_diferencial(void)
 {
+    string enviado = "", recebido = "";
+
     this->pacote_meio_comunicacao = camadafisica.TransmissoraCodificacaoManchesterDiferencial(this->pacote_transmissor);
     this->pacote_receptor = camadafisica.ReceptoraCodificacaoManchesterDiferencial(this->pacote_meio_comunicacao);
+
+    for (int i = 0; i < this->pacote_meio_comunicacao.size(); i++)
+        enviado += to_string(this->pacote_meio_comunicacao[i]);
+    for (int i = 0; i < this->pacote_receptor.size(); i++)
+        recebido += to_string(this->pacote_receptor[i]);
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: 101" << endl;
 
     assertm(int(this->pacote_receptor[0]) == 1, "Falha na Decodificacao manchester");
     assertm(int(this->pacote_receptor[1]) == 0, "Falha na Decodificacao manchester");
     assertm(int(this->pacote_receptor[2]) == 1, "Falha na Decodificacao manchester");
 
     cout << "Decodificacao Manchester Diferencial Funcionando" << endl;
+    cout << endl;
 }
 
 /*##########################################################################################################*/
@@ -155,17 +232,25 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 {
     string _255 = "11111111", _3 = "00000011", _esc_240 = "11110000";
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
-    string quadro_real = _flag_15 + _255 + _3 + _esc_240 + _esc_240 + _esc_240 + _flag_15 + _5 + _0 + _flag_15;
-    string quadro = "";
+    string esperado = _flag_15 + _255 + _3 + _esc_240 + _esc_240 + _esc_240 + _flag_15 + _5 + _0 + _flag_15;
+    string enviado = "", recebido = "";
 
     this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
 
-    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
-        quadro += to_string(this->camadaenlace.quadro[i]);
+    for (int i = 0; i < this->quadro_transmissor.size(); i++)
+        enviado += to_string(this->quadro_transmissor[i]);
 
-    assertm(quadro == quadro_real, "Falha na insercao de bytes");
+    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
+        recebido += to_string(this->camadaenlace.quadro[i]);
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: " << esperado << endl;
+
+    assertm(recebido == esperado, "Falha na insercao de bytes");
 
     cout << "Enquadramento com inserção de bytes funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_enquadramento_insercao_de_bits(void)
@@ -198,18 +283,27 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
 
 void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
 {
-    string quadro = "", quadro_real = "";
+    string enviado = "", recebido = "", esperado = "";
 
     this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
+
+    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
+        enviado += to_string(this->camadaenlace.quadro[i]);
+
     this->camadaenlace.DadosReceptoraEnquadramentoInsercaoDeBytes(this->camadaenlace.quadro);
 
     for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
     {
-        quadro += to_string(this->camadaenlace.quadro[i]);
-        quadro_real += to_string(this->quadro_transmissor[i]);
+        recebido += to_string(this->camadaenlace.quadro[i]);
+        esperado += to_string(this->quadro_transmissor[i]);
     }
 
-    assertm(quadro == quadro_real, "Falha na insercao de bytes");
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: " << esperado << endl;
+
+    assertm(recebido == esperado, "Falha na insercao de bytes");
 
     cout << "Decodificação do enquadramento com inserção de bytes funcionando" << endl;
+    cout << endl;
 }

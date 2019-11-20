@@ -11,9 +11,6 @@ void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
     // CamadaFisicaTransmissora(quadro_bruto);
 }
 
-/*##########################################################################################################*/
-// TRANSMISSORA: ENQUADRAMENTO
-
 void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro_bruto)
 {
     int tipoDeEnquadramento = 0; //alterar de acordo com o teste
@@ -256,9 +253,6 @@ void CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
     //chama proxima camada
     // CamadaDeAplicacaoReceptora(quadro_bruto);
 }
-
-/*##########################################################################################################*/
-// RECEPTORA: ENQUADRAMENTO
 
 void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 {
