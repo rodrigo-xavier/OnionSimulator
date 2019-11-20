@@ -77,11 +77,11 @@ public:
 
 int main(int argc, char *args[])
 {
-    //Testes teste;
-    //teste.run();
+    Testes teste;
+    teste.run();
 
-    CamadaAplicacao camadaaplicacao;
-    camadaaplicacao.AplicacaoTransmissora();
+    // CamadaAplicacao camadaaplicacao;
+    // camadaaplicacao.AplicacaoTransmissora();
 
     return 0;
 }
