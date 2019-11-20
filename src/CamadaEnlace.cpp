@@ -89,7 +89,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro_bruto)
 {
     cout << "Realizando enquadramento com inserção de bits" << endl;
-    //implementacao do algoritmo
+
     int seq_cinco_bits_um = 0;
     vector<int> enquadramento_insercao_bits;
 
@@ -98,14 +98,8 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quad
         cout << quadro[i];
     cout << endl;
 
-    enquadramento_insercao_bits.push_back(0);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(0);
+    for (int i = 0; i < this->flag_bit.length(); i++)
+        enquadramento_insercao_bits.push_back(this->flag_bit[i] - '0');
 
     for (int i = 0; i < quadro.size(); i++)
     {
@@ -129,14 +123,8 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quad
         }
     }
 
-    enquadramento_insercao_bits.push_back(0);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(1);
-    enquadramento_insercao_bits.push_back(0);
+    for (int i = 0; i < this->flag_bit.length(); i++)
+        enquadramento_insercao_bits.push_back(this->flag_bit[i] - '0');
 
     cout << "Enquadramento insercao de bits: ";
     for (int i = 0; i < enquadramento_insercao_bits.size(); i++)
@@ -175,6 +163,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErro(vector<int> quadro_bruto)
 void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro_bruto)
 {
     cout << "Controle de Paridade Par" << endl;
+
     vector<int> controle_paridade_par;
     bool paridade = true;
 
@@ -197,6 +186,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(vector<int> qua
 void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> quadro_bruto)
 {
     cout << "Controle de Paridade Ímpar" << endl;
+
     vector<int> controle_paridade_impar;
     bool paridade = false;
 
@@ -287,7 +277,7 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
-    //implementacao do algoritmo para DESENQUADRAR
+
     int qtd_bytes = quadro.front();
     vector<int> desenquadramento_contagem_caracteres;
 
@@ -300,8 +290,7 @@ void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> q
     cout << endl;
 
     this->quadro = desenquadramento_contagem_caracteres;
-
-} //fim do metodo DadosReceptoraContagemDeCaracteres
+}
 
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro_bruto)
 {
@@ -341,7 +330,7 @@ void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro_bruto)
 {
     cout << "Realizando desenquadramento com inserção de bits" << endl;
-    //implementacao do algoritmo
+
     int seq_cinco_bits_um = 0;
     vector<int> desenquadramento_insercao_bits;
 
@@ -400,6 +389,7 @@ void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro_bruto)
 void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro_bruto)
 {
     cout << "Recebimento do controle de Paridade Par" << endl;
+
     vector<int> recebimento_paridade_par;
     bool paridade = true;
 
@@ -422,11 +412,12 @@ void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quad
 
 void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro_bruto)
 {
-    /*cout << "Recebimento do controle de Paridade Ímpar" << endl;
+    cout << "Recebimento do controle de Paridade Ímpar" << endl;
+
     vector<int> recebimento_paridade_impar;
     bool paridade = false;
 
-        for (int i = 0; i < quadro_bruto.size() - 1; i++)
+    for (int i = 0; i < quadro_bruto.size() - 1; i++)
     {
         recebimento_paridade_impar.push_back(quadro_bruto.at(i));
     }
@@ -450,7 +441,7 @@ void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> qu
     }
     cout << endl;
 
-    this->quadro = recebimento_paridade_impar;*/
+    this->quadro = recebimento_paridade_impar;
 }
 
 void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
@@ -466,6 +457,7 @@ void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
         return;
     }
 
+    novo_quadro = quadro_bruto;
     mensagem = quadro_bruto;
     mensagem.erase(mensagem.end() - 31, mensagem.end());
 
@@ -485,7 +477,7 @@ void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
     }
 
     if (valido)
-        this->quadro = novo_quadro;
+        this->quadro = mensagem;
 }
 
 void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)

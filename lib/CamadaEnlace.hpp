@@ -14,6 +14,7 @@ public:
     vector<int> quadro;
     string flag = "00001111";
     string esc = "11110000";
+    string flag_bit = "01111110";
     string polinomio_crc_32 = "100110000010001110110110111";
 
     void DadosTransmissora(vector<int> quadro);
