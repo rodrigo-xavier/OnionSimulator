@@ -19,10 +19,11 @@ void Testes::run(void)
 
     // test_transmissora_enquadramento_contagem_de_caracteres();
     // test_transmissora_enquadramento_insercao_de_bits();
-    test_transmissora_enquadramento_insercao_de_bytes();
+    // test_transmissora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_bit_paridade_impar();
-    //    test_receptora_controle_de_erro_bit_paridade_par();
-    test_receptora_enquadramento_insercao_de_bytes();
+    // test_receptora_controle_de_erro_bit_paridade_par();
+    // test_receptora_enquadramento_insercao_de_bytes();
+    test_transmissora_controle_de_erro_crc();
 
 #endif
 
@@ -305,5 +306,30 @@ void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
     assertm(recebido == esperado, "Falha na insercao de bytes");
 
     cout << "Decodificação do enquadramento com inserção de bytes funcionando" << endl;
+    cout << endl;
+}
+
+void Testes::test_transmissora_controle_de_erro_crc(void)
+{
+    string enviado = "", recebido = "", esperado = "";
+
+    // this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
+
+    // for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
+    //     enviado += to_string(this->camadaenlace.quadro[i]);
+
+    // for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
+    // {
+    //     recebido += to_string(this->camadaenlace.quadro[i]);
+    //     esperado += to_string(this->quadro_transmissor[i]);
+    // }
+
+    cout << "Valor enviado : " << enviado << endl;
+    cout << "Valor recebido: " << recebido << endl;
+    cout << "Valor esperado: " << esperado << endl;
+
+    assertm(recebido == esperado, "Falha na insercao de bytes");
+
+    cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
 }

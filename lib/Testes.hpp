@@ -50,4 +50,5 @@ public:
     void test_transmissora_controle_de_erro_bit_paridade_par(void);
     void test_receptora_controle_de_erro_bit_paridade_par(void);
     void test_receptora_enquadramento_insercao_de_bytes(void);
+    void test_transmissora_controle_de_erro_crc(void);
 };
