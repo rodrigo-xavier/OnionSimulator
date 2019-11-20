@@ -6,12 +6,11 @@
 
 #define BYTE 8
 
-using namespace std;
+// using namespace std;
 
-class CamadaEnlace
+class CamadaEnlace : CamadaFisica
 {
 public:
-    CamadaFisica camadafisica;
     vector<int> quadro;
     string flag = "00001111";
     string esc = "11110000";

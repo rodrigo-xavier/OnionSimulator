@@ -215,17 +215,17 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> 
 {
     cout << "Realizando a Decodificação Manchester Diferencial" << endl;
 
-    vector<int> decodificacao_manchester;
     int alternador = 0;
+    vector<int> decodificacao_manchester;
 
     for (int i = 0; i < pacote.size(); i += 2)
     {
-        if ((pacote[i] == 0 ^ alternador) && (pacote[i + 1] == 1 ^ alternador))
+        if ((pacote[i] == (0 ^ alternador)) && (pacote[i + 1] == (1 ^ alternador)))
             decodificacao_manchester.push_back(0);
         else if ((pacote[i] == (1 ^ alternador)) && (pacote[i + 1] == (0 ^ alternador)))
         {
-            decodificacao_manchester.push_back(1);
             alternador = alternador ^ 1;
+            decodificacao_manchester.push_back(1);
         }
         else
             cout << "Erro na Decodificação" << endl;
