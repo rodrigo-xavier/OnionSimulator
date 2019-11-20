@@ -67,11 +67,9 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
     {
         byte_str += to_string(quadro_bruto[i]);
 
-        if (counter == BYTE)
+        if (counter == (BYTE))
         {
-            if (byte_str == this->flag)
-                quadro_str += this->esc;
-            if (byte_str == this->esc)
+            if ((byte_str == this->flag) || (byte_str == this->esc))
                 quadro_str += this->esc;
 
             quadro_str += byte_str;
@@ -302,6 +300,37 @@ void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> q
 
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro_bruto)
 {
+    cout << "Realizando a decodificação do enquadramento com inserção de bytes" << endl;
+
+    string byte_str = "", quadro_str = "";
+    vector<int> novo_quadro;
+    int counter = 1;
+    bool ignore = false;
+
+    for (int i = 0; i < quadro_bruto.size(); i++)
+    {
+        byte_str += to_string(quadro_bruto[i]);
+
+        if (counter == BYTE)
+        {
+            if (((byte_str == this->flag) || (byte_str == this->esc)) && !ignore)
+                ignore = true;
+            else
+            {
+                quadro_str += byte_str;
+                ignore = false;
+            }
+
+            counter = 0;
+            byte_str = "";
+        }
+        counter++;
+    }
+
+    for (auto &i : quadro_str)
+        novo_quadro.push_back(i - '0');
+
+    this->quadro = novo_quadro;
 }
 
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro_bruto)
