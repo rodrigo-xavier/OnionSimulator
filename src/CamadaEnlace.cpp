@@ -220,7 +220,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
 {
     cout << "Realizando a transmissão com controle de erro CRC" << endl;
 
-    vector<int> novo_quadro;
+    vector<int> crc, novo_quadro;
 
     if (quadro_bruto.size() <= this->polinomio_crc_32.length())
     {
@@ -228,23 +228,23 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
         return;
     }
 
-    novo_quadro = quadro_bruto;
+    crc = quadro_bruto;
 
-    for (int i = 0; i < novo_quadro.size(); i++)
-    {
-        if (novo_quadro[i] == 1)
-        {
-            for (int j = 0; j < this->polinomio_crc_32.size(); j++)
-                novo_quadro[j + i] ^= this->polinomio_crc_32[j];
-        }
-    }
+    for (int i = 0; i < this->polinomio_crc_32.length(); i++)
+        crc.push_back(0);
+    
+    cout << "polinomio " << this->polinomio_crc_32 << endl;
 
     for (int i = 0; i < quadro_bruto.size(); i++)
     {
-        quadro_bruto[i] = this->quadro[i];
+        if (crc[i] == 1)
+        {
+            for (int j = 0; j < this->polinomio_crc_32.length(); j++)
+                crc[i + j] ^= (this->polinomio_crc_32[j] - '0');
+        }
     }
 
-    this->quadro = quadro_bruto;
+    this->quadro = crc;
 }
 
 void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)

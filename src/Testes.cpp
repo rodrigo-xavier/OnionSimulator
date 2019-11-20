@@ -311,22 +311,20 @@ void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
 
 void Testes::test_transmissora_controle_de_erro_crc(void)
 {
-    string enviado = "", recebido = "", esperado = "";
+    string enviado = "", recebido = "", esperado = "1111111100000011111100000000111100000101000000001010100110001111111110010";
 
-    // this->camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBytes(this->quadro_transmissor);
+    this->camadaenlace.DadosTransmissoraControleDeErroCRC(this->quadro_transmissor);
 
-    // for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
-    //     enviado += to_string(this->camadaenlace.quadro[i]);
+    for (int i = 0; i < this->quadro_transmissor.size(); i++)
+        enviado += to_string(this->quadro_transmissor[i]);
 
-    // for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
-    // {
-    //     recebido += to_string(this->camadaenlace.quadro[i]);
-    //     esperado += to_string(this->quadro_transmissor[i]);
-    // }
+    for (int i = 0; i < this->camadaenlace.quadro.size(); i++)
+        recebido += to_string(this->camadaenlace.quadro[i]);
 
     cout << "Valor enviado : " << enviado << endl;
     cout << "Valor recebido: " << recebido << endl;
     cout << "Valor esperado: " << esperado << endl;
+    cout << "CRC:            1010100110001111111110010" << endl;
 
     assertm(recebido == esperado, "Falha na insercao de bytes");
 
