@@ -242,6 +242,79 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
+    int bit_redundancia = 0;
+    vector<int> codigo_hamming;
+    vector<int> bits_paridade;
+    while (quadro_bruto.size() + bit_redundancia + 1 > pow(2, bit_redundancia))
+    {
+        bit_redundancia++;
+    }
+    cout << "Bit de redundância: " << bit_redundancia << endl;
+    int tamanho_hamming = bit_redundancia + quadro_bruto.size();
+    cout << "Qtd final de bits: " << tamanho_hamming << endl;
+    int posicao_paridade = 0;
+    int posicao_dado = 0;
+
+    for (int i = 1; i <= tamanho_hamming; i++)
+    {
+        if (i == pow(2, posicao_paridade))
+        {
+            codigo_hamming.push_back(0);
+            posicao_paridade++;
+        }
+        else
+        {
+            codigo_hamming.push_back(quadro_bruto.at(posicao_dado));
+            posicao_dado++;
+        }
+    }
+
+    cout << "Com bits 0 nas posições de paridade: ";
+    for (int i = 0; i < codigo_hamming.size(); i++)
+        cout << codigo_hamming.at(i);
+    cout << endl;
+
+    int posicao_analise;
+    int xor_analise;
+    bool primeiro_elemento;
+
+    /*for (int i = 0; i < bit_redundancia; i++)
+    {
+        primeiro_elemento = true;
+        xor_analise = 0;
+        posicao_analise = pow(2, i);
+        while (posicao_analise < codigo_hamming.size())
+        {
+            if (primeiro_elemento == true)
+            {
+                xor_analise = codigo_hamming[posicao_analise + 1];
+                primeiro_elemento = false;
+            }
+            else
+            {
+                xor_analise ^= codigo_hamming[posicao_analise];
+                xor_analise ^= codigo_hamming[posicao_analise + 1];
+            }
+            posicao_analise += 1;
+            posicao_analise += pow(2, i) + 1;
+        }
+        bits_paridade.push_back(xor_analise);
+    }*/
+
+    int p1 = codigo_hamming.at(2) ^ codigo_hamming.at(4) ^ codigo_hamming.at(6) ^ codigo_hamming.at(8) ^ codigo_hamming.at(10);
+    int p2 = codigo_hamming.at(2) ^ codigo_hamming.at(5) ^ codigo_hamming.at(6) ^ codigo_hamming.at(9) ^ codigo_hamming.at(10);
+    int p4 = codigo_hamming.at(4) ^ codigo_hamming.at(5) ^ codigo_hamming.at(6);
+    int p8 = codigo_hamming.at(9) ^ codigo_hamming.at(9) ^ codigo_hamming.at(10);
+
+    bits_paridade.push_back(p8);
+    bits_paridade.push_back(p4);
+    bits_paridade.push_back(p2);
+    bits_paridade.push_back(p1);
+
+    cout << "bits de paridade: ";
+    for (int i = 0; i < bits_paridade.size(); i++)
+        cout << bits_paridade.at(i);
+    cout << endl;
 }
 
 /*##########################################################################################################*/

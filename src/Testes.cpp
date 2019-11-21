@@ -18,14 +18,15 @@ void Testes::run(void)
 #ifdef DEBUG_CAMADA_ENLACE
 
     // test_transmissora_enquadramento_contagem_de_caracteres();
-    test_transmissora_enquadramento_insercao_de_bits();
+    //test_transmissora_enquadramento_insercao_de_bits();
     // test_transmissora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_bit_paridade_impar();
     // test_receptora_controle_de_erro_bit_paridade_par();
     // test_receptora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_crc();
     // test_receptora_controle_de_erro_crc();
-    test_receptora_camada_aplicacao();
+    // test_receptora_camada_aplicacao();
+    test_transmissora_controle_de_erro_codificacao_hamming();
 
 #endif
 
@@ -48,7 +49,8 @@ void Testes::init_quadro(void)
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
     int introdutor;
 
-    string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
+    string concat = "1001101";
+    //string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
 
     for (int i = 0; i < concat.length(); i++)
     {
@@ -380,4 +382,19 @@ void Testes::test_receptora_controle_de_erro_crc(void)
 
     cout << "Recepção com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
+}
+
+void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
+{
+    CamadaEnlace camadaenlace;
+    string enviado = "", recebido = "", esperado = "111111110000001111110000000011110000010100000000";
+
+    cout << "Valor enviado: " << endl;
+    for (int i = 0; i < this->quadro_transmissor.size(); i++)
+        cout << this->quadro_transmissor.at(i);
+    cout << endl;
+
+    cout << this->quadro_transmissor.size() << endl;
+
+    camadaenlace.DadosTransmissoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
 }
