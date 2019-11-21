@@ -12,7 +12,9 @@
   Descrição da saída:
   (void)
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Realiza a codificação escolhida e armazena o resultado em
+                        "fluxoBrutoDeBits" para transmissão. Em seguida, chama o método
+                        do Meio de Comunicação para realizar a transmissão
 *********************************************************************************************/
 vector<int> CamadaFisica::Transmissora(vector<int> pacote)
 {
@@ -42,9 +44,10 @@ vector<int> CamadaFisica::Transmissora(vector<int> pacote)
   (pacote) - Unidade de dados da camada física
 
   Descrição da saída:
-  (codificacao_binaria) - 
+  (codificacao_binaria) - Pacote codificado com a codificação Binária
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Recebe um pacote e faz a codificação binária do mesmo, armazenando os
+                        bits no vetor de inteiros para transmissão.
 *********************************************************************************************/
 
 vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
@@ -72,7 +75,8 @@ vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
   Descrição da saída:
   (codificacao_manchester) - Pacote codificado com a codificação Manchester
 
-  Descrição Detalhada: A codificação manchester separa os bits em clocks, 
+  Descrição Detalhada:  Separa os bits do pacote recebido em clocks e, de acordo com o formato
+                        do sinal, insere 1 ou 0 no final do vetor de inteiros para transmissão.
 *********************************************************************************************/
 vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> pacote)
 {
@@ -96,15 +100,18 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> pacote)
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
+  Descrição Breve: Método da Camada Física de codificação Manchester Diferencial
   
   Descrição da Entrada:
   (pacote) - Unidade de dados da camada física
 
   Descrição da saída:
-  (codificacao_manchester_diferencial) - 
+  (codificacao_manchester_diferencial) - Pacote codificado com a codificação Manchester Diferencial
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Separa os bits em clocks e verifica se a primeira metade do sinal é
+                        igual ou diferente à útima metade do sinal anterior para definir se o
+                        sinal é 0 ou 1, para então armazenar os bits no vetor de inteiros
+                        e transmiti-los.
 *********************************************************************************************/
 vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<int> pacote)
 {
@@ -129,7 +136,7 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 // RECEPTORA
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
+  Descrição Breve: Método receptor de dados da Camada Física
   
   Descrição da Entrada:
   (pacote) - Unidade de dados da camada física
@@ -137,7 +144,8 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
   Descrição da saída:
   (void)
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Realiza a codificação escolhida na fase receptora e armazena no vetor
+                        resultado para verificação.
 *********************************************************************************************/
 vector<int> CamadaFisica::Receptora(vector<int> pacote)
 {
@@ -171,9 +179,10 @@ vector<int> CamadaFisica::Receptora(vector<int> pacote)
   (pacote) - Unidade de dados da camada física
 
   Descrição da saída:
-  (decodificacao_binaria) - 
+  (decodificacao_binaria) - Pacote decodificado com a codificação Binária
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Recebe o pacote recebido da fase transmissora e faz a decodificação
+                        binária do mesmo.
 *********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> pacote)
 {
@@ -192,15 +201,16 @@ vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> pacote)
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
+  Descrição Breve: Método da Camada Física de codificação Manchester
   
   Descrição da Entrada:
   (pacote) - Unidade de dados da camada física
 
   Descrição da saída:
-  (decodificacao_manchester) - 
+  (decodificacao_manchester) - Pacote decodificado com a codificação Manchester
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Realiza a decodificação Manchester do pacote recebido pela fase transmissora
+                        transmissora.
 *********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> pacote)
 {
@@ -228,9 +238,10 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchester(vector<int> pacote)
   (pacote) - Unidade de dados da camada física
 
   Descrição da saída:
-  (decodificacao_manchester_diferencial) - 
+  (decodificacao_manchester_diferencial) - Pacote decodificado com a codificação Manchester Diferencial
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Realiza a decodificação Manchester Diferencial do pacote recebido pela fase
+                        transmissora.
 *********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> pacote)
 {
@@ -259,15 +270,16 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> 
 // MEIO DE COMUNICAÇÃO
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
+  Descrição Breve: Método da Camada Física de Comunicação pelo Meio
   
   Descrição da Entrada:
-  (fluxoBrutoDeBits) - 
+  (fluxoBrutoDeBits) - Pacote a ser transmitido
 
   Descrição da saída:
   (void)
 
-  Descrição Detalhada: 
+  Descrição Detalhada:  Transfere a mensagem codificada do ponto A para o ponto B passando pelo
+                        Meio de Comunicação.
 *********************************************************************************************/
 vector<int> CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
