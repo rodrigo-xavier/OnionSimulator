@@ -12,7 +12,7 @@
 // DEFINE
 
 // #define DEBUG_CAMADA_FISICA
-#define DEBUG_CAMADA_ENLACE
+// #define DEBUG_CAMADA_ENLACE
 #define DEBUG_CAMADA_APLICACAO
 #define assertm(exp, msg) assert(((void)msg, exp))
 #define BYTE 8

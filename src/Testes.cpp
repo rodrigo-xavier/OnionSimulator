@@ -17,15 +17,15 @@ void Testes::run(void)
 
 #ifdef DEBUG_CAMADA_ENLACE
 
-    // test_transmissora_enquadramento_contagem_de_caracteres();
-    //test_transmissora_enquadramento_insercao_de_bits();
-    // test_transmissora_enquadramento_insercao_de_bytes();
-    // test_transmissora_controle_de_erro_bit_paridade_impar();
-    // test_receptora_controle_de_erro_bit_paridade_par();
-    // test_receptora_enquadramento_insercao_de_bytes();
-    // test_transmissora_controle_de_erro_crc();
-    // test_receptora_controle_de_erro_crc();
-    // test_receptora_camada_aplicacao();
+    test_transmissora_enquadramento_contagem_de_caracteres();
+    test_transmissora_enquadramento_insercao_de_bits();
+    test_transmissora_enquadramento_insercao_de_bytes();
+    test_transmissora_controle_de_erro_bit_paridade_impar();
+    test_receptora_controle_de_erro_bit_paridade_par();
+    test_receptora_enquadramento_insercao_de_bytes();
+    test_transmissora_controle_de_erro_crc();
+    test_receptora_controle_de_erro_crc();
+    test_receptora_camada_aplicacao();
     test_transmissora_controle_de_erro_codificacao_hamming();
 
 #endif
