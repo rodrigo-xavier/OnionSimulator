@@ -596,11 +596,11 @@ void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     porcentagemDeErros = 0; //10%, 20%, 30%, 40%, ..., 100%
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
-    // {
-    //     if ((rand() % 100) == ...)                        //fazer a probabilidade do erro
-    //         fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS!!!
-    //     else                                              //ERRO! INVERTER (usa condicao ternaria)
-    //         (fluxoBrutoBitsPontoB == 0) ? fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB++ : fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB--;
-    // } //fim do while
+    /*for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
+    {
+        if ((rand() % 100) == porcentagemDeErros)                           //fazer a probabilidade do erro
+            fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i)); //BITS!!!
+        else                                                                //ERRO! INVERTER (usa condicao ternaria)
+            (fluxoBrutoDeBitsPontoB.at(i) == 0) ? fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)++ : fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)--;
+    } //fim do while*/
 }
