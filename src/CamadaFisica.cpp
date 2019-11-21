@@ -136,7 +136,7 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 // RECEPTORA
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada Física de codificação Binária
+  Descrição Breve: Método receptor de dados da Camada Física
   
   Descrição da Entrada:
   (pacote) - Unidade de dados da camada física

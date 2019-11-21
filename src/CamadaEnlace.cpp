@@ -15,7 +15,6 @@
 
   Descrição Detalhada:  Realiza o enquadramento e o controle de erros do quadro a ser transmitido.
 *********************************************************************************************/
-
 vector<int> CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
 {
     this->quadro = quadro_bruto;
@@ -106,7 +105,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
   (void)
 
   Descrição Detalhada:  Realiza o enquadramento por inserção de bytes do quadro recebido
-                        como parâmtero e armazena no quadro tratado (vetor de inteiros).
+                        como parâmetro e armazena no quadro tratado (vetor de inteiros).
 *********************************************************************************************/
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro_bruto)
 {
@@ -154,7 +153,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
   (void)
 
   Descrição Detalhada:  Realiza o enquadramento por inserção de bits do quadro recebido
-                        como parâmtero e armazena no quadro tratado (vetor de inteiros).
+                        como parâmetro e armazena no quadro tratado (vetor de inteiros).
 *********************************************************************************************/
 void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro_bruto)
 {
@@ -474,7 +473,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
   Descrição da saída:
   (void)
 
-  Descrição Detalhada:  Realiza o enquadramento e o controle de erros do quadro recebido.
+  Descrição Detalhada:  Realiza o desenquadramento e o controle de erros do quadro recebido.
 *********************************************************************************************/
 
 vector<int> CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
@@ -530,7 +529,7 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
   (void)
 
   Descrição Detalhada:  Realiza o desenquadramento por contagem de caracteres do quadro recebido
-                        como parâmtero e armazena no quadro desenquadrado (vetor de inteiros).
+                        como parâmetro e armazena no quadro desenquadrado (vetor de inteiros).
 *********************************************************************************************/
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
