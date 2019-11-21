@@ -571,11 +571,6 @@ void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadr
     vector<int> decodificacao_hamming;
     int posicao_paridade = 0;
 
-    cout << "Decodicação de Hamming: ";
-    for (int i = 0; i < quadro_bruto.size(); i++)
-        cout << quadro_bruto.at(i);
-    cout << endl;
-
     for (int i = 1; i <= quadro_bruto.size(); i++)
     {
         if (i == pow(2, posicao_paridade))

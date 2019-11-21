@@ -9,6 +9,7 @@ void Testes::run(void)
     cout << "REALIZANDO TESTES NA CAMADA FÍSICA" << endl;
     cout << endl;
     cout << endl;
+
     test_transmissora_binaria();
     test_transmissora_manchester();
     test_transmissora_manchester_diferencial();
@@ -16,6 +17,7 @@ void Testes::run(void)
     test_binaria_receptora();
     test_manchester_receptora();
     test_manchester_receptora_diferencial();
+
     cout << endl;
 #endif
 
@@ -41,7 +43,7 @@ void Testes::run(void)
     cout << "REALIZANDO TESTES NA CAMADA DE APLICAÇÃO" << endl;
     cout << endl;
     cout << endl;
-    // test_receptora_camada_aplicacao();
+
     CamadaAplicacao camadaaplicacao;
     CamadaEnlace camadaenlace;
     CamadaFisica camadafisica;
@@ -63,6 +65,8 @@ void Testes::run(void)
     passagem_bits = camadaenlace.DadosReceptora(passagem_bits);
     mensagem = camadaaplicacao.Receptora(passagem_bits);
     camadaaplicacao.AplicacaoReceptora(mensagem);
+
+    cout << endl;
 #endif
 }
 
