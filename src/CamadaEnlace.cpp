@@ -35,17 +35,23 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
 {
     cout << "Realizando enquadramento com contagem de caracteres" << endl;
 
-    int qtd_bytes = ceil(quadro.size() / 8);
-    vector<int> enquadramento_contagem_caracteres;
+    uint8_t qtd_bytes = ceil(quadro_bruto.size() / 8);
+    vector<int> enquadramento_contagem_caracteres = quadro_bruto;
+    vector<int> binario;
 
-    enquadramento_contagem_caracteres.push_back(qtd_bytes);
-
-    for (int i = 0; i < quadro.size(); i++)
-        enquadramento_contagem_caracteres.push_back(quadro[i]);
+    bitset<8> bits(qtd_bytes);
+    for (int i = 0; i < 8; i++)
+    {
+        if (int(bits[i]) == 1)
+            enquadramento_contagem_caracteres.insert(enquadramento_contagem_caracteres.begin(), int(bits[i]));
+        else
+            enquadramento_contagem_caracteres.insert(enquadramento_contagem_caracteres.begin(), int(0));
+    }
 
     for (int i = 0; i < enquadramento_contagem_caracteres.size(); i++)
-        cout << enquadramento_contagem_caracteres[i];
-
+    {
+        cout << enquadramento_contagem_caracteres.at(i);
+    }
     cout << endl;
 
     this->quadro = enquadramento_contagem_caracteres;
@@ -357,10 +363,10 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
     cout << "Realizando o desenquadramento usando contagem de caracteres" << endl;
-    int qtd_bytes = quadro.front();
+
     vector<int> desenquadramento_contagem_caracteres;
 
-    for (int i = 1; i < quadro.size(); i++)
+    for (int i = 8; i < quadro.size(); i++)
         desenquadramento_contagem_caracteres.push_back(quadro[i]);
 
     for (int i = 0; i < desenquadramento_contagem_caracteres.size(); i++)

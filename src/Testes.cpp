@@ -72,8 +72,8 @@ void Testes::init_quadro(void)
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
     int introdutor;
 
-    string concat = "1001101";
-    //string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
+    //string concat = "1001101010011010";
+    string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
 
     for (int i = 0; i < concat.length(); i++)
     {
