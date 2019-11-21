@@ -305,6 +305,25 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
     for (int i = 0; i < bits_paridade.size(); i++)
         cout << bits_paridade.at(i);
     cout << endl;
+
+    int pos = 0;
+    posicao_paridade = 0;
+
+    for (int i = 1; i <= codigo_hamming.size(); i++)
+    {
+        if (i == pow(2, posicao_paridade))
+        {
+            codigo_hamming[i - 1] = bits_paridade.at(bit_redundancia - 1 - pos);
+            pos++;
+            cout << i;
+            posicao_paridade++;
+        }
+    }
+
+    cout << "codigo_hamming: ";
+    for (int i = 0; i < codigo_hamming.size(); i++)
+        cout << codigo_hamming.at(i);
+    cout << endl;
 }
 
 /*##########################################################################################################*/
