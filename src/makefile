@@ -21,7 +21,7 @@ LIBS = -lm
 ########################## Listas com nomes dos arquivos de código ##########################
 # Define o local dos arquivos de código e arquivos de cabeçalho de código
 
-_HEADERS = CamadaEnlace.hpp CamadaFisica.hpp Testes.hpp
+_HEADERS = CamadaEnlace.hpp CamadaFisica.hpp Testes.hpp CamadaAplicacao.hpp
 HEADERS = $(patsubst %,$(DIR_HEADERS)/%,$(_HEADERS))
 
 _OBJECTS = Simulador.o CamadaEnlace.o CamadaFisica.o Testes.o

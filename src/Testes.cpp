@@ -18,13 +18,14 @@ void Testes::run(void)
 #ifdef DEBUG_CAMADA_ENLACE
 
     // test_transmissora_enquadramento_contagem_de_caracteres();
-    test_transmissora_enquadramento_insercao_de_bits();
+    // test_transmissora_enquadramento_insercao_de_bits();
     // test_transmissora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_bit_paridade_impar();
     // test_receptora_controle_de_erro_bit_paridade_par();
     // test_receptora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_crc();
     // test_receptora_controle_de_erro_crc();
+    // test_receptora_camada_aplicacao();
 
 #endif
 
@@ -243,6 +244,7 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 
     string _255 = "11111111", _3 = "00000011", _esc_240 = "11110000";
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
+    string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
     string esperado = _flag_15 + _255 + _3 + _esc_240 + _esc_240 + _esc_240 + _flag_15 + _5 + _0 + _flag_15;
     string enviado = "", recebido = "";
 
@@ -323,6 +325,13 @@ void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
 
     cout << "Decodificação do enquadramento com inserção de bytes funcionando" << endl;
     cout << endl;
+}
+
+void Testes::test_receptora_camada_aplicacao(void)
+{
+    CamadaAplicacao camadaaplicacao;
+
+    camadaaplicacao.AplicacaoTransmissora();
 }
 
 void Testes::test_transmissora_controle_de_erro_crc(void)
