@@ -49,7 +49,7 @@ vector<int> CamadaFisica::Transmissora(vector<int> pacote)
 
 vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
 {
-    cout << "Realizando a codificação binária: ";
+    cout << "Realizando a codificação binária" << endl;
 
     vector<int> codificacao_binaria;
 
@@ -171,7 +171,7 @@ vector<int> CamadaFisica::Receptora(vector<int> pacote)
 *********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> pacote)
 {
-    cout << "Realizando a decodificação binária: ";
+    cout << "Realizando a decodificação binária" << endl;
 
     vector<int> decodificacao_binaria;
 

@@ -3,11 +3,13 @@
 /*##########################################################################################################*/
 // TRANSMISSORA
 
-void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
+vector<int> CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro_bruto);
-    DadosTransmissoraControleDeErro(quadro_bruto);
+    this->quadro = quadro_bruto;
+    DadosTransmissoraEnquadramento(this->quadro);
+    DadosTransmissoraControleDeErro(this->quadro);
     //chama proxima camada
+    return this->quadro;
     // CamadaFisicaTransmissora(quadro_bruto);
 }
 
@@ -25,8 +27,6 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro_bruto)
         break;
     case 2: //insercao de bits
         DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
-    case 3: //violacao da camada fisica
-        // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
     } //fim do switch/case
 }
@@ -134,7 +134,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quad
 
     this->quadro = enquadramento_insercao_bits;
 
-    DadosReceptoraEnquadramentoInsercaoDeBits(enquadramento_insercao_bits);
+    //DadosReceptoraEnquadramentoInsercaoDeBits(enquadramento_insercao_bits);
 }
 
 /*##########################################################################################################*/
@@ -325,10 +325,11 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
 /*##########################################################################################################*/
 // RECEPTORA
 
-void CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
+vector<int> CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro_bruto);
-    DadosTransmissoraControleDeErro(quadro_bruto);
+    this->quadro = quadro_bruto;
+    DadosReceptoraEnquadramento(this->quadro);
+    DadosReceptoraControleDeErro(this->quadro);
     //chama proxima camada
     // CamadaDeAplicacaoReceptora(quadro_bruto);
 }
@@ -340,13 +341,13 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
-        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro_bruto);
+        DadosReceptoraEnquadramentoContagemDeCaracteres(quadro_bruto);
         break;
     case 1: //insercao de bytes
-        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro_bruto);
+        DadosReceptoraEnquadramentoInsercaoDeBytes(quadro_bruto);
         break;
     case 2: //insercao de bits
-        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
+        DadosReceptoraEnquadramentoInsercaoDeBits(quadro_bruto);
     case 3: //violacao da camada fisica
         // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
@@ -355,7 +356,7 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
-
+    cout << "Realizando o desenquadramento usando contagem de caracteres" << endl;
     int qtd_bytes = quadro.front();
     vector<int> desenquadramento_contagem_caracteres;
 

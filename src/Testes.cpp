@@ -36,11 +36,18 @@ void Testes::run(void)
     vector<int> passagem_bits;
     string mensagem;
 
+    /* Emissor */
     mensagem = camadaaplicacao.AplicacaoTransmissora();
     passagem_bits = camadaaplicacao.Transmissora(mensagem);
+    passagem_bits = camadaenlace.DadosTransmissora(passagem_bits);
     passagem_bits = camadafisica.Transmissora(passagem_bits);
+
+    /* Meio de transmissão */
     passagem_bits = camadafisica.MeioDeComunicacao(passagem_bits);
+
+    /*Receptor*/
     passagem_bits = camadafisica.Receptora(passagem_bits);
+    passagem_bits = camadaenlace.DadosReceptora(passagem_bits);
     mensagem = camadaaplicacao.Receptora(passagem_bits);
     camadaaplicacao.AplicacaoReceptora(mensagem);
 
