@@ -361,11 +361,7 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
-<<<<<<< HEAD
-    cout << "Realizando o desenquadramento usando contagem de caracteres" << endl;
-=======
     cout << "Realizando o enquadramento com contagem de caracteres" << endl;
->>>>>>> master
 
     vector<int> desenquadramento_contagem_caracteres;
 
