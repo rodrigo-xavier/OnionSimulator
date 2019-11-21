@@ -64,7 +64,7 @@ void Testes::run(void)
     passagem_bits = camadafisica.Receptora(passagem_bits);
     passagem_bits = camadaenlace.DadosReceptora(passagem_bits);
     mensagem = camadaaplicacao.Receptora(passagem_bits);
-    camadaaplicacao.AplicacaoReceptora(mensagem);
+    // camadaaplicacao.AplicacaoReceptora(mensagem);
 
     cout << endl;
 #endif

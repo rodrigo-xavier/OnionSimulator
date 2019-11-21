@@ -2,7 +2,7 @@
 # Aqui estão listados os diretórios do projeto
 
 # Nomes dos executáveis
-PROJECT_EXE = ../bir
+PROJECT_EXE = ../projeto
 
 # Nomes dos diretórios
 DIR_HEADERS = ../lib
@@ -52,16 +52,16 @@ $(PROJECT_EXE): $(OBJECTS)
 ################################## Outras Regras de Make ####################################
 # Aqui estão listadas algumas regras úteis de make para facilitar o trabalho
 
-# make bir
+# make projeto
 # Limpa a tela e executa automaticamente o software
-bir:
+projeto:
 	clear
 	./$(PROJECT_EXE)
 
 
 # make all
 # Chama todas as regras de make
-all: $(PROJECT_EXE) bir
+all: $(PROJECT_EXE) projeto
 
 
 

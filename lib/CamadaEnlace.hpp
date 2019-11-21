@@ -24,7 +24,6 @@ public:
     void DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro);
     void DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> quadro);
     void DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quadro);
-    void DadosTransmissoraEnquadramentoViolacaoDaCamadaFisica(vector<int> quadro);
 
     void DadosTransmissoraControleDeErro(vector<int> quadro);
     void DadosTransmissoraControleDeErroBitParidadePar(vector<int> quadro);
@@ -46,8 +45,6 @@ public:
     void DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro);
 
     void MeioDeComunicacao(vector<int> fluxoBrutoDeBits);
-
-public:
 };
 
 #endif

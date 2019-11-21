@@ -22,8 +22,6 @@ public:
     vector<int> ReceptoraCodificacaoManchesterDiferencial(vector<int> quadro);
 
     vector<int> MeioDeComunicacao(vector<int> fluxoBrutoDeBits);
-
-public:
 };
 
 #endif

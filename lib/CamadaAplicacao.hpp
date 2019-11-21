@@ -25,53 +25,45 @@ public:
     {
         vector<int> binario;
         int bit_mensagem;
-        cout << "Transformando em binário" << endl;
-        for (int i = 0; i < mensagem.size(); i++)
+
+        cout << endl
+             << "Transformando em binário" << endl;
+
+        for (int i = 0; i < mensagem.length(); i++)
         {
-            bitset<8> bits(mensagem.c_str()[i]);
+            bitset<7> bits(mensagem[i]);
             for (int j = 0; j < 8; j++)
                 binario.push_back(int(bits[j]));
         }
 
-        for (int i = 0; i < binario.size(); i++)
-            cout << binario.at(i);
-
-        cout << endl;
-
         return binario;
-        //chama a proxima camada
-        // CamadaFisicaTransmissora(quadro);
-        //camadafisica.Transmissora(binario);
-    } //fim do metodo CamadaDeAplicacaoTransmissora
+    }
 
     string Receptora(vector<int> quadro)
     {
         string mensagem = "";
         int counter = 0;
-        bitset<8> byte;
+        bitset<7> byte;
         char msg;
 
-        cout << "Receptora da Camada de Aplicação: ";
+        cout << "Receptora da Camada de Aplicação" << endl;
 
         for (int i = 0; i < quadro.size(); i++)
         {
             byte[counter] = quadro[i];
+
             if (counter == 8)
             {
-                msg = (char)byte.to_ulong();
+                msg = char(byte.to_ulong());
                 mensagem += msg;
                 counter = 0;
             }
 
             counter++;
         }
-        cout << endl;
 
         AplicacaoReceptora(mensagem);
-        //chama proxima camada
-        //this->mensagem = "mensagem a ser recebida";
-        // AplicacaoReceptora(mensagem);
-    } //fim do metodo CamadaDeAplicacaoReceptora
+    }
 
     string AplicacaoTransmissora(void)
     {
@@ -79,15 +71,14 @@ public:
         cout << "Digite uma mensagem:" << endl;
         cin >> mensagem;
 
-        //Transmissora(mensagem);
-        //chama a proxima camada
         return mensagem;
-        // CamadaDeAplicacaoTransmissora(mensagem); //em um exemplo mais realistico, aqui seria dado um SEND do SOCKET
-    } //fim do metodo AplicacaoTransmissora
+    }
 
     void AplicacaoReceptora(string mensagem)
     {
-        cout << "A mensagem recebida foi:" << mensagem << endl;
+        cout << endl
+             << "A mensagem recebida foi:" << mensagem
+             << endl;
     }
 };
 
