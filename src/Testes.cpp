@@ -20,7 +20,42 @@ void Testes::run(void)
 #endif
 
 #ifdef DEBUG_CAMADA_ENLACE
-    cout << "REALIZANDO TESTES NA CAMADA DE ENLACE" << endl;
+
+    // test_transmissora_enquadramento_contagem_de_caracteres();
+    //test_transmissora_enquadramento_insercao_de_bits();
+    // test_transmissora_enquadramento_insercao_de_bytes();
+    // test_transmissora_controle_de_erro_bit_paridade_impar();
+    // test_receptora_controle_de_erro_bit_paridade_par();
+    // test_receptora_enquadramento_insercao_de_bytes();
+    // test_transmissora_controle_de_erro_crc();
+    // test_receptora_controle_de_erro_crc();
+    // test_receptora_camada_aplicacao();
+    // test_transmissora_controle_de_erro_codificacao_hamming();
+    // test_receptora_camada_aplicacao();
+
+    CamadaAplicacao camadaaplicacao;
+    CamadaEnlace camadaenlace;
+    CamadaFisica camadafisica;
+
+    vector<int> passagem_bits;
+    string mensagem;
+
+    /* Emissor */
+    mensagem = camadaaplicacao.AplicacaoTransmissora();
+    passagem_bits = camadaaplicacao.Transmissora(mensagem);
+    passagem_bits = camadaenlace.DadosTransmissora(passagem_bits);
+    passagem_bits = camadafisica.Transmissora(passagem_bits);
+
+    /* Meio de transmissão */
+    passagem_bits = camadafisica.MeioDeComunicacao(passagem_bits);
+
+    /*Receptor*/
+    passagem_bits = camadafisica.Receptora(passagem_bits);
+    passagem_bits = camadaenlace.DadosReceptora(passagem_bits);
+    mensagem = camadaaplicacao.Receptora(passagem_bits);
+    camadaaplicacao.AplicacaoReceptora(mensagem);
+
+    /*cout << "REALIZANDO TESTES NA CAMADA DE ENLACE" << endl;
     cout << endl;
     cout << endl;
     test_transmissora_enquadramento_contagem_de_caracteres();
@@ -30,9 +65,15 @@ void Testes::run(void)
     test_receptora_controle_de_erro_bit_paridade_par();
     test_receptora_enquadramento_insercao_de_bytes();
     test_transmissora_controle_de_erro_codificacao_hamming();
+<<<<<<< HEAD
+    // test_transmissora_controle_de_erro_crc();
+    // test_receptora_controle_de_erro_crc();
+    cout << endl;*/
+=======
     test_transmissora_controle_de_erro_crc();
     test_receptora_controle_de_erro_crc();
     cout << endl;
+>>>>>>> master
 #endif
 
 #ifdef DEBUG_CAMADA_APLICACAO
@@ -58,6 +99,7 @@ void Testes::init_quadro(void)
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
     int introdutor;
 
+    //string concat = "1001101010011010";
     string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
 
     for (int i = 0; i < concat.length(); i++)
@@ -419,7 +461,10 @@ void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
 
     camadaenlace.DadosTransmissoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
     camadaenlace.DadosReceptoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
+<<<<<<< HEAD
+=======
 
     cout << "Concluídas a Codificação e a Decodificação do código de Hamming" << endl;
     cout << endl;
+>>>>>>> master
 }

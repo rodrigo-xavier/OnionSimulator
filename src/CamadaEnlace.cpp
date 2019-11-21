@@ -3,11 +3,13 @@
 /*##########################################################################################################*/
 // TRANSMISSORA
 
-void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
+vector<int> CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro_bruto);
-    DadosTransmissoraControleDeErro(quadro_bruto);
+    this->quadro = quadro_bruto;
+    DadosTransmissoraEnquadramento(this->quadro);
+    DadosTransmissoraControleDeErro(this->quadro);
     //chama proxima camada
+    return this->quadro;
     // CamadaFisicaTransmissora(quadro_bruto);
 }
 
@@ -25,8 +27,6 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro_bruto)
         break;
     case 2: //insercao de bits
         DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
-    case 3: //violacao da camada fisica
-        // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
     } //fim do switch/case
 }
@@ -35,17 +35,23 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
 {
     cout << "Realizando enquadramento com contagem de caracteres" << endl;
 
-    int qtd_bytes = ceil(quadro.size() / 8);
-    vector<int> enquadramento_contagem_caracteres;
+    uint8_t qtd_bytes = ceil(quadro_bruto.size() / 8);
+    vector<int> enquadramento_contagem_caracteres = quadro_bruto;
+    vector<int> binario;
 
-    enquadramento_contagem_caracteres.push_back(qtd_bytes);
-
-    for (int i = 0; i < quadro.size(); i++)
-        enquadramento_contagem_caracteres.push_back(quadro[i]);
+    bitset<8> bits(qtd_bytes);
+    for (int i = 0; i < 8; i++)
+    {
+        if (int(bits[i]) == 1)
+            enquadramento_contagem_caracteres.insert(enquadramento_contagem_caracteres.begin(), int(bits[i]));
+        else
+            enquadramento_contagem_caracteres.insert(enquadramento_contagem_caracteres.begin(), int(0));
+    }
 
     for (int i = 0; i < enquadramento_contagem_caracteres.size(); i++)
-        cout << enquadramento_contagem_caracteres[i];
-
+    {
+        cout << enquadramento_contagem_caracteres.at(i);
+    }
     cout << endl;
 
     this->quadro = enquadramento_contagem_caracteres;
@@ -134,7 +140,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quad
 
     this->quadro = enquadramento_insercao_bits;
 
-    DadosReceptoraEnquadramentoInsercaoDeBits(enquadramento_insercao_bits);
+    //DadosReceptoraEnquadramentoInsercaoDeBits(enquadramento_insercao_bits);
 }
 
 /*##########################################################################################################*/
@@ -323,12 +329,14 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
 /*##########################################################################################################*/
 // RECEPTORA
 
-void CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
+vector<int> CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro_bruto);
-    DadosTransmissoraControleDeErro(quadro_bruto);
+    this->quadro = quadro_bruto;
+    DadosReceptoraEnquadramento(this->quadro);
+    DadosReceptoraControleDeErro(this->quadro);
     //chama proxima camada
     // CamadaDeAplicacaoReceptora(quadro_bruto);
+    return this->quadro;
 }
 
 void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
@@ -338,13 +346,13 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
-        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro_bruto);
+        DadosReceptoraEnquadramentoContagemDeCaracteres(quadro_bruto);
         break;
     case 1: //insercao de bytes
-        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro_bruto);
+        DadosReceptoraEnquadramentoInsercaoDeBytes(quadro_bruto);
         break;
     case 2: //insercao de bits
-        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
+        DadosReceptoraEnquadramentoInsercaoDeBits(quadro_bruto);
     case 3: //violacao da camada fisica
         // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
@@ -353,12 +361,15 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
+<<<<<<< HEAD
+    cout << "Realizando o desenquadramento usando contagem de caracteres" << endl;
+=======
     cout << "Realizando o enquadramento com contagem de caracteres" << endl;
+>>>>>>> master
 
-    int qtd_bytes = quadro.front();
     vector<int> desenquadramento_contagem_caracteres;
 
-    for (int i = 1; i < quadro.size(); i++)
+    for (int i = 8; i < quadro.size(); i++)
         desenquadramento_contagem_caracteres.push_back(quadro[i]);
 
     for (int i = 0; i < desenquadramento_contagem_caracteres.size(); i++)
@@ -597,11 +608,11 @@ void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     porcentagemDeErros = 0; //10%, 20%, 30%, 40%, ..., 100%
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
-    // {
-    //     if ((rand() % 100) == ...)                        //fazer a probabilidade do erro
-    //         fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS!!!
-    //     else                                              //ERRO! INVERTER (usa condicao ternaria)
-    //         (fluxoBrutoBitsPontoB == 0) ? fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB++ : fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB--;
-    // } //fim do while
+    /*for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
+    {
+        if ((rand() % 100) == porcentagemDeErros)                           //fazer a probabilidade do erro
+            fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i)); //BITS!!!
+        else                                                                //ERRO! INVERTER (usa condicao ternaria)
+            (fluxoBrutoDeBitsPontoB.at(i) == 0) ? fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)++ : fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)--;
+    } //fim do while*/
 }

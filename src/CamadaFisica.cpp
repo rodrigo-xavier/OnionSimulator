@@ -14,9 +14,9 @@
 
   Descrição Detalhada: 
 *********************************************************************************************/
-void CamadaFisica::Transmissora(vector<int> pacote)
+vector<int> CamadaFisica::Transmissora(vector<int> pacote)
 {
-    int tipoDeCodificacao = 0;
+    int tipoDeCodificacao = 1;
     vector<int> fluxoBrutoDeBits;
     switch (tipoDeCodificacao)
     {
@@ -30,7 +30,9 @@ void CamadaFisica::Transmissora(vector<int> pacote)
         fluxoBrutoDeBits = TransmissoraCodificacaoManchesterDiferencial(pacote);
         break;
     } //fim do switch/case
-    MeioDeComunicacao(fluxoBrutoDeBits);
+    //this->vetor_bits = fluxoBrutoDeBits;
+    return fluxoBrutoDeBits;
+    //MeioDeComunicacao(fluxoBrutoDeBits);
 }
 
 /********************************************************************************************  
@@ -47,7 +49,7 @@ void CamadaFisica::Transmissora(vector<int> pacote)
 
 vector<int> CamadaFisica::TransmissoraCodificacaoBinaria(vector<int> pacote)
 {
-    cout << "Realizando a codificação binária: ";
+    cout << "Realizando a codificação binária" << endl;
 
     vector<int> codificacao_binaria;
 
@@ -83,6 +85,12 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchester(vector<int> pacote)
         codificacao_manchester.push_back(pacote[i] ^ 0);
         codificacao_manchester.push_back(pacote[i] ^ 1);
     }
+
+    for (int i = 0; i < codificacao_manchester.size(); i++)
+    {
+        cout << codificacao_manchester.at(i);
+    }
+    cout << endl;
 
     return codificacao_manchester;
 }
@@ -131,9 +139,9 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 
   Descrição Detalhada: 
 *********************************************************************************************/
-void CamadaFisica::Receptora(vector<int> pacote)
+vector<int> CamadaFisica::Receptora(vector<int> pacote)
 {
-    int tipoDeDecodificacao = 0;  //alterar de acordo o teste
+    int tipoDeDecodificacao = 1;  //alterar de acordo o teste
     vector<int> fluxoBrutoDeBits; //ATENÇÃO: trabalhar com BITS!!!
     //CamadaAplicacao camadaaplicacao;
 
@@ -149,6 +157,9 @@ void CamadaFisica::Receptora(vector<int> pacote)
         fluxoBrutoDeBits = ReceptoraCodificacaoManchesterDiferencial(pacote);
         break;
     }
+
+    return fluxoBrutoDeBits;
+
     //chama proxima camada
     //camadaaplicacao.Receptora(fluxoBrutoDeBits);
 }
@@ -166,7 +177,7 @@ void CamadaFisica::Receptora(vector<int> pacote)
 *********************************************************************************************/
 vector<int> CamadaFisica::ReceptoraCodificacaoBinaria(vector<int> pacote)
 {
-    cout << "Realizando a decodificação binária: ";
+    cout << "Realizando a decodificação binária" << endl;
 
     vector<int> decodificacao_binaria;
 
@@ -258,7 +269,7 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> 
 
   Descrição Detalhada: 
 *********************************************************************************************/
-void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
+vector<int> CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
@@ -271,5 +282,7 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 
     cout << "Passando pelo Meio de Comunicação" << endl;
     //chama proxima camada
-    Receptora(fluxoBrutoDeBitsPontoB);
+    return fluxoBrutoDeBitsPontoB;
+    //this->vetor_bits = fluxoBrutoDeBitsPontoB;
+    //Receptora(fluxoBrutoDeBitsPontoB);
 }

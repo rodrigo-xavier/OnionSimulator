@@ -18,23 +18,14 @@ public:
     CamadaEnlace camadaenlace;
     CamadaFisica camadafisica;
     string mensagem;
+    string mensagem_recebida;
+    vector<int> vetor_bits;
 
-    void AplicacaoTransmissora(void)
-    {
-        string mensagem;
-        cout << "Digite uma mensagem:" << endl;
-        cin >> mensagem;
-
-        Transmissora(mensagem);
-        //chama a proxima camada
-        // CamadaDeAplicacaoTransmissora(mensagem); //em um exemplo mais realistico, aqui seria dado um SEND do SOCKET
-    }
-
-    void Transmissora(string mensagem)
+    vector<int> Transmissora(string mensagem)
     {
         vector<int> binario;
         int bit_mensagem;
-        cout << "Transformando em binário: ";
+        cout << "Transformando em binário" << endl;
         for (int i = 0; i < mensagem.size(); i++)
         {
             bitset<8> bits(mensagem.c_str()[i]);
@@ -47,12 +38,13 @@ public:
 
         cout << endl;
 
+        return binario;
         //chama a proxima camada
         // CamadaFisicaTransmissora(quadro);
-        camadafisica.Transmissora(binario);
-    }
+        //camadafisica.Transmissora(binario);
+    } //fim do metodo CamadaDeAplicacaoTransmissora
 
-    void Receptora(vector<int> quadro)
+    string Receptora(vector<int> quadro)
     {
         string mensagem = "";
         int counter = 0;
@@ -73,11 +65,25 @@ public:
 
             counter++;
         }
-
         cout << endl;
 
         AplicacaoReceptora(mensagem);
-    }
+        //chama proxima camada
+        //this->mensagem = "mensagem a ser recebida";
+        // AplicacaoReceptora(mensagem);
+    } //fim do metodo CamadaDeAplicacaoReceptora
+
+    string AplicacaoTransmissora(void)
+    {
+        string mensagem;
+        cout << "Digite uma mensagem:" << endl;
+        cin >> mensagem;
+
+        //Transmissora(mensagem);
+        //chama a proxima camada
+        return mensagem;
+        // CamadaDeAplicacaoTransmissora(mensagem); //em um exemplo mais realistico, aqui seria dado um SEND do SOCKET
+    } //fim do metodo AplicacaoTransmissora
 
     void AplicacaoReceptora(string mensagem)
     {
