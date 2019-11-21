@@ -25,12 +25,8 @@ void Testes::run(void)
     // test_receptora_enquadramento_insercao_de_bytes();
     // test_transmissora_controle_de_erro_crc();
     // test_receptora_controle_de_erro_crc();
-<<<<<<< HEAD
     // test_receptora_camada_aplicacao();
     test_transmissora_controle_de_erro_codificacao_hamming();
-=======
-    test_receptora_camada_aplicacao();
->>>>>>> master
 
 #endif
 
@@ -250,6 +246,7 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 
     string _255 = "11111111", _3 = "00000011", _esc_240 = "11110000";
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
+    string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
     string esperado = _flag_15 + _255 + _3 + _esc_240 + _esc_240 + _esc_240 + _flag_15 + _5 + _0 + _flag_15;
     string enviado = "", recebido = "";
 
@@ -338,6 +335,7 @@ void Testes::test_receptora_camada_aplicacao(void)
 
     camadaaplicacao.AplicacaoTransmissora();
 }
+
 void Testes::test_transmissora_controle_de_erro_crc(void)
 {
 
@@ -387,7 +385,6 @@ void Testes::test_receptora_controle_de_erro_crc(void)
     cout << "Recepção com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
 }
-<<<<<<< HEAD
 
 void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
 {
@@ -404,5 +401,3 @@ void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
     camadaenlace.DadosTransmissoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
     camadaenlace.DadosReceptoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
 }
-=======
->>>>>>> master
