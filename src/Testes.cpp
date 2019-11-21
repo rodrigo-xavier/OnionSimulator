@@ -6,6 +6,9 @@ void Testes::run(void)
     init_quadro();
 
 #ifdef DEBUG_CAMADA_FISICA
+    cout << "REALIZANDO TESTES NA CAMADA FÍSICA" << endl;
+    cout << endl;
+    cout << endl;
     test_transmissora_binaria();
     test_transmissora_manchester();
     test_transmissora_manchester_diferencial();
@@ -13,24 +16,30 @@ void Testes::run(void)
     test_binaria_receptora();
     test_manchester_receptora();
     test_manchester_receptora_diferencial();
+    cout << endl;
 #endif
 
 #ifdef DEBUG_CAMADA_ENLACE
-
-    // test_transmissora_enquadramento_contagem_de_caracteres();
-    //test_transmissora_enquadramento_insercao_de_bits();
-    // test_transmissora_enquadramento_insercao_de_bytes();
-    // test_transmissora_controle_de_erro_bit_paridade_impar();
-    // test_receptora_controle_de_erro_bit_paridade_par();
-    // test_receptora_enquadramento_insercao_de_bytes();
-    // test_transmissora_controle_de_erro_crc();
-    // test_receptora_controle_de_erro_crc();
-    // test_receptora_camada_aplicacao();
+    cout << "REALIZANDO TESTES NA CAMADA DE ENLACE" << endl;
+    cout << endl;
+    cout << endl;
+    test_transmissora_enquadramento_contagem_de_caracteres();
+    test_transmissora_enquadramento_insercao_de_bits();
+    test_transmissora_enquadramento_insercao_de_bytes();
+    test_transmissora_controle_de_erro_bit_paridade_impar();
+    test_receptora_controle_de_erro_bit_paridade_par();
+    test_receptora_enquadramento_insercao_de_bytes();
     test_transmissora_controle_de_erro_codificacao_hamming();
-
+    test_transmissora_controle_de_erro_crc();
+    test_receptora_controle_de_erro_crc();
+    cout << endl;
 #endif
 
 #ifdef DEBUG_CAMADA_APLICACAO
+    cout << "REALIZANDO TESTES NA CAMADA DE APLICAÇÃO" << endl;
+    cout << endl;
+    cout << endl;
+    test_receptora_camada_aplicacao();
 #endif
 }
 
@@ -49,8 +58,7 @@ void Testes::init_quadro(void)
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
     int introdutor;
 
-    string concat = "1001101";
-    //string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
+    string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
 
     for (int i = 0; i < concat.length(); i++)
     {
@@ -238,6 +246,7 @@ void Testes::test_transmissora_enquadramento_contagem_de_caracteres(void)
     assertm(int(this->quadro_transmissor[47]) == 1, "Falha no Enquadramento usando contagem de caracteres");
     */
     cout << "Enquadramento usando contagem de caracteres funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
@@ -246,7 +255,6 @@ void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
 
     string _255 = "11111111", _3 = "00000011", _esc_240 = "11110000";
     string _flag_15 = "00001111", _5 = "00000101", _0 = "00000000";
-    string concat = _255 + _3 + _esc_240 + _flag_15 + _5 + _0;
     string esperado = _flag_15 + _255 + _3 + _esc_240 + _esc_240 + _esc_240 + _flag_15 + _5 + _0 + _flag_15;
     string enviado = "", recebido = "";
 
@@ -275,6 +283,7 @@ void Testes::test_transmissora_enquadramento_insercao_de_bits(void)
     camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBits(this->quadro_transmissor);
 
     cout << "Enquadramento com inserção de bits funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_controle_de_erro_bit_paridade_par(void)
@@ -283,6 +292,7 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_par(void)
     camadaenlace.DadosTransmissoraControleDeErroBitParidadePar(this->quadro_transmissor);
 
     cout << "Controle de erro de paridade par funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_receptora_controle_de_erro_bit_paridade_par(void)
@@ -291,6 +301,7 @@ void Testes::test_receptora_controle_de_erro_bit_paridade_par(void)
     camadaenlace.DadosReceptoraControleDeErroBitDeParidadePar(this->quadro_transmissor);
 
     cout << "Recebimento do controle de erro de paridade par funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
@@ -299,6 +310,7 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
     camadaenlace.DadosTransmissoraControleDeErroBitParidadeImpar(this->quadro_transmissor);
 
     cout << "Recebimento do controle de erro de paridade impar funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
@@ -334,6 +346,7 @@ void Testes::test_receptora_camada_aplicacao(void)
     CamadaAplicacao camadaaplicacao;
 
     camadaaplicacao.AplicacaoTransmissora();
+    cout << endl;
 }
 
 void Testes::test_transmissora_controle_de_erro_crc(void)
@@ -355,9 +368,11 @@ void Testes::test_transmissora_controle_de_erro_crc(void)
     cout << "Valor esperado: " << esperado << endl;
     cout << "CRC:            1010100110001111111110010" << endl;
 
-    assertm(recebido == esperado, "Falha na insercao de bytes");
+    if (recebido == esperado)
+        cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
+    else
+        cout << "Falha na transmissão com controle de erro CRC" << endl;
 
-    cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
 }
 
@@ -380,14 +395,18 @@ void Testes::test_receptora_controle_de_erro_crc(void)
     cout << "Valor esperado: " << esperado << endl;
     cout << "CRC:            1010100110001111111110010" << endl;
 
-    assertm(recebido == esperado, "Falha na insercao de bytes");
+    if (recebido == esperado)
+        cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
+    else
+        cout << "Falha na transmissão com controle de erro CRC" << endl;
 
-    cout << "Recepção com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
 }
 
 void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
 {
+    cout << "Realizando a Codificação e a Decodificação do código de Hamming" << endl;
+
     CamadaEnlace camadaenlace;
     string enviado = "", recebido = "", esperado = "111111110000001111110000000011110000010100000000";
 
@@ -400,4 +419,7 @@ void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
 
     camadaenlace.DadosTransmissoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
     camadaenlace.DadosReceptoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
+
+    cout << "Concluídas a Codificação e a Decodificação do código de Hamming" << endl;
+    cout << endl;
 }
