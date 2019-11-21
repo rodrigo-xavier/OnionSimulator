@@ -244,6 +244,8 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
+    cout << "Realizando o controle de erro utilizando código de Hamming" << endl;
+
     int bit_redundancia = 0;
     vector<int> codigo_hamming;
     vector<int> bits_paridade;
@@ -359,7 +361,11 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
+<<<<<<< HEAD
     cout << "Realizando o desenquadramento usando contagem de caracteres" << endl;
+=======
+    cout << "Realizando o enquadramento com contagem de caracteres" << endl;
+>>>>>>> master
 
     vector<int> desenquadramento_contagem_caracteres;
 
@@ -564,6 +570,8 @@ void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
+    cout << "Realizando a Decodificação do código de hamming" << endl;
+
     vector<int> decodificacao_hamming;
     int posicao_paridade = 0;
 

@@ -8,6 +8,7 @@ void Testes::run(void)
 #ifdef DEBUG_CAMADA_FISICA
     cout << "REALIZANDO TESTES NA CAMADA FÍSICA" << endl;
     cout << endl;
+    cout << endl;
     test_transmissora_binaria();
     test_transmissora_manchester();
     test_transmissora_manchester_diferencial();
@@ -63,14 +64,23 @@ void Testes::run(void)
     test_transmissora_controle_de_erro_bit_paridade_impar();
     test_receptora_controle_de_erro_bit_paridade_par();
     test_receptora_enquadramento_insercao_de_bytes();
-    test_receptora_camada_aplicacao();
     test_transmissora_controle_de_erro_codificacao_hamming();
+<<<<<<< HEAD
     // test_transmissora_controle_de_erro_crc();
     // test_receptora_controle_de_erro_crc();
     cout << endl;*/
+=======
+    test_transmissora_controle_de_erro_crc();
+    test_receptora_controle_de_erro_crc();
+    cout << endl;
+>>>>>>> master
 #endif
 
 #ifdef DEBUG_CAMADA_APLICACAO
+    cout << "REALIZANDO TESTES NA CAMADA DE APLICAÇÃO" << endl;
+    cout << endl;
+    cout << endl;
+    test_receptora_camada_aplicacao();
 #endif
 }
 
@@ -400,9 +410,11 @@ void Testes::test_transmissora_controle_de_erro_crc(void)
     cout << "Valor esperado: " << esperado << endl;
     cout << "CRC:            1010100110001111111110010" << endl;
 
-    assertm(recebido == esperado, "Falha na insercao de bytes");
+    if (recebido == esperado)
+        cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
+    else
+        cout << "Falha na transmissão com controle de erro CRC" << endl;
 
-    cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
 }
 
@@ -425,14 +437,18 @@ void Testes::test_receptora_controle_de_erro_crc(void)
     cout << "Valor esperado: " << esperado << endl;
     cout << "CRC:            1010100110001111111110010" << endl;
 
-    assertm(recebido == esperado, "Falha na insercao de bytes");
+    if (recebido == esperado)
+        cout << "Transmissão com controle de erro CRC realizada com sucesso" << endl;
+    else
+        cout << "Falha na transmissão com controle de erro CRC" << endl;
 
-    cout << "Recepção com controle de erro CRC realizada com sucesso" << endl;
     cout << endl;
 }
 
 void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
 {
+    cout << "Realizando a Codificação e a Decodificação do código de Hamming" << endl;
+
     CamadaEnlace camadaenlace;
     string enviado = "", recebido = "", esperado = "111111110000001111110000000011110000010100000000";
 
@@ -445,4 +461,10 @@ void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
 
     camadaenlace.DadosTransmissoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
     camadaenlace.DadosReceptoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
+<<<<<<< HEAD
+=======
+
+    cout << "Concluídas a Codificação e a Decodificação do código de Hamming" << endl;
+    cout << endl;
+>>>>>>> master
 }
