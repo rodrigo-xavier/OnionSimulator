@@ -1,7 +1,13 @@
+#ifndef CAMADA_APLICACAO
+#define CAMADA_APLICACAO
+
 #include "CamadaFisica.hpp"
 #include "CamadaEnlace.hpp"
 #include <iostream>
 #include <string>
+#include <bitset>
+
+using namespace std;
 
 /*##########################################################################################################*/
 // CamadaAplicacao
@@ -17,7 +23,6 @@ public:
 
     vector<int> Transmissora(string mensagem)
     {
-        //int quadro [] = mensagem //trabalhar com bits!!!
         vector<int> binario;
         int bit_mensagem;
         cout << "Transformando em binário" << endl;
@@ -25,15 +30,12 @@ public:
         {
             bitset<8> bits(mensagem.c_str()[i]);
             for (int j = 0; j < 8; j++)
-            {
                 binario.push_back(int(bits[j]));
-            }
         }
 
         for (int i = 0; i < binario.size(); i++)
-        {
             cout << binario.at(i);
-        }
+
         cout << endl;
 
         return binario;
@@ -44,14 +46,29 @@ public:
 
     string Receptora(vector<int> quadro)
     {
-        cout << "Receptora da Camada de Aplicação";
+        string mensagem = "";
+        int counter = 0;
+        bitset<8> byte;
+        char msg;
+
+        cout << "Receptora da Camada de Aplicação: ";
+
         for (int i = 0; i < quadro.size(); i++)
         {
-            cout << quadro.at(i); //estava trabalhando com bits
+            byte[counter] = quadro[i];
+            if (counter == 8)
+            {
+                msg = (char)byte.to_ulong();
+                mensagem += msg;
+                counter = 0;
+            }
+
+            counter++;
         }
         cout << endl;
+
+        AplicacaoReceptora(mensagem);
         //chama proxima camada
-        return "mensagem a ser recebida";
         //this->mensagem = "mensagem a ser recebida";
         // AplicacaoReceptora(mensagem);
     } //fim do metodo CamadaDeAplicacaoReceptora
@@ -71,5 +88,7 @@ public:
     void AplicacaoReceptora(string mensagem)
     {
         cout << "A mensagem recebida foi:" << mensagem << endl;
-    } //fim do metodo AplicacaoReceptora
+    }
 };
+
+#endif

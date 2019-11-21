@@ -216,7 +216,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
 {
     cout << "Realizando a transmissão com controle de erro CRC" << endl;
 
-    vector<int> novo_quadro;
+    vector<int> novo_quadro = quadro_bruto;
 
     if (quadro_bruto.size() <= this->polinomio_crc_32.length())
     {
@@ -224,12 +224,8 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
         return;
     }
 
-    novo_quadro = quadro_bruto;
-
-    for (int i = 0; i < 32 - 1; i++)
+    for (int i = 0; i < this->polinomio_crc_32.length(); i++)
         novo_quadro.push_back(0);
-
-    cout << "polinomio " << this->polinomio_crc_32 << endl;
 
     for (int i = 0; i < quadro_bruto.size(); i++)
     {

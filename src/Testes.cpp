@@ -6,6 +6,8 @@ void Testes::run(void)
     init_quadro();
 
 #ifdef DEBUG_CAMADA_FISICA
+    cout << "REALIZANDO TESTES NA CAMADA FÍSICA" << endl;
+    cout << endl;
     test_transmissora_binaria();
     test_transmissora_manchester();
     test_transmissora_manchester_diferencial();
@@ -13,6 +15,7 @@ void Testes::run(void)
     test_binaria_receptora();
     test_manchester_receptora();
     test_manchester_receptora_diferencial();
+    cout << endl;
 #endif
 
 #ifdef DEBUG_CAMADA_ENLACE
@@ -51,6 +54,20 @@ void Testes::run(void)
     mensagem = camadaaplicacao.Receptora(passagem_bits);
     camadaaplicacao.AplicacaoReceptora(mensagem);
 
+    /*cout << "REALIZANDO TESTES NA CAMADA DE ENLACE" << endl;
+    cout << endl;
+    cout << endl;
+    test_transmissora_enquadramento_contagem_de_caracteres();
+    test_transmissora_enquadramento_insercao_de_bits();
+    test_transmissora_enquadramento_insercao_de_bytes();
+    test_transmissora_controle_de_erro_bit_paridade_impar();
+    test_receptora_controle_de_erro_bit_paridade_par();
+    test_receptora_enquadramento_insercao_de_bytes();
+    test_receptora_camada_aplicacao();
+    test_transmissora_controle_de_erro_codificacao_hamming();
+    // test_transmissora_controle_de_erro_crc();
+    // test_receptora_controle_de_erro_crc();
+    cout << endl;*/
 #endif
 
 #ifdef DEBUG_CAMADA_APLICACAO
@@ -261,6 +278,7 @@ void Testes::test_transmissora_enquadramento_contagem_de_caracteres(void)
     assertm(int(this->quadro_transmissor[47]) == 1, "Falha no Enquadramento usando contagem de caracteres");
     */
     cout << "Enquadramento usando contagem de caracteres funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_enquadramento_insercao_de_bytes(void)
@@ -297,6 +315,7 @@ void Testes::test_transmissora_enquadramento_insercao_de_bits(void)
     camadaenlace.DadosTransmissoraEnquadramentoInsercaoDeBits(this->quadro_transmissor);
 
     cout << "Enquadramento com inserção de bits funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_controle_de_erro_bit_paridade_par(void)
@@ -305,6 +324,7 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_par(void)
     camadaenlace.DadosTransmissoraControleDeErroBitParidadePar(this->quadro_transmissor);
 
     cout << "Controle de erro de paridade par funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_receptora_controle_de_erro_bit_paridade_par(void)
@@ -313,6 +333,7 @@ void Testes::test_receptora_controle_de_erro_bit_paridade_par(void)
     camadaenlace.DadosReceptoraControleDeErroBitDeParidadePar(this->quadro_transmissor);
 
     cout << "Recebimento do controle de erro de paridade par funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
@@ -321,6 +342,7 @@ void Testes::test_transmissora_controle_de_erro_bit_paridade_impar(void)
     camadaenlace.DadosTransmissoraControleDeErroBitParidadeImpar(this->quadro_transmissor);
 
     cout << "Recebimento do controle de erro de paridade impar funcionando" << endl;
+    cout << endl;
 }
 
 void Testes::test_receptora_enquadramento_insercao_de_bytes(void)
@@ -356,7 +378,9 @@ void Testes::test_receptora_camada_aplicacao(void)
     CamadaAplicacao camadaaplicacao;
 
     camadaaplicacao.AplicacaoTransmissora();
+    cout << endl;
 }
+
 void Testes::test_transmissora_controle_de_erro_crc(void)
 {
 

@@ -9,7 +9,7 @@
 
 // using namespace std;
 
-class CamadaEnlace : CamadaFisica
+class CamadaEnlace
 {
 public:
     vector<int> quadro;
