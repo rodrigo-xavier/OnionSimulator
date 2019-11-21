@@ -310,7 +310,6 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
         {
             codigo_hamming[i - 1] = bits_paridade.at(bit_redundancia - 1 - pos);
             pos++;
-            cout << i;
             posicao_paridade++;
         }
     }
