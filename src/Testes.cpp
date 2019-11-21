@@ -397,4 +397,5 @@ void Testes::test_transmissora_controle_de_erro_codificacao_hamming(void)
     cout << this->quadro_transmissor.size() << endl;
 
     camadaenlace.DadosTransmissoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
+    camadaenlace.DadosReceptoraControleDeErroCodigoDeHamming(this->quadro_transmissor);
 }

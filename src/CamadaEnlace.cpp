@@ -269,11 +269,6 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
         }
     }
 
-    cout << "Com bits 0 nas posições de paridade: ";
-    for (int i = 0; i < codigo_hamming.size(); i++)
-        cout << codigo_hamming.at(i);
-    cout << endl;
-
     int posicao_analise;
     int xor_analise;
     bool primeiro_elemento;
@@ -324,6 +319,8 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
     for (int i = 0; i < codigo_hamming.size(); i++)
         cout << codigo_hamming.at(i);
     cout << endl;
+
+    this->quadro = codigo_hamming;
 }
 
 /*##########################################################################################################*/
@@ -564,6 +561,30 @@ void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
 
 void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
+    vector<int> decodificacao_hamming;
+    int posicao_paridade = 0;
+
+    cout << "Decodicação de Hamming: ";
+    for (int i = 0; i < quadro_bruto.size(); i++)
+        cout << quadro_bruto.at(i);
+    cout << endl;
+
+    for (int i = 1; i <= quadro_bruto.size(); i++)
+    {
+        if (i == pow(2, posicao_paridade))
+        {
+            posicao_paridade++;
+        }
+        else
+        {
+            decodificacao_hamming.push_back(quadro_bruto.at(i - 1));
+        }
+    }
+
+    cout << "Decodicação de Hamming: ";
+    for (int i = 0; i < decodificacao_hamming.size(); i++)
+        cout << decodificacao_hamming.at(i);
+    cout << endl;
 }
 
 /*##########################################################################################################*/
