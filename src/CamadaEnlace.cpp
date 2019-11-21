@@ -4,7 +4,8 @@
 // TRANSMISSORA
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Tratamento de Dados
+  Descrição Breve:
+  Método da Camada de Enlace de Tratamento de Dados da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -12,7 +13,7 @@
   Descrição da saída:
   (void)
 
-  Descrição Detalhada:  Realiza o enquadramento e o controle de erros do quadro recebido.
+  Descrição Detalhada:  Realiza o enquadramento e o controle de erros do quadro a ser transmitido.
 *********************************************************************************************/
 void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
 {
@@ -23,7 +24,8 @@ void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Enquadramento
+  Descrição Breve:
+  Método da Camada de Enlace de Enquadramento da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -31,7 +33,7 @@ void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
   Descrição da saída:
   (void)
 
-  Descrição Detalhada:  Realiza o enquadramento escolhido.
+  Descrição Detalhada:  Realiza o enquadramento pelo método escolhido.
 *********************************************************************************************/
 void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro_bruto)
 {
@@ -54,7 +56,8 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro_bruto)
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Enquadramento por Contagem de Caracteres
+  Descrição Breve:
+  Método da Camada de Enlace de Enquadramento por Contagem de Caracteres (da fase Transmissora)
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -86,7 +89,8 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Enquadramento por Inserção de Bytes
+  Descrição Breve:
+  Método da Camada de Enlace de Enquadramento por Inserção de Bytes da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -133,7 +137,8 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBytes(vector<int> qua
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Enquadramento por Inserção de Bits
+  Descrição Breve:
+  Método da Camada de Enlace de Enquadramento por Inserção de Bits da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -199,7 +204,8 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quad
 // TRANSMISSORA: CONTROLE
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Controle de Erro
+  Descrição Breve:
+  Método da Camada de Enlace de Controle de Erro da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -230,7 +236,8 @@ void CamadaEnlace::DadosTransmissoraControleDeErro(vector<int> quadro_bruto)
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Controle de Erro por Bit de Paridade Par
+  Descrição Breve:
+  Método da Camada de Enlace de Controle de Erro por Bit de Paridade Par da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -267,7 +274,8 @@ void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadePar(vector<int> qua
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Controle de Erro por Bit de Paridade Ímpar
+  Descrição Breve:
+  Método da Camada de Enlace de Controle de Erro por Bit de Paridade Ímpar da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -304,7 +312,8 @@ void CamadaEnlace::DadosTransmissoraControleDeErroBitParidadeImpar(vector<int> q
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Controle de Erro por CRC
+  Descrição Breve:
+  Método da Camada de Enlace de Controle de Erro por CRC da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -350,7 +359,8 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
 }
 
 /********************************************************************************************  
-  Descrição Breve: Método da Camada de Enlace de Controle de Erro por Código de Hamming
+  Descrição Breve:
+  Método da Camada de Enlace de Controle de Erro por Código de Hamming da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
@@ -447,6 +457,18 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
 /*##########################################################################################################*/
 // RECEPTORA
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Tratamento de Dados da fase Receptora
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Realiza o enquadramento e o controle de erros do quadro recebido.
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
 {
     DadosTransmissoraEnquadramento(quadro_bruto);
@@ -455,6 +477,18 @@ void CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
     // CamadaDeAplicacaoReceptora(quadro_bruto);
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Desenquadramento da fase Receptora
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Realiza o desenquadramento pelo método escolhido.
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
 {
     int tipoDeEnquadramento = 0; //alterar de acordo com o teste
@@ -475,6 +509,19 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
     } //fim do switch/case
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Desenquadramento por Contagem de Caracteres (da fase Receptora)
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Realiza o desenquadramento por contagem de caracteres do quadro recebido
+                        como parâmtero e armazena no quadro desenquadrado (vetor de inteiros).
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro_bruto)
 {
     cout << "Realizando o enquadramento com contagem de caracteres" << endl;
@@ -493,6 +540,19 @@ void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> q
     this->quadro = desenquadramento_contagem_caracteres;
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Desenquadramento por Inserção de Bytes (da fase Receptora)
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Realiza o desenquadramento por inserção de bytes do quadro recebido
+                        e armazena no quadro tratado (vetor de inteiros).
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro_bruto)
 {
     cout << "Realizando a decodificação do enquadramento com inserção de bytes" << endl;
@@ -528,6 +588,19 @@ void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBytes(vector<int> quadro
     this->quadro = novo_quadro;
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Desenquadramento por Inserção de Bits (da fase Receptora)
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Realiza o desenquadramento por inserção de bits do quadro recebido
+                        e armazena no quadro tratado (vetor de inteiros).
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro_bruto)
 {
     cout << "Realizando desenquadramento com inserção de bits" << endl;
@@ -568,6 +641,19 @@ void CamadaEnlace::DadosReceptoraEnquadramentoInsercaoDeBits(vector<int> quadro_
 /*##########################################################################################################*/
 // RECEPTORA: CONTROLE
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Recebimento e Checagem do Controle de Erro da fase Receptora
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada: 
+  Realiza o recebimento e checagem do controle de erro transmitido pelo método escolhido.
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro_bruto)
 {
     int tipoDeControleDeErro = 0; //alterar de acordo com o teste
@@ -587,6 +673,20 @@ void CamadaEnlace::DadosReceptoraControleDeErro(vector<int> quadro_bruto)
     } //fim do switch/case
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Recebimento do Controle de Erro por Bit de Paridade Par da fase Receptora
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Checa se o controle de erro por Bit de Paridade Par da fase transmissora
+  foi recebido com sucesso e da forma correta, realizando um segundo controle de erro pelo mesmo método
+  e comparando o vetor transmitido e o vetor recebido, além de imprimir o vetor de recebimento.
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quadro_bruto)
 {
     cout << "Recebimento do controle de Paridade Par" << endl;
@@ -611,6 +711,20 @@ void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadePar(vector<int> quad
     this->quadro = recebimento_paridade_par;
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Recebimento do Controle de Erro por Bit de Paridade Ímpar da fase Receptora
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Checa se o controle de erro por Bit de Paridade Ímpar da fase transmissora
+  foi recebido com sucesso e da forma correta, realizando um segundo controle de erro pelo mesmo método
+  e comparando o vetor transmitido e o vetor recebido, além de imprimir o vetor de recebimento.
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> quadro_bruto)
 {
     cout << "Recebimento do controle de Paridade Ímpar" << endl;
@@ -645,6 +759,20 @@ void CamadaEnlace::DadosReceptoraControleDeErroBitDeParidadeImpar(vector<int> qu
     this->quadro = recebimento_paridade_impar;
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Recebimento do Controle de Erro por CRC da fase Receptora
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada:  Checa se o controle de erro por CRC da fase transmissora foi recebido
+  com sucesso e da forma correta, realizando uma verificação de igualdade (descrita abaixo) entre
+  o novo quadro e o polinômio CRC 32bits e armazenando o resultado no quadro, caso seja válido.
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
 {
     cout << "Realizando o controle de erro CRC receptor" << endl;
@@ -668,6 +796,8 @@ void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
         {
             for (int j = 0; j < this->polinomio_crc_32.length(); j++)
                 novo_quadro[j + i] = novo_quadro[j + i] == polinomio_crc_32[j] ? 0 : 1;
+                /*  Compara o item i+j do novo quadro com o polinômio CRC 32 bits e armazena, no mesmo elemento,
+                    0 se forem iguais, e 1 caso sejam diferentes. */
         }
     }
 
@@ -681,6 +811,19 @@ void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
         this->quadro = mensagem;
 }
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace de Recebimento e Verificação do Controle de Erro da fase transmissora
+  por Código de Hamming
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
     cout << "Realizando a Decodificação do código de hamming" << endl;
@@ -714,6 +857,18 @@ void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadr
 /*##########################################################################################################*/
 // MEIO DE COMUNICAÇÃO
 
+/********************************************************************************************  
+  Descrição Breve:
+  Método da Camada de Enlace do Meio de Comunicação
+  
+  Descrição da Entrada:
+  (quadro_bruto) - Unidade de dados da camada de enlace
+
+  Descrição da saída:
+  (void)
+
+  Descrição Detalhada: 
+*********************************************************************************************/
 void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
     //OBS: trabalhar com BITS e nao com BYTES!!!
