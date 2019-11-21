@@ -26,8 +26,23 @@ void Testes::run(void)
     // test_transmissora_controle_de_erro_crc();
     // test_receptora_controle_de_erro_crc();
     // test_receptora_camada_aplicacao();
-    test_transmissora_controle_de_erro_codificacao_hamming();
-    test_receptora_camada_aplicacao();
+    // test_transmissora_controle_de_erro_codificacao_hamming();
+    // test_receptora_camada_aplicacao();
+
+    CamadaAplicacao camadaaplicacao;
+    CamadaEnlace camadaenlace;
+    CamadaFisica camadafisica;
+
+    vector<int> passagem_bits;
+    string mensagem;
+
+    mensagem = camadaaplicacao.AplicacaoTransmissora();
+    passagem_bits = camadaaplicacao.Transmissora(mensagem);
+    passagem_bits = camadafisica.Transmissora(passagem_bits);
+    passagem_bits = camadafisica.MeioDeComunicacao(passagem_bits);
+    passagem_bits = camadafisica.Receptora(passagem_bits);
+    mensagem = camadaaplicacao.Receptora(passagem_bits);
+    camadaaplicacao.AplicacaoReceptora(mensagem);
 
 #endif
 

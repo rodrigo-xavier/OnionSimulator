@@ -14,7 +14,7 @@
 
   Descrição Detalhada: 
 *********************************************************************************************/
-void CamadaFisica::Transmissora(vector<int> pacote)
+vector<int> CamadaFisica::Transmissora(vector<int> pacote)
 {
     int tipoDeCodificacao = 0;
     vector<int> fluxoBrutoDeBits;
@@ -30,7 +30,9 @@ void CamadaFisica::Transmissora(vector<int> pacote)
         fluxoBrutoDeBits = TransmissoraCodificacaoManchesterDiferencial(pacote);
         break;
     } //fim do switch/case
-    MeioDeComunicacao(fluxoBrutoDeBits);
+    //this->vetor_bits = fluxoBrutoDeBits;
+    return fluxoBrutoDeBits;
+    //MeioDeComunicacao(fluxoBrutoDeBits);
 }
 
 /********************************************************************************************  
@@ -131,7 +133,7 @@ vector<int> CamadaFisica::TransmissoraCodificacaoManchesterDiferencial(vector<in
 
   Descrição Detalhada: 
 *********************************************************************************************/
-void CamadaFisica::Receptora(vector<int> pacote)
+vector<int> CamadaFisica::Receptora(vector<int> pacote)
 {
     int tipoDeDecodificacao = 0;  //alterar de acordo o teste
     vector<int> fluxoBrutoDeBits; //ATENÇÃO: trabalhar com BITS!!!
@@ -149,6 +151,9 @@ void CamadaFisica::Receptora(vector<int> pacote)
         fluxoBrutoDeBits = ReceptoraCodificacaoManchesterDiferencial(pacote);
         break;
     }
+
+    return fluxoBrutoDeBits;
+
     //chama proxima camada
     //camadaaplicacao.Receptora(fluxoBrutoDeBits);
 }
@@ -258,7 +263,7 @@ vector<int> CamadaFisica::ReceptoraCodificacaoManchesterDiferencial(vector<int> 
 
   Descrição Detalhada: 
 *********************************************************************************************/
-void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
+vector<int> CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
     //OBS IMPORTANTE: trabalhar com BITS e nao com BYTES!!!
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
@@ -271,5 +276,7 @@ void CamadaFisica::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 
     cout << "Passando pelo Meio de Comunicação" << endl;
     //chama proxima camada
-    Receptora(fluxoBrutoDeBitsPontoB);
+    return fluxoBrutoDeBitsPontoB;
+    //this->vetor_bits = fluxoBrutoDeBitsPontoB;
+    //Receptora(fluxoBrutoDeBitsPontoB);
 }
