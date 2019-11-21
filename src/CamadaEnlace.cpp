@@ -866,12 +866,13 @@ void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadr
   Método da Camada de Enlace do Meio de Comunicação
   
   Descrição da Entrada:
-  (quadro_bruto) - Unidade de dados da camada de enlace
+  (fluxoBrutoDeBits) - Unidade de dados da camada de enlace
 
   Descrição da saída:
   (void)
 
-  Descrição Detalhada: 
+  Descrição Detalhada: Verifica a porcentagem de erros na comunicação do pacote pelo meio de
+  comunicação.
 *********************************************************************************************/
 void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
 {
@@ -880,11 +881,13 @@ void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     porcentagemDeErros = 0; //10%, 20%, 30%, 40%, ..., 100%
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    /*for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
+    /*
+    for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
     {
         if ((rand() % 100) == porcentagemDeErros)                           //fazer a probabilidade do erro
             fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i)); //BITS!!!
         else                                                                //ERRO! INVERTER (usa condicao ternaria)
             (fluxoBrutoDeBitsPontoB.at(i) == 0) ? fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)++ : fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)--;
-    } //fim do while*/
+    } //fim do while
+    */
 }
