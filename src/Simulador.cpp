@@ -10,8 +10,5 @@ int main(int argc, char *args[])
     Testes teste;
     teste.run();
 
-    CamadaAplicacao maquinaA;
-    CamadaAplicacao maquinaB;
-
     return 0;
 }

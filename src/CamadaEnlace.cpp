@@ -15,11 +15,14 @@
 
   Descrição Detalhada:  Realiza o enquadramento e o controle de erros do quadro a ser transmitido.
 *********************************************************************************************/
-void CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
+
+vector<int> CamadaEnlace::DadosTransmissora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro_bruto);
-    DadosTransmissoraControleDeErro(quadro_bruto);
+    this->quadro = quadro_bruto;
+    DadosTransmissoraEnquadramento(this->quadro);
+    DadosTransmissoraControleDeErro(this->quadro);
     //chama proxima camada
+    return this->quadro;
     // CamadaFisicaTransmissora(quadro_bruto);
 }
 
@@ -49,8 +52,6 @@ void CamadaEnlace::DadosTransmissoraEnquadramento(vector<int> quadro_bruto)
         break;
     case 2: //insercao de bits
         DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
-    case 3: //violacao da camada fisica
-        // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
     } //fim do switch/case
 }
@@ -72,17 +73,23 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int
 {
     cout << "Realizando enquadramento com contagem de caracteres" << endl;
 
-    int qtd_bytes = ceil(quadro.size() / 8);
-    vector<int> enquadramento_contagem_caracteres;
+    uint8_t qtd_bytes = ceil(quadro_bruto.size() / 8);
+    vector<int> enquadramento_contagem_caracteres = quadro_bruto;
+    vector<int> binario;
 
-    enquadramento_contagem_caracteres.push_back(qtd_bytes);
-
-    for (int i = 0; i < quadro.size(); i++)
-        enquadramento_contagem_caracteres.push_back(quadro[i]);
+    bitset<8> bits(qtd_bytes);
+    for (int i = 0; i < 8; i++)
+    {
+        if (int(bits[i]) == 1)
+            enquadramento_contagem_caracteres.insert(enquadramento_contagem_caracteres.begin(), int(bits[i]));
+        else
+            enquadramento_contagem_caracteres.insert(enquadramento_contagem_caracteres.begin(), int(0));
+    }
 
     for (int i = 0; i < enquadramento_contagem_caracteres.size(); i++)
-        cout << enquadramento_contagem_caracteres[i];
-
+    {
+        cout << enquadramento_contagem_caracteres.at(i);
+    }
     cout << endl;
 
     this->quadro = enquadramento_contagem_caracteres;
@@ -197,7 +204,7 @@ void CamadaEnlace::DadosTransmissoraEnquadramentoInsercaoDeBits(vector<int> quad
 
     this->quadro = enquadramento_insercao_bits;
 
-    DadosReceptoraEnquadramentoInsercaoDeBits(enquadramento_insercao_bits);
+    //DadosReceptoraEnquadramentoInsercaoDeBits(enquadramento_insercao_bits);
 }
 
 /*##########################################################################################################*/
@@ -348,7 +355,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
         {
             for (int j = 0; j < this->polinomio_crc_32.length(); j++)
                 novo_quadro[i + j] ^= (this->polinomio_crc_32[j] - '0');
-                // XOR entre o elemento i+j do novo quadro e o polinômio CRC 32bits; Armazena no próprio elemento i+j do novo quadro
+            // XOR entre o elemento i+j do novo quadro e o polinômio CRC 32bits; Armazena no próprio elemento i+j do novo quadro
         }
     }
 
@@ -469,12 +476,15 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
 
   Descrição Detalhada:  Realiza o enquadramento e o controle de erros do quadro recebido.
 *********************************************************************************************/
-void CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
+
+vector<int> CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
 {
-    DadosTransmissoraEnquadramento(quadro_bruto);
-    DadosTransmissoraControleDeErro(quadro_bruto);
+    this->quadro = quadro_bruto;
+    DadosReceptoraEnquadramento(this->quadro);
+    DadosReceptoraControleDeErro(this->quadro);
     //chama proxima camada
     // CamadaDeAplicacaoReceptora(quadro_bruto);
+    return this->quadro;
 }
 
 /********************************************************************************************  
@@ -496,13 +506,13 @@ void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
     switch (tipoDeEnquadramento)
     {
     case 0: //contagem de caracteres
-        DadosTransmissoraEnquadramentoContagemDeCaracteres(quadro_bruto);
+        DadosReceptoraEnquadramentoContagemDeCaracteres(quadro_bruto);
         break;
     case 1: //insercao de bytes
-        DadosTransmissoraEnquadramentoInsercaoDeBytes(quadro_bruto);
+        DadosReceptoraEnquadramentoInsercaoDeBytes(quadro_bruto);
         break;
     case 2: //insercao de bits
-        DadosTransmissoraEnquadramentoInsercaoDeBits(quadro_bruto);
+        DadosReceptoraEnquadramentoInsercaoDeBits(quadro_bruto);
     case 3: //violacao da camada fisica
         // DadosTransmissoraEnquadramentoViolacaoCamadaFisica(quadro_bruto);
         break;
@@ -526,10 +536,9 @@ void CamadaEnlace::DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> q
 {
     cout << "Realizando o enquadramento com contagem de caracteres" << endl;
 
-    int qtd_bytes = quadro.front();
     vector<int> desenquadramento_contagem_caracteres;
 
-    for (int i = 1; i < quadro.size(); i++)
+    for (int i = 8; i < quadro.size(); i++)
         desenquadramento_contagem_caracteres.push_back(quadro[i]);
 
     for (int i = 0; i < desenquadramento_contagem_caracteres.size(); i++)
@@ -796,7 +805,7 @@ void CamadaEnlace::DadosReceptoraControleDeErroCRC(vector<int> quadro_bruto)
         {
             for (int j = 0; j < this->polinomio_crc_32.length(); j++)
                 novo_quadro[j + i] = novo_quadro[j + i] == polinomio_crc_32[j] ? 0 : 1;
-                /*  Compara o item i+j do novo quadro com o polinômio CRC 32 bits e armazena, no mesmo elemento,
+            /*  Compara o item i+j do novo quadro com o polinômio CRC 32 bits e armazena, no mesmo elemento,
                     0 se forem iguais, e 1 caso sejam diferentes. */
         }
     }
@@ -830,11 +839,6 @@ void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadr
 
     vector<int> decodificacao_hamming;
     int posicao_paridade = 0;
-
-    cout << "Decodicação de Hamming: ";
-    for (int i = 0; i < quadro_bruto.size(); i++)
-        cout << quadro_bruto.at(i);
-    cout << endl;
 
     for (int i = 1; i <= quadro_bruto.size(); i++)
     {
@@ -876,11 +880,11 @@ void CamadaEnlace::MeioDeComunicacao(vector<int> fluxoBrutoDeBits)
     vector<int> fluxoBrutoDeBitsPontoA, fluxoBrutoDeBitsPontoB;
     porcentagemDeErros = 0; //10%, 20%, 30%, 40%, ..., 100%
     fluxoBrutoDeBitsPontoA = fluxoBrutoDeBits;
-    // while (fluxoBrutoDeBitsPontoB.lenght != fluxoBrutoDeBitsPontoA)
-    // {
-    //     if ((rand() % 100) == ...)                        //fazer a probabilidade do erro
-    //         fluxoBrutoBitsPontoB += fluxoBrutoBitsPontoA; //BITS!!!
-    //     else                                              //ERRO! INVERTER (usa condicao ternaria)
-    //         (fluxoBrutoBitsPontoB == 0) ? fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB++ : fluxoBrutoBitsPontoA = fluxoBrutoBitsPontoB--;
-    // } //fim do while
+    /*for (int i = 0; i < fluxoBrutoDeBitsPontoA.size(); i++)
+    {
+        if ((rand() % 100) == porcentagemDeErros)                           //fazer a probabilidade do erro
+            fluxoBrutoDeBitsPontoB.push_back(fluxoBrutoDeBitsPontoA.at(i)); //BITS!!!
+        else                                                                //ERRO! INVERTER (usa condicao ternaria)
+            (fluxoBrutoDeBitsPontoB.at(i) == 0) ? fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)++ : fluxoBrutoDeBitsPontoA[i] = fluxoBrutoDeBitsPontoB.at(i)--;
+    } //fim do while*/
 }

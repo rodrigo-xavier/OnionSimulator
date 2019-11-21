@@ -18,7 +18,7 @@ public:
     string flag_bit = "01111110";
     string polinomio_crc_32 = "100110000010001110110110111";
 
-    void DadosTransmissora(vector<int> quadro);
+    vector<int> DadosTransmissora(vector<int> quadro);
 
     void DadosTransmissoraEnquadramento(vector<int> quadro);
     void DadosTransmissoraEnquadramentoContagemDeCaracteres(vector<int> quadro);
@@ -32,7 +32,7 @@ public:
     void DadosTransmissoraControleDeErroCRC(vector<int> quadro);
     void DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro);
 
-    void DadosReceptora(vector<int> quadro);
+    vector<int> DadosReceptora(vector<int> quadro);
 
     void DadosReceptoraEnquadramento(vector<int> quadro);
     void DadosReceptoraEnquadramentoContagemDeCaracteres(vector<int> quadro);
