@@ -364,18 +364,24 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCRC(vector<int> quadro_bruto)
     this->quadro = novo_quadro;
 }
 
-/********************************************************************************************  
-  Descrição Breve:
+/********************************  
+  Descrição Breve: É feito uma codificação de hamming no quadro recebido.
   Método da Camada de Enlace de Controle de Erro por Código de Hamming da fase Transmissora
   
   Descrição da Entrada:
   (quadro_bruto) - Unidade de dados da camada de enlace
-
   Descrição da saída:
   (void)
+  Descrição Detalhada: Cria-se um vetor de tamanho: tamanho do quadro + número de bits de 
+					   paridade necessários.
+					   No novo vetor é armazenado os bits de paridade nas posições múltiplos 
+					   de 2 e os bits de dados no restante do vetor.
+					   Provisóriamente foi armazenado 0 nas posições de bits de paridade.
+					   Para o cálculo dos bits de paridade é realizado um xor com determinados
+					   bits que dependem da posição do bit de paridade.		
+					   O vetor contendo o novo quadro é atualizado
+*******************************/
 
-  Descrição Detalhada: 
-*********************************************************************************************/
 void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> quadro_bruto)
 {
     cout << "Realizando o controle de erro utilizando código de Hamming" << endl;
@@ -383,16 +389,20 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
     int bit_redundancia = 0;
     vector<int> codigo_hamming;
     vector<int> bits_paridade;
+	/* Neste loop verifica-se a quantidade de bits de paridade que são necessários */
     while (quadro_bruto.size() + bit_redundancia + 1 > pow(2, bit_redundancia))
     {
         bit_redundancia++;
     }
-    cout << "Bit de redundância: " << bit_redundancia << endl;
+    cout << "Bits de redundância: " << bit_redundancia << endl;
     int tamanho_hamming = bit_redundancia + quadro_bruto.size();
-    cout << "Qtd final de bits: " << tamanho_hamming << endl;
+    cout << "Qtd final de bits do quadro: " << tamanho_hamming << endl;
+	
     int posicao_paridade = 0;
     int posicao_dado = 0;
 
+	/* Considera-se os bits enumerados a partir de 1*/
+	/* Criado novo quadro contendo 0 nas posições de bit de´paridade */
     for (int i = 1; i <= tamanho_hamming; i++)
     {
         if (i == pow(2, posicao_paridade))
@@ -406,7 +416,9 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
             posicao_dado++;
         }
     }
-
+	
+	/* Calcula-se os bits de paridade pelo segundo método visto em sala de aula */
+	/* Usa-se um vetor auxiliar para armazenar os bits de paridade: bits_paridade*/
     int posicao_analise;
     int xor_analise;
     bool primeiro_elemento;
@@ -439,6 +451,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
         cout << bits_paridade.at(i);
     cout << endl;
 
+	/* O novo quadro é atualizado com bis de paridade nas posições corretas */
     int pos = 0;
     posicao_paridade = 0;
 
@@ -458,6 +471,7 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
     cout << endl;
 
     this->quadro = codigo_hamming;
+
 }
 
 /*##########################################################################################################*/
@@ -855,6 +869,8 @@ void CamadaEnlace::DadosReceptoraControleDeErroCodigoDeHamming(vector<int> quadr
     for (int i = 0; i < decodificacao_hamming.size(); i++)
         cout << decodificacao_hamming.at(i);
     cout << endl;
+
+    this -> quadro = decodificacao_hamming;
 }
 
 /*##########################################################################################################*/
