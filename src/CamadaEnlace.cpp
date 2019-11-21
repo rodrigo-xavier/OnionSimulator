@@ -334,6 +334,7 @@ vector<int> CamadaEnlace::DadosReceptora(vector<int> quadro_bruto)
     DadosReceptoraControleDeErro(this->quadro);
     //chama proxima camada
     // CamadaDeAplicacaoReceptora(quadro_bruto);
+    return this->quadro;
 }
 
 void CamadaEnlace::DadosReceptoraEnquadramento(vector<int> quadro_bruto)
