@@ -3,6 +3,7 @@
 #include "CamadaFisica.hpp"
 #include <iostream>
 #include <math.h>
+#include <algorithm>
 
 #define BYTE 8
 

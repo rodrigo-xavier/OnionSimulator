@@ -52,4 +52,5 @@ public:
     void test_receptora_camada_aplicacao(void);
     void test_transmissora_controle_de_erro_crc(void);
     void test_receptora_controle_de_erro_crc(void);
+    void test_transmissora_controle_de_erro_codificacao_hamming(void);
 };
