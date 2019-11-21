@@ -278,11 +278,11 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
     int xor_analise;
     bool primeiro_elemento;
 
-    /*for (int i = 0; i < bit_redundancia; i++)
+    for (int i = 0; i < bit_redundancia; i++)
     {
         primeiro_elemento = true;
         xor_analise = 0;
-        posicao_analise = pow(2, i);
+        posicao_analise = pow(2, i) - 1;
         while (posicao_analise < codigo_hamming.size())
         {
             if (primeiro_elemento == true)
@@ -296,20 +296,10 @@ void CamadaEnlace::DadosTransmissoraControleDeErroCodigoDeHamming(vector<int> qu
                 xor_analise ^= codigo_hamming[posicao_analise + 1];
             }
             posicao_analise += 1;
-            posicao_analise += pow(2, i) + 1;
+            posicao_analise += pow(2, i) - 1 + 1;
         }
         bits_paridade.push_back(xor_analise);
-    }*/
-
-    int p1 = codigo_hamming.at(2) ^ codigo_hamming.at(4) ^ codigo_hamming.at(6) ^ codigo_hamming.at(8) ^ codigo_hamming.at(10);
-    int p2 = codigo_hamming.at(2) ^ codigo_hamming.at(5) ^ codigo_hamming.at(6) ^ codigo_hamming.at(9) ^ codigo_hamming.at(10);
-    int p4 = codigo_hamming.at(4) ^ codigo_hamming.at(5) ^ codigo_hamming.at(6);
-    int p8 = codigo_hamming.at(9) ^ codigo_hamming.at(9) ^ codigo_hamming.at(10);
-
-    bits_paridade.push_back(p8);
-    bits_paridade.push_back(p4);
-    bits_paridade.push_back(p2);
-    bits_paridade.push_back(p1);
+    }
 
     cout << "bits de paridade: ";
     for (int i = 0; i < bits_paridade.size(); i++)
